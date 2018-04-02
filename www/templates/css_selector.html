@@ -1,0 +1,898 @@
+{% extends 'c-word.html' %}
+
+{% block title %}CSS Selector - {% endblock %}
+
+{% block meta %}
+
+{% endblock %}
+
+
+{% block point1 %}
+<div class="tm-main uk-width-medium-3-4" contenteditable="true">
+  <article class="uk-article">
+    <div id="maincontent" contenteditable="true">
+
+      <h3 id="blogTitle0" style="font-family: &quot;Proxima Nova&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC Regular&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, å¾®è½¯é›…é»‘, Arial, sans-serif;"><span style="font-weight: 700; background-color: yellow;">计算机 | web | CSS | selector</span></h3>
+
+
+      <div>
+        <h1><b>CSS3 选择器总览</b></h1>
+
+        <p>在 CSS 中，选择器是一种模式，用于选择需要添加样式的元素。</p>
+
+        <table class="dataintable"><tbody><tr><th>选择器</th><th>例子</th><th>例子描述</th></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_class.asp" title="CSS .class 选择器">.<i>class</i></a></td><td>.intro</td><td>选择 class="intro" 的所有元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_id.asp" title="CSS #id 选择器">#<i>id</i></a></td><td>#firstname</td><td>选择 id="firstname" 的所有元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_all.asp" title="CSS * 选择器">*</a></td><td>*</td><td>选择所有元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_element.asp" title="CSS element 选择器"><i>element</i></a></td><td>p</td><td>选择所有 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_element_comma.asp" title="CSS element,element 选择器"><i>element</i>,<i>element</i></a></td><td>div,p</td><td>选择所有 &lt;div&gt; 元素和所有 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_element_element.asp" title="CSS element element 选择器"><i>element</i> <i>element</i></a></td><td>div p</td><td>选择 &lt;div&gt; 元素内部的所有 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_element_gt.asp" title="CSS element>element 选择器"><i>element</i>&gt;<i>element</i></a></td><td>div&gt;p</td><td>选择父元素为 &lt;div&gt; 元素的所有 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_element_plus.asp" title="CSS element+element 选择器"><i>element</i>+<i>element</i></a></td><td>div+p</td><td>选择紧接在 &lt;div&gt; 元素之后的所有 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute.asp" title="CSS [attribute] 选择器">[<i>attribute</i>]</a></td><td>[target]</td><td>选择带有 target 属性所有元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute_value.asp" title="CSS [attribute=value] 选择器">[<i>attribute</i>=<i>value</i>]</a></td><td>[target=_blank]</td><td>选择 target="_blank" 的所有元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute_value_contain.asp" title="CSS [attribute~=value] 选择器">[<i>attribute</i>~=<i>value</i>]</a></td><td>[title~=flower]</td><td>选择 title 属性包含单词 "flower" 的所有元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute_value_start.asp" title="CSS [attribute|=value] 选择器">[<i>attribute</i>|=<i>value</i>]</a></td><td>[lang|=en]</td><td>选择 lang 属性值以 "en" 开头的所有元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_link.asp" title="CSS :link 选择器">:link</a></td><td>a:link</td><td>选择所有未被访问的链接。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_visited.asp" title="CSS :visited 选择器">:visited</a></td><td>a:visited</td><td>选择所有已被访问的链接。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_active.asp" title="CSS :active 选择器">:active</a></td><td>a:active</td><td>选择活动链接。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_hover.asp" title="CSS :hover 选择器">:hover</a></td><td>a:hover</td><td>选择鼠标指针位于其上的链接。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_focus.asp" title="CSS :focus 选择器">:focus</a></td><td>input:focus</td><td>选择获得焦点的 input 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_first-letter.asp" title="CSS :first-letter 选择器">::first-letter</a></td><td>p::first-letter</td><td>选择每个 &lt;p&gt; 元素的首字母。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_first-line.asp" title="CSS :first-line 选择器">::first-line</a></td><td>p::first-line</td><td>选择每个 &lt;p&gt; 元素的首行。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_first-child.asp" title="CSS :first-child 选择器">:first-child</a></td><td>p:first-child</td><td>选择属于父元素的第一个子元素的每个 &lt;p&gt; 元素。</td></tr><tr><td>:<a href="http://127.0.0.1:9000/cssref/selector_before.asp" title="CSS :before 选择器">:before</a></td><td>p::before</td><td>在每个 &lt;p&gt; 元素的内容之前插入内容。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_after.asp" title="CSS :after 选择器">::after</a></td><td>p::after</td><td>在每个 &lt;p&gt; 元素的内容之后插入内容。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_lang.asp" title="CSS :lang(language) 选择器">:lang(<i>language</i>)</a></td><td>p:lang(it)</td><td>选择带有以 "it" 开头的 lang 属性值的每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_gen_sibling.asp" title="CSS element1~element2 选择器"><i>element1</i>~<i>element2</i></a></td><td>p~ul</td><td>选择前面有 &lt;p&gt; 元素的每个 &lt;ul&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attr_begin.asp" title="CSS [attribute^=value] 选择器">[<i>attribute</i>^=<i>value</i>]</a></td><td>a[src^="https"]</td><td>选择其 src 属性值以 "https" 开头的每个 &lt;a&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attr_end.asp" title="CSS [attribute$=value] 选择器">[<i>attribute</i>$=<i>value</i>]</a></td><td>a[src$=".pdf"]</td><td>选择其 src 属性以 ".pdf" 结尾的所有 &lt;a&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attr_contain.asp" title="CSS [attribute*=value] 选择器">[<i>attribute</i>*=<i>value</i>]</a></td><td>a[src*="abc"]</td><td>选择其 src 属性中包含 "abc" 子串的每个 &lt;a&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_first-of-type.asp" title="CSS :first-of-type 选择器">:first-of-type</a></td><td>p:first-of-type</td><td>选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_last-of-type.asp" title="CSS :last-of-type 选择器">:last-of-type</a></td><td>p:last-of-type</td><td>选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_only-of-type.asp" title="CSS :only-of-type 选择器">:only-of-type</a></td><td>p:only-of-type</td><td>选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_only-child.asp" title="CSS :only-child 选择器">:only-child</a></td><td>p:only-child</td><td>选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_nth-child.asp" title="CSS :nth-child(n) 选择器">:nth-child(<i>n</i>)</a></td><td>p:nth-child(2)</td><td>选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_nth-last-child.asp" title="CSS :nth-last-child(n) 选择器">:nth-last-child(<i>n</i>)</a></td><td>p:nth-last-child(2)</td><td>同上，从最后一个子元素开始计数。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_nth-of-type.asp" title="CSS :nth-of-type(n) 选择器">:nth-of-type(<i>n</i>)</a></td><td>p:nth-of-type(2)</td><td>选择属于其父元素第二个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_nth-last-of-type.asp" title="CSS :nth-last-of-type(n) 选择器">:nth-last-of-type(<i>n</i>)</a></td><td>p:nth-last-of-type(2)</td><td>同上，但是从最后一个子元素开始计数。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_last-child.asp" title="CSS :last-child 选择器">:last-child</a></td><td>p:last-child</td><td>选择属于其父元素最后一个子元素每个 &lt;p&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_root.asp" title="CSS :root 选择器">:root</a></td><td>:root</td><td>选择文档的根元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_empty.asp" title="CSS :empty 选择器">:empty</a></td><td>p:empty</td><td>选择没有子元素的每个 &lt;p&gt; 元素（包括文本节点）。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_target.asp" title="CSS :target 选择器">:target</a></td><td>#news:target</td><td>选择当前活动的 #news 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_enabled.asp" title="CSS :enabled 选择器">:enabled</a></td><td>input:enabled</td><td>选择每个启用的 &lt;input&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_disabled.asp" title="CSS :disabled 选择器">:disabled</a></td><td>input:disabled</td><td>选择每个禁用的 &lt;input&gt; 元素</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_checked.asp" title="CSS :checked 选择器">:checked</a></td><td>input:checked</td><td>选择每个被选中的 &lt;input&gt; 元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_not.asp" title="CSS :not(selector) 选择器">:not(<i>selector</i>)</a></td><td>:not(p)</td><td>选择非 &lt;p&gt; 元素的每个元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_selection.asp" title="CSS ::selection 选择器">::selection</a></td><td>::selection</td><td>选择被用户选取的元素部分。</td></tr></tbody></table></div><div><br></div><h1 id="blogTitle2"><b>元素选择器（类型选择器）</b></h1><div>
+
+      <p>最常见的 CSS 选择器是元素选择器。文档的元素是最基本的选择器。</p>
+
+      <p>如果设置 HTML 的样式，选择器通常将是某个 HTML 元素，比如 p、h1、em、a，甚至可以是 html 本身：</p>
+
+      <pre>html {color:black;}
+h1 {color:blue;}
+h2 {color:silver;}</pre></div><div>
+
+      <p>在 W3C 标准中，元素选择器又称为类型选择器（type selector）。</p>
+
+      <p>“类型选择器匹配文档语言元素类型的名称。类型选择器匹配文档树中该元素类型的每一个实例。”</p>
+
+      <p>因此，我们也可以为 XML 文档中的元素设置样式：</p>
+
+      <p><b>XML 文档：</b></p>
+
+      <pre>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+<code class="xml">&lt;?xml-stylesheet type="text/css" href="note.css"?&gt;</code>
+&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don't forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</pre>
+
+      <p><b>CSS 文档：</b></p>
+      <pre>note
+  {
+  font-family:Verdana, Arial;
+  margin-left:30px;
+  }
+
+to
+  {
+  font-size:28px;
+  display: block;
+  }
+
+from
+  {
+  font-size:28px;
+  display: block;
+  }
+
+heading
+  {
+  color: red;
+  font-size:60px;
+  display: block;
+  }
+
+body
+  {
+  color: blue;
+  font-size:35px;
+  display: block;
+  }</pre>
+
+      <p>通过上面的例子，您可以看到，CSS 元素选择器（类型选择器）可以设置 XML 文档中元素的样式。</p></div>
+
+
+      <div>
+        <h1 id="blogTitle5"><b>分组选择器（并集选择器）</b></h1>
+
+        <p>假设希望 h2 元素和段落都有灰色。为达到这个目的，最容易的做法是使用以下声明：</p>
+
+        <pre>h2, p {color:gray;}</pre>
+
+        <p>将 h2 和 p 选择器放在规则左边，然后用逗号分隔，就定义了一个规则。其右边的样式（color:gray;）将应用到这两个选择器所引用的元素。逗号告诉浏览器，规则中包含两个不同的选择器。如果没有这个逗号，那么规则的含义将完全不同。参见后代选择器。</p>
+
+        <p>可以将任意多个选择器分组在一起，对此没有任何限制。</p>
+
+        <p class="tip"><span>提示：</span>通过分组，创作者可以将某些类型的样式“压缩”在一起，这样就可以得到更简洁的样式表。</p>
+
+        <p>以下的两组规则能得到同样的结果，不过可以很清楚地看出哪一个写起来更容易：</p>
+
+        <pre><span>/* no grouping */</span>
+h1 {color:blue;}
+h2 {color:blue;}
+h3 {color:blue;}
+h4 {color:blue;}
+h5 {color:blue;}
+h6 {color:blue;}
+
+<span>/* grouping */</span>
+h1, h2, h3, h4, h5, h6 {color:blue;}</pre>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle6"><b>通配符选择器</b></h2>
+
+        <p>CSS2 引入了一种新的简单选择器 - 通配选择器（universal selector），显示为一个星号（*）。该选择器可以与任何元素匹配，就像是一个通配符。</p>
+
+        <p>例如，下面的规则可以使文档中的每个元素都为红色：</p>
+
+        <pre>* {color:red;}</pre>
+
+        <p>这个声明等价于列出了文档中所有元素的一个分组选择器。利用通配选择器，只需敲一次键（仅一个星号）就能使文档中所有元素的 color 属性值指定为 red。</p><p>效率不高，如果页面上的标签越多，效率越低，所以页面上不能出现这个选择器。<br></p><h1 id="blogTitle7"><span lang="ZH-CN" style="line-height: 45px;"><span style="font-weight: 700;">交集选择器</span></span></h1><div><img src="data:image/png;base64,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"><br></div><div><br></div><div><pre>1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; h3.special{<br>2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;color:red;<br>3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</pre><p class="MsoNormal"><font face="宋体">选择的元素是同时满足两个条件：必须是h3标签，然后必须是类名为special。</font><br></p><p class="MsoNormal"><span style="font-weight: 700;"><span lang="ZH-CN" style="font-family: 宋体;">交集选择器没有空格。</span></span></p><pre>1 div.red</pre><p class="MsoNormal"><font face="宋体">和</font><br></p><pre>1 div .red</pre><p class="MsoNormal"><font face="宋体">不是一个意思。</font><br></p></div><div>交集选择器可以连续交（一般不要这么写）<br></div><div><pre><span class="Apple-tab-span">    </span>h3.special.zhongyao{<br><span class="Apple-tab-span">        </span>color:red;3<span class="Apple-tab-span"> <br></span>&nbsp; &nbsp; }</pre></div><div>交集选择器，我们一般都是以标签名开头，比如div.haha &nbsp;比如p.special。</div></div>
+
+      <h1 id="blogTitle8"><b>CSS 类选择器</b></h1>
+
+
+      <div id="intro">
+        <p><strong>类选择器允许以一种独立于文档元素的方式来指定样式。</strong></p></div><div>
+
+      <p>该选择器可以单独使用，也可以与其他元素结合使用。</p>
+
+      <p class="tip"><span>提示：</span>只有适当地标记文档后，才能使用这些选择器，所以使用这两种选择器通常需要先做一些构想和计划。</p>
+
+      <p>要应用样式而不考虑具体设计的元素，最常用的方法就是使用类选择器。</p>
+
+      <p>类选择器可以结合元素选择器来使用。</p><p class="MsoNormal" style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span lang="ZH-CN"><b>总结两条：</b></span><span lang="EN-US" style="background-color: rgb(204, 255, 255);"><o:p></o:p></span></p><p class="MsoNormal" style="background:#CCFFFF"><span lang="EN-US">1</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">）</span><span lang="EN-US"> class</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">可以重复，也就是说，同一个页面上可能有多个标签同时属于某一个类；</span><span lang="EN-US"><o:p></o:p></span></p><p>
+
+
+
+    </p><p class="MsoNormal" style="background:#CCFFFF"><span lang="EN-US">2</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">）</span><span lang="ZH-CN"> </span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">同一个标签可以同时携带多个类。</span></p></div><div><b><br></b></div><div><p class="MsoNormal" style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span lang="ZH-CN"><b>注意：</b></span><span lang="EN-US" style="background-color: rgb(204, 255, 255);"><o:p></o:p></span></p>
+
+      <p class="MsoNormal" style="background:#CCFFFF"><span lang="EN-US">1</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">）</span><span lang="ZH-CN"> </span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">不要去试图用一个类名，把某个标签的所有样式写完。这个标签要多携带几个类，共同造成这个标签的样式。</span><span lang="EN-US"><o:p></o:p></span></p>
+
+      <p class="MsoNormal" style="background:#CCFFFF"><span lang="EN-US">2</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">）</span><span lang="ZH-CN"> </span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">每一个类要尽可能小，有“公共”的概念，能够让更多的标签使用。</span><span lang="EN-US"><o:p></o:p></span></p></div><div><b><br></b></div><h1 id="blogTitle9"><b>CSS ID 选择器</b></h1>
+
+
+      <div id="intro">
+        <p><strong>ID 选择器允许以一种独立于文档元素的方式来指定样式。</strong></p></div><div>
+
+      <p>在某些方面，ID 选择器类似于类选择器，不过也有一些重要差别。</p>
+
+      <p>首先，ID 选择器前面有一个 # 号 - 也称为棋盘号或井号。</p>
+
+      <p>第二个区别是 ID 选择器不引用 class 属性的值，毫无疑问，它要引用 id 属性中的值。</p>
+    </div>
+
+
+      <div>
+        <h2 id="blogTitle10"><b>类选择器和&nbsp;ID 选择器的区别</b></h2>
+
+        <h3 id="blogTitle11"><b>ID只能在文档中使用一次</b></h3>
+
+        <p>与类不同，在一个 HTML 文档中，ID 选择器会使用一次，而且仅一次。</p>
+
+        <h3 id="blogTitle12"><b>不能使用 ID 词列表</b></h3>
+
+        <p>不同于类选择器，ID 选择器不能结合使用，因为 ID 属性不允许有以空格分隔的词列表。</p>
+
+        <h3 id="blogTitle13"><b>ID 能包含更多含义</b></h3>
+
+        <p>类似于类，可以独立于元素来选择 ID。有些情况下，文档中会出现某个特定 ID 值，但是并不知道它会出现在哪个元素上，所以您想声明独立的 ID 选择器。</p><h2 style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><b><span lang="ZH-CN">到底用</span><span lang="EN-US">id</span><span lang="ZH-CN">还是用</span><span lang="EN-US">class</span><span lang="ZH-CN">？</span></b></h2><div><p class="MsoNormal" align="center" style="text-align:center"><span lang="ZH-CN" style="font-size:18.0pt;mso-bidi-font-size:16.0pt;line-height:125%;font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;
+color:red">类上样式，</span><span lang="EN-US" style="font-size:18.0pt;mso-bidi-font-size:
+16.0pt;line-height:125%;color:red">id</span><span lang="ZH-CN" style="font-size:
+18.0pt;mso-bidi-font-size:16.0pt;line-height:125%;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;color:red">上行为</span></p></div><p class="MsoNormal" style="background:#FFFF99"><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">答案：尽可能的用</span><span lang="EN-US">class</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">，除非极特殊的情况可以用</span><span lang="EN-US">id</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">。</span><span lang="EN-US"><o:p></o:p></span></p><p class="MsoNormal" style="background:#FFFF99"><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">原因：</span><span lang="EN-US">id</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">是</span><span lang="EN-US">js</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">用的。也就是说，</span><span lang="EN-US">js</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">要通过</span><span lang="EN-US">id</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">属性得到标签，所以我们</span><span lang="EN-US">css</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">层面尽量不用</span><span lang="EN-US">id</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">，要不然</span><span lang="EN-US">js</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">就很别扭。另一层面，我们会认为一个有</span><span lang="EN-US">id</span><span lang="ZH-CN" style="font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">的元素，有动态效果。</span><span lang="EN-US"><o:p></o:p></span></p><p><br></p></div>
+
+      <h1 id="blogTitle15"><b>属性选择器</b></h1>
+
+
+      <div id="intro">
+        <p><strong>CSS 2 引入了属性选择器。</strong></p>
+        <p><strong>属性选择器可以根据元素的属性及属性值来选择元素。</strong></p><h2 id="blogTitle16" style="margin-top: 0px;"><span style="font-weight: 700;">属性选择器参考手册</span></h2><table class="dataintable"><tbody><tr><th style="width: 178.011px;">选择器</th><th>描述</th></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute.asp" title="CSS [attribute] 选择器">[<i>attribute</i>]</a></td><td>选取带有指定属性的元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute_value.asp" title="CSS [attribute=value] 选择器">[<i>attribute</i>=<i>value</i>]</a></td><td>选取带有指定属性和值的元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute_value_contain.asp" title="CSS [attribute~=value] 选择器">[<i>attribute</i>~=<i>value</i>]</a></td><td>选取属性值列表中包含指定值的元素。（该值必须是一个单独的属性值）</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attribute_value_start.asp" title="CSS [attribute|=value] 选择器">[<i>attribute</i>|=<i>value</i>]</a></td><td>选取属性值列表中第一个属性值为value或以value- 开头的元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attr_begin.asp" title="CSS [attribute^=value] 选择器">[<i>attribute</i>^=<i>value</i>]</a></td><td>C3，子串匹配属性选择器，匹配属性值列表中第一个属性值为value或以value作为前缀开头的元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attr_end.asp" title="CSS [attribute$=value] 选择器">[<i>attribute</i>$=<i>value</i>]</a></td><td>C3，子串匹配属性选择器，匹配属性值列表中最后一个属性值为value或以value作为后缀结尾的元素。</td></tr><tr><td><a href="http://127.0.0.1:9000/cssref/selector_attr_contain.asp" title="CSS [attribute*=value] 选择器">[<i>attribute</i>*=<i>value</i>]</a></td><td>C3，子串匹配属性选择器，匹配属性值列表中属性值“包含”’‘value’‘的元素。（该值可以是一个属性值的部分）</td></tr></tbody></table></div><div><div><b><br></b></div><h2 id="blogTitle17"><b>简单属性选择</b></h2>
+
+      <p>如果希望选择有某个属性的元素，而不论属性值是什么，可以使用简单属性选择器。</p>
+
+      <p><b>例子 1</b></p>
+
+      <p>如果您希望把包含标题（title）的所有元素变为红色，可以写作：</p>
+
+      <pre>*[title] {color:red;}</pre>
+
+      <p><b>例子 2</b></p>
+
+      <p>与上面类似，可以只对有 href 属性的锚（a 元素）应用样式：</p>
+
+      <pre>a[href] {color:red;}</pre>
+
+      <p><b>例子 3</b></p>
+
+      <p>还可以根据多个属性进行选择，只需将属性选择器链接在一起即可。</p>
+
+      <p>例如，为了将同时有 href 和 title 属性的 HTML 超链接的文本设置为红色，可以这样写：</p>
+
+      <pre>a[href][title] {color:red;}</pre>
+
+      <p><b>例子 4</b></p>
+
+      <p>可以采用一些创造性的方法使用这个特性。</p>
+
+      <p>例如，可以对所有带有 alt 属性的图像应用样式，从而突出显示这些有效的图像：</p>
+
+      <pre>img[alt] {border: 5px solid red;}</pre>
+
+      <p class="tip"><span>提示：</span>上面这个特例更适合用来诊断而不是设计，即用来确定图像是否确实有效。</p>
+
+      <p><b>例子 5：为 XML 文档使用属性选择器</b></p>
+
+      <p>属性选择器在 XML 文档中相当有用，因为 XML 语言主张要针对元素和属性的用途指定元素名和属性名。</p>
+
+      <p>假设我们为描述太阳系行星设计了一个 XML 文档。如果我们想选择有 moons 属性的所有 planet 元素，使之显示为红色，以便能更关注有 moons 的行星，就可以这样写：</p>
+
+      <pre>planet[moons] {color:red;}</pre>
+
+      <p>这会让以下标记片段中的第二个和第三个元素的文本显示为红色，但第一个元素的文本不是红色：</p>
+
+      <pre>&lt;planet&gt;Venus&lt;/planet&gt;
+&lt;planet <span class="marked">moons="1"</span>&gt;Earth&lt;/planet&gt;
+&lt;planet <span class="marked">moons="2"</span>&gt;Mars&lt;/planet&gt;</pre>
+    </div>
+
+
+      <div>
+        <h2 id="blogTitle18"><b>根据具体属性值选择</b></h2>
+
+        <p>除了选择拥有某些属性的元素，还可以进一步缩小选择范围，只选择有特定属性值的元素。</p>
+
+        <p><b>例子 1</b></p>
+
+        <p>例如，假设希望将指向 Web 服务器上某个指定文档的超链接变成红色，可以这样写：</p>
+
+        <pre>a[href="http://www.w3school.com.cn/about_us.asp"] {color: red;}</pre>
+
+        <p><b>例子 2</b></p>
+
+        <p>与简单属性选择器类似，可以把多个属性-值选择器链接在一起来选择一个文档。</p>
+
+        <pre>a[href="http://www.w3school.com.cn/"][title="W3School"] {color: red;}</pre>
+
+        <p>这会把以下标记中的第一个超链接的文本变为红色，但是第二个或第三个链接不受影响：</p>
+
+        <pre>&lt;a <span class="marked">href="http://www.w3school.com.cn/"</span> <span class="marked">title="W3School"</span>&gt;W3School&lt;/a&gt;
+&lt;a href="http://www.w3school.com.cn/css/" title="CSS"&gt;CSS&lt;/a&gt;
+&lt;a href="http://www.w3school.com.cn/html/" title="HTML"&gt;HTML&lt;/a&gt;</pre>
+
+        <p><b>例子 3</b></p>
+
+        <p>同样地，XML 语言也可以利用这种方法来设置样式。</p>
+
+        <p>下面我们再回到行星那个例子中。假设只希望选择 moons 属性值为 1 的那些 planet 元素：</p>
+
+        <pre>planet[moons="1"] {color: red;}</pre>
+
+        <p>上面的代码会把以下标记中的第二个元素变成红色，但第一个和第三个元素不受影响：</p>
+
+        <pre>&lt;planet&gt;Venus&lt;/planet&gt;
+&lt;planet <span class="marked">moons="1"</span>&gt;Earth&lt;/planet&gt;
+&lt;planet moons="2"&gt;Mars&lt;/planet&gt;</pre>
+
+        <h3 id="blogTitle19"><b>属性与属性值必须完全匹配</b></h3>
+
+        <p>请注意，这种格式要求必须与属性值完全匹配。</p>
+
+        <p>如果属性值包含用空格分隔的值列表，匹配就可能出问题。</p>
+
+        <p>请考虑一下的标记片段：</p>
+
+        <pre>&lt;p <span class="marked">class="important warning"</span>&gt;This paragraph is a very important warning.&lt;/p&gt;
+</pre>
+
+        <p>如果写成 p[class="important"]，那么这个规则不能匹配示例标记。</p>
+
+        <p>要根据具体属性值来选择该元素，必须这样写：</p>
+
+        <pre>p[class="important warning"] {color: red;}</pre>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle20"><b>根据部分属性值选择</b></h2>
+
+        <p>如果需要根据属性值中的词列表的某个词进行选择，则需要使用波浪号（~）。</p>
+
+        <p>假设您想选择 class 属性中包含 important 的元素，可以用下面这个选择器做到这一点：</p>
+
+        <pre>p[class~="important"] {color: red;}</pre>
+
+        <p>如果忽略了波浪号，则说明需要完成完全值匹配。</p>
+
+        <h3 id="blogTitle21"><b>与点号类名记法的区别</b></h3>
+
+        <p>该选择器等价于我们在类选择器中讨论过的点号类名记法。</p>
+
+        <p>也就是说，p.important 和 p[class="important"] 应用到 HTML 文档时是等价的。</p>
+
+        <p>那么，为什么还要有 "~=" 属性选择器呢？因为它能用于任何属性，而不只是 class。</p>
+
+        <p>例如，可以有一个包含大量图像的文档，其中只有一部分是图片。对此，可以使用一个基于 title 文档的部分属性选择器，只选择这些图片：</p>
+
+        <pre>img[title~="Figure"] {border: 1px solid gray;}</pre>
+
+        <p>这个规则会选择 title 文本包含 "Figure" 的所有图像。没有 title 属性或者 title 属性中不包含 "Figure" 的图像都不会匹配。</p>
+
+        <h2><b>子串匹配属性选择器</b></h2>
+
+        <p>下面为您介绍一个更高级的选择器模块，它是 CSS2 完成之后发布的，其中包含了更多的部分值属性选择器。按照规范的说法，应该称之为“子串匹配属性选择器”。</p>
+
+        <p>很多现代浏览器都支持这些选择器，包括 IE7。</p>
+
+        <p>下表是对这些选择器的简单总结：</p>
+
+        <table class="dataintable">
+          <tbody><tr>
+            <th>类型</th>
+            <th>描述</th>
+          </tr>
+
+          <tr>
+            <td>[abc^="def"]</td>
+            <td>选择 abc 属性值以 "def" 开头的所有元素</td>
+          </tr>
+
+          <tr>
+            <td>[abc$="def"]</td>
+            <td>选择 abc 属性值以 "def" 结尾的所有元素</td>
+          </tr>
+
+          <tr>
+            <td>[abc*="def"]</td>
+            <td>选择 abc 属性值中包含子串 "def" 的所有元素</td>
+          </tr>
+          </tbody></table>
+
+        <p>可以想到，这些选择有很多用途。</p>
+
+        <p>举例来说，如果希望对指向 W3School 的所有链接应用样式，不必为所有这些链接指定 class，再根据这个类编写样式，而只需编写以下规则：</p>
+
+        <pre>a[href*="w3school.com.cn"] {color: red;}</pre>
+
+        <p class="tip"><span>提示：</span>任何属性都可以使用这些选择器。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle23"><b>特定属性选择类型</b></h2>
+
+        <p>最后为您介绍特定属性选择器。请看下面的例子：</p>
+
+        <pre>*[lang|="en"] {color: red;}</pre>
+
+        <p>上面这个规则会选择 lang 属性等于 en 或以 en- 开头的所有元素。因此，以下示例标记中的前三个元素将被选中，而不会选择后两个元素：</p>
+
+        <pre>&lt;p lang="<span class="marked">en</span>"&gt;Hello!&lt;/p&gt;
+&lt;p lang="<span class="marked">en-</span>us"&gt;Greetings!&lt;/p&gt;
+&lt;p lang="<span class="marked">en-</span>au"&gt;G'day!&lt;/p&gt;
+&lt;p lang="fr"&gt;Bonjour!&lt;/p&gt;
+&lt;p lang="cy-en"&gt;Jrooana!&lt;/p&gt;</pre>
+
+        <p>一般来说，[att|="val"] 可以用于任何属性及其值。</p>
+
+        <p>假设一个 HTML 文档中有一系列图片，其中每个图片的文件名都形如 <i>figure-1.jpg</i> 和 <i>figure-2.jpg</i>。就可以使用以下选择器匹配所有这些图像：</p>
+
+        <pre>img[src|="figure"] {border: 1px solid gray;}</pre>
+
+        <p>当然，这种属性选择器最常见的用途还是匹配语言值。</p></div>
+
+
+      <h1 id="blogTitle24"><b>后代选择器（包含选择器）</b></h1>
+
+
+      <div id="intro">
+        <p><strong>后代选择器（descendant selector）又称为包含选择器。</strong></p>
+        <p><strong>后代选择器可以选择作为某元素后代的元素。</strong></p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle25"><b>根据上下文选择元素</b></h2>
+
+        <p>我们可以定义后代选择器来创建一些规则，使这些规则在某些文档结构中起作用，而在另外一些结构中不起作用。</p>
+
+        <p>举例来说，如果您希望只对 h1 元素中的 em 元素应用样式，可以这样写：</p>
+
+        <pre>h1 em {color:red;}</pre>
+
+        <p>上面这个规则会把作为 h1 元素后代的 em 元素的文本变为 红色。其他 em 文本（如段落或块引用中的 em）则不会被这个规则选中：</p>
+
+        <pre>&lt;h1&gt;This is a &lt;em&gt;important&lt;/em&gt; heading&lt;/h1&gt;
+&lt;p&gt;This is a &lt;em&gt;important&lt;/em&gt; paragraph.&lt;/p&gt;</pre>
+
+        <p>当然，您也可以在 h1 中找到的每个 em 元素上放一个 class 属性，但是显然，后代选择器的效率更高。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle26"><b>语法解释</b></h2><div><b>空格就表示后代。</b></div><div><b>选择的是后代，不一定是儿子。</b></div><div><b>空格可以多次出现。<br></b></div><div><b>后代选择器，描述的是祖先结构。<br></b></div><div><b><br></b></div><div><p class="MsoNormal">后代选择器，就是一种平衡：共性、特性的平衡。当要把某一个部分的所有的什么，进行样式改变，就要想到后代选择器。<br></p></div>
+
+        <p>在后代选择器中，规则左边的选择器一端包括两个或多个用空格分隔的选择器。选择器之间的空格是一种结合符（combinator）。每个空格结合符可以解释为“... 在 ... 找到”、“... 作为 ... 的一部分”、“... 作为 ... 的后代”，但是要求必须从右向左读选择器。</p>
+
+        <p>因此，h1 em 选择器可以解释为 “作为 h1 元素后代的任何 em 元素”。如果要从左向右读选择器，可以换成以下说法：“包含 em 的所有 h1 会把以下样式应用到该 em”。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle27"><b>具体应用</b></h2>
+
+        <p>后代选择器的功能极其强大。有了它，可以使 HTML 中不可能实现的任务成为可能。</p>
+
+        <p>假设有一个文档，其中有一个边栏，还有一个主区。边栏的背景为蓝色，主区的背景为白色，这两个区都包含链接列表。不能把所有链接都设置为蓝色，因为这样一来边栏中的蓝色链接都无法看到。</p>
+
+        <p>解决方法是使用后代选择器。在这种情况下，可以为包含边栏的 div 指定值为 sidebar 的 class 属性，并把主区的 class 属性值设置为 maincontent。然后编写以下样式：</p>
+
+        <pre>div.sidebar {background:blue;}
+div.maincontent {background:white;}
+div.sidebar a:link {color:white;}
+div.maincontent a:link {color:blue;}
+</pre>
+
+        <p><b style="background-color: yellow;">有关后代选择器有一个易被忽视的方面，即两个元素之间的层次间隔可以是无限的。</b></p>
+
+        <p>例如，如果写作 ul em，这个语法就会选择从 ul 元素继承的所有 em 元素，而不论 em 的嵌套层次多深。</p>
+
+        <p>因此，ul em 将会选择以下标记中的所有 em 元素：</p>
+
+        <pre>&lt;ul&gt;
+  &lt;li&gt;List item 1
+    &lt;ol&gt;
+      &lt;li&gt;List item 1-1&lt;/li&gt;
+      &lt;li&gt;List item 1-2&lt;/li&gt;
+      &lt;li&gt;List item 1-3
+        &lt;ol&gt;
+          &lt;li&gt;List item 1-3-1&lt;/li&gt;
+          &lt;li&gt;List item <span class="marked">&lt;em&gt;1-3-2&lt;/em&gt;</span>&lt;/li&gt;
+          &lt;li&gt;List item 1-3-3&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;List item 1-4&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;List item 2&lt;/li&gt;
+  &lt;li&gt;List item 3&lt;/li&gt;
+&lt;/ul&gt;</pre></div>
+
+
+      <h1 id="blogTitle28"><b>子元素选择器</b></h1>
+
+
+      <div id="intro">
+        <p><strong>与后代选择器相比，子元素选择器（Child selectors）只能选择作为某元素子元素的元素。</strong></p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle29"><b>选择子元素</b></h2>
+
+        <p>如果您不希望选择任意的后代元素，而是希望缩小范围，只选择某个元素的子元素，请使用子元素选择器（Child selector）。</p>
+
+        <p>例如，如果您希望选择只作为 h1 元素子元素的 strong 元素，可以这样写：</p>
+
+        <pre>h1 <span class="marked">&gt;</span> strong {color:red;}</pre>
+
+        <p>这个规则会把第一个 h1 下面的两个 strong 元素变为红色，但是第二个 h1 中的 strong 不受影响：</p>
+
+        <pre>&lt;h1&gt;This is &lt;strong&gt;very&lt;/strong&gt; &lt;strong&gt;very&lt;/strong&gt; important.&lt;/h1&gt;
+&lt;h1&gt;This is &lt;em&gt;really &lt;strong&gt;very&lt;/strong&gt;&lt;/em&gt; important.&lt;/h1&gt;</pre>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle30"><b>语法解释</b></h2>
+
+        <p>您应该已经注意到了，子选择器使用了大于号（子结合符）。</p>
+
+        <p>子结合符两边可以有空白符，这是可选的。因此，以下写法都没有问题：</p>
+
+        <pre>h1 &gt; strong
+h1&gt; strong
+h1 &gt;strong
+h1&gt;strong
+</pre>
+
+        <p>如果从右向左读，选择器 h1 &gt; strong 可以解释为“选择作为 h1 元素子元素的所有 strong 元素”。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle31"><b>结合后代选择器和子选择器</b></h2>
+
+        <p>请看下面这个选择器：</p>
+
+        <pre>table.company td &gt; p</pre>
+
+        <p>上面的选择器会选择作为 td 元素子元素的所有 p 元素，这个 td 元素本身从 table 元素继承，该 table 元素有一个包含 company 的 class 属性。</p></div>
+
+
+      <h1 id="blogTitle32"><b>相邻兄弟选择器</b></h1>
+
+
+      <div id="intro">
+        <p><strong>相邻兄弟选择器（Adjacent sibling selector）可选择紧接在另一元素后的元素，且二者有相同父元素。</strong></p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle33"><b>选择相邻兄弟</b></h2>
+
+        <p>如果需要选择紧接在另一个元素后的元素，而且二者有相同的父元素，可以使用相邻兄弟选择器（Adjacent sibling selector）。</p>
+
+        <p>例如，如果要增加紧接在 h1 元素后出现的段落的上边距，可以这样写：</p>
+
+        <pre>h1 + p {margin-top:50px;}</pre>
+
+        <p>这个选择器读作：“选择紧接在 h1 元素后出现的段落，h1 和 p 元素拥有共同的父元素”。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle34"><b>语法解释</b></h2>
+
+        <p>相邻兄弟选择器使用了加号（+），即相邻兄弟结合符（Adjacent sibling combinator）。</p>
+
+        <p class="note"><span>注释：</span>与子结合符一样，相邻兄弟结合符旁边可以有空白符。</p>
+
+        <p>请看下面这个文档树片段：</p>
+
+        <pre>&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2&lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;ol&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2&lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</pre>
+
+        <p>在上面的片段中，div 元素中包含两个列表：一个无序列表，一个有序列表，每个列表都包含三个列表项。这两个列表是相邻兄弟，列表项本身也是相邻兄弟。不过，第一个列表中的列表项与第二个列表中的列表项不是相邻兄弟，因为这两组列表项不属于同一父元素（最多只能算堂兄弟）。</p>
+
+        <p>请记住，用一个结合符只能选择两个相邻兄弟中的第二个元素。请看下面的选择器：</p>
+
+        <pre>li + li {font-weight:bold;}</pre>
+
+        <p>上面这个选择器只会把列表中的第二个和第三个列表项变为粗体。第一个列表项不受影响。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle35"><b>结合其他选择器</b></h2>
+
+        <p>相邻兄弟结合符还可以结合其他结合符：</p>
+
+        <pre>html &gt; body table + ul {margin-top:20px;}</pre>
+
+        <p>这个选择器解释为：选择紧接在 table 元素后出现的所有兄弟 ul 元素，该 table 元素包含在一个 body 元素中，body 元素本身是 html 元素的子元素。</p></div>
+
+
+      <h1 id="blogTitle36"><b>伪类选择器&nbsp;(Pseudo-classes)</b></h1>
+
+
+      <div id="intro">
+        <p><strong>CSS 伪类用于向某些选择器添加特殊的效果。用 ：表示</strong></p><div style="font-family: &quot;Proxima Nova&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC Regular&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, å¾®è½¯é›…é»‘, Arial, sans-serif;"><b>关于n的取值范围：</b></div><div style="font-family: &quot;Proxima Nova&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC Regular&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, å¾®è½¯é›…é»‘, Arial, sans-serif;">1、当n做为一个独立值时，n取值为n&gt;=1，例如nth-child(n)</div><div style="font-family: &quot;Proxima Nova&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC Regular&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, å¾®è½¯é›…é»‘, Arial, sans-serif;">2、当n做一个系数时，n取值为n&gt;=0，例如nth-child(2n+1)、nth-child(-n+5) 此处需要理解2n+1或者-n+5做为一个整体不能小于1；</div><div style="font-family: &quot;Proxima Nova&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC Regular&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, å¾®è½¯é›…é»‘, Arial, sans-serif;"><br></div><h2 id="blogTitle37" style="margin-top: 0px;"><span style="font-weight: 700;">伪类参考手册</span></h2><table class="dataintable"><tbody><tr><th style="width: 133.466px;">属性</th><th style="width: 295.284px;">描述</th></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_active.asp">:active</a></td><td>向被激活的元素E添加样式</td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_focus.asp">:focus</a></td><td>向拥有键盘输入焦点的元素添加样式</td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_hover.asp">:hover</a></td><td>当鼠标悬浮在元素上方时，向元素添加样式</td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_link.asp">:link</a></td><td>向未被访问的链接添加样式</td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_visited.asp">:visited</a></td><td>向已被访问的链接添加样式</td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_lang.asp">:lang(language)</a></td><td>选择带有以 "language" 开头的 lang 属性值的每个 E 元素。</td></tr><tr><td>E:first-letter<br></td><td>选择每个E 元素的首字母。<br></td></tr><tr><td>E:first-line<br></td><td>选择每个E 元素的首行。<br></td></tr><tr><td>E:before<br></td><td>在每个E 元素的内容之前插入内容。<br></td></tr><tr><td>E:after<br></td><td>在每个E 元素的内容之后插入内容。</td></tr><tr><td>E:nth-child(n)</td><td>C3，匹配同级兄弟中第n个元素为E的元素</td></tr><tr><td>E:nth-of-type(n)&nbsp;</td><td>C3，匹配同级兄弟中与E元素同类型的第n个元素</td></tr><tr><td>E:nth-last-child(n)&nbsp;</td><td>C3，匹配同级兄弟元素中的倒数第n个元素为E的元素</td></tr><tr><td>E:nth-last-of-type(n)&nbsp;</td><td>C3，匹配同级兄弟元素中的与E元素同类型的倒数第n个元素</td></tr><tr><td>E:only-child&nbsp;</td><td>C3，匹配属于父元素中唯一子元素为E的元素</td></tr><tr><td>E:only-of-type</td><td>C3，匹配同级兄弟元素中唯一一个类型为E的元素<br></td></tr><tr><td>E:target&nbsp;</td><td>C3，匹配相关URL指向的E元素<br></td></tr><tr><td>E:empty&nbsp;</td><td>C3，匹配没有任何子元素（包括text节点）的元素E</td></tr><tr><td>E:root</td><td>C3，匹配文档的根元素。在HTML中，根元素永远是HTML</td></tr><tr><td>E:last-child</td><td>C3，匹配同级兄弟元素中最后一个元素为E的元素</td></tr><tr><td>E:first-of-type&nbsp;</td><td>C3，匹配同级兄弟元素中与E元素相同类型的第一个元素</td></tr><tr><td>E:first-child</td><td>匹配同级兄弟中第一个元素为E的元素<br></td></tr><tr><td>E:checked</td><td>C3，匹配所有用户界面（form表单）中处于选中状态的元素E</td></tr><tr><td>E:enabled&nbsp;</td><td>C3，匹配所有用户界面（form表单）中处于可用状态的E元素</td></tr><tr><td>E:disabled</td><td>C3，匹配所有用户界面（form表单）中处于不可用状态的E元素</td></tr><tr><td>E::selection</td><td>C3，匹配E元素中被用户选中或处于高亮状态的部分</td></tr><tr><td>data</td><td>data</td></tr><tr><td>E:not(s)</td><td>C3，匹配所有不匹配简单选择符s的元素E</td></tr><tr><td>E ~ F</td><td>C3，匹配E元素之后的F元素</td></tr><tr><td>E:last-of-type</td><td><td>C3，匹配同级兄弟元素中的最后一个元素为E的元素</td></td></tr></tbody></table></div><div class="example"><div><b><br></b></div><h2 id="blogTitle38"><b>语法</b><br></h2></div><div>
+
+      <p>伪类的语法：</p>
+
+      <pre>selector : pseudo-class {property: value}</pre>
+
+      <p>CSS 类也可与伪类搭配使用。</p>
+
+      <pre>selector.class : pseudo-class {property: value}</pre>
+    </div>
+
+
+      <div>
+        <h2 id="blogTitle39"><b>锚伪类</b></h2>
+
+        <p>在支持 CSS 的浏览器中，链接的不同状态都可以不同的方式显示，这些状态包括：活动状态，已被访问状态，未被访问状态，和鼠标悬停状态。</p>
+
+        <pre><code class="css">a:link</code> {color: #FF0000}       <span>/* 未访问的链接 */</span>
+<code class="css">a:visited</code> {color: #00FF00} <span>/* 已访问的链接 */</span>
+<code class="css">a:hover</code> {color: #FF00FF}   <span>/* 鼠标移动到链接上 */</span>
+<code class="css">a:active</code> {color: #0000FF}  <span>/* 选定的链接 */</span></pre>
+
+        <p class="tip"><span>提示：</span>在 CSS 定义中，a:hover 必须被置于 a:link 和 a:visited 之后，才是有效的。</p>
+        <p class="tip"><span>提示：</span>在 CSS 定义中，a:active 必须被置于 a:hover 之后，才是有效的。</p>
+        <p class="tip"><span>提示：</span>伪类名称对大小写不敏感。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle40"><b>伪类与 CSS 类</b></h2>
+
+        <p>伪类可以与 CSS 类配合使用：</p>
+
+        <pre>a<code class="undefined">.red</code> : visited {color: #FF0000}
+
+&lt;a class="<code class="undefined">red</code>" href="css_syntax.asp"&gt;CSS Syntax&lt;/a&gt;</pre>
+
+        <p>假如上面的例子中的链接被访问过，那么它将显示为红色。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle41"><b>:first-child 伪类</b></h2>
+
+        <p>您可以使用 :first-child 伪类来选择元素的第一个子元素。这个特定伪类很容易遭到误解，所以有必要举例来说明。考虑以下标记：</p>
+
+        <pre>&lt;div&gt;
+<code class="xml">&lt;p&gt;These are the necessary steps:&lt;/p&gt;</code>
+&lt;ul&gt;
+<code class="xml">&lt;li&gt;Intert Key&lt;/li&gt;</code>
+&lt;li&gt;Turn key <code class="xml">&lt;strong&gt;clockwise&lt;/strong&gt;</code>&lt;/li&gt;
+&lt;li&gt;Push accelerator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Do <code class="xml">&lt;em&gt;not&lt;/em&gt;</code> push the brake at the same time as the accelerator.&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+        <p>在上面的例子中，作为第一个元素的元素包括第一个 p、第一个 li 和 strong 和 em 元素。</p>
+
+        <p>给定以下规则：</p>
+
+        <pre>p:first-child {font-weight: bold;}
+li:first-child {text-transform:uppercase;}
+</pre>
+
+        <p>第一个规则将所有元素的第一个子元素 p 设置为粗体。第二个规则将所有元素（在 HTML 中，这肯定是 ol 或 ul 元素）的第一个子元素 li 变成大写。</p>
+
+        <p>为了使您更透彻地理解 :first-child 伪类，我们另外提供了 3 个例子：</p>
+
+
+        <p><b>例子 1 - 匹配第一个 &lt;p&gt; 元素</b></p>
+
+        <p>在下面的例子中，选择器匹配作为任何元素的第一个子元素 p：</p>
+
+        <pre>&lt;html&gt;
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+<code class="css">p:first-child</code> {
+  color: red;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+<code class="xml">&lt;p&gt;some text&lt;/p&gt;</code>
+&lt;p&gt;some text&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+
+        <p><b>例子 2 - 匹配所有 &lt;p&gt; 元素中的第一个 &lt;i&gt; 元素</b></p>
+
+        <p>在下面的例子中，选择器匹配所有 &lt;p&gt; 元素中的第一个 &lt;i&gt; 元素：</p>
+
+        <pre>&lt;html&gt;
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+<code class="css">p &gt; i:first-child</code> {
+  font-weight:bold;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;some <code class="xml">&lt;i&gt;text&lt;/i&gt;</code>. some &lt;i&gt;text&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;some <code class="xml">&lt;i&gt;text&lt;/i&gt;</code>. some &lt;i&gt;text&lt;/i&gt;.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+
+        <p><b>例子 3 - 匹配所有作为第一个子元素的 &lt;p&gt; 元素中的所有 &lt;i&gt; 元素</b></p>
+
+        <p>在下面的例子中，选择器匹配所有作为元素的第一个子元素的 &lt;p&gt; 元素中的所有 &lt;i&gt; 元素：</p>
+
+        <pre>&lt;html&gt;
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+<code class="css">p:first-child i</code> {
+  color:blue;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;some <code class="xml">&lt;i&gt;text&lt;/i&gt;</code>. some <code class="xml">&lt;i&gt;text&lt;/i&gt;</code>.&lt;/p&gt;
+&lt;p&gt;some &lt;i&gt;text&lt;/i&gt;. some &lt;i&gt;text&lt;/i&gt;.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle42"><b>:lang 伪类</b></h2>
+
+        <p>:lang 伪类使你有能力为不同的语言定义特殊的规则。在下面的例子中，:lang 类为属性值为 no 的 q 元素定义引号的类型：</p>
+
+        <pre>&lt;html&gt;
+&lt;head&gt;
+
+&lt;style type="text/css"&gt;
+<code class="css">q:lang(no)
+   {
+   quotes: "~" "~"
+   }</code>
+&lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;文字&lt;q <code class="ini">lang="no"</code>&gt;段落中的引用的文字&lt;/q&gt;文字&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</pre></div>
+
+
+      <h1 id="blogTitle43"><b>伪元素选择器&nbsp;(Pseudo-elements)</b></h1>
+
+
+      <div id="intro">
+        <p><strong>CSS 伪元素用于向某些选择器设置特殊效果。用 :: 表示</strong></p><p><span style="font-weight: 700; color: rgb(255, 0, 0); font-family: &quot;Proxima Nova&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC Regular&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, å¾®è½¯é›…é»‘, Arial, sans-serif; font-size: 12.7273px;">":" 与 "::" 区别在于区分伪类和伪元素</span><strong><br></strong></p><h2 id="blogTitle44" style="margin-top: 0px;"><span style="font-weight: 700;">伪元素参考手册</span></h2><table class="dataintable"><tbody><tr><th style="width: 107.102px;">属性</th><th style="width: 237.102px;">描述</th></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_first-letter.asp">::first-letter</a></td><td>C3，选择每个E 元素的首字母。</td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_first-line.asp">::first-line</a></td><td>C3，选择每个E 元素的首行。</td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_before.asp">::before</a></td><td>C3，在每个E 元素的内容之前插入内容。<br>在旧版本里是伪类，在新版本里是伪元素，新版本下E:after、E:before会被自动识别为E::after、E::before，按伪元素来对待<br></td></tr><tr><td>E<a href="http://127.0.0.1:9000/cssref/pr_pseudo_after.asp">::after</a></td><td>C3，在每个E 元素的内容之后插入内容。<br>在旧版本里是伪类，在新版本里是伪元素，新版本下E:after、E:before会被自动识别为E::after、E::before，按伪元素来对待<br></td></tr><tr><td>E::selection&nbsp;<br></td><td>C3，可改变选中文本的样式</td></tr><tr><td>E::placeholder<br></td><td>C3，可改变placeholder默认样式，这个存在明显的兼容问题，比如::-webkit-input-placeholder，具体参考手册进行对比</td></tr></tbody></table></div><div><div><b><br></b></div><h2 id="blogTitle45"><b>语法</b></h2>
+
+      <p>伪元素的语法：</p>
+
+      <pre>selector::pseudo-element {property:value;}</pre>
+
+      <p>CSS 类也可以与伪元素配合使用：</p>
+
+      <pre>selector.class::pseudo-element {property:value;}</pre>
+    </div>
+
+
+      <div>
+        <h2 id="blogTitle46"><b>::first-line 伪元素</b></h2>
+
+        <p>"first-line" 伪元素用于向文本的首行设置特殊样式。</p>
+
+        <p>在下面的例子中，浏览器会根据 "first-line" 伪元素中的样式对 p 元素的第一行文本进行格式化：</p>
+
+        <h3 id="blogTitle47">实例</h3>
+
+        <pre>p::first-line
+  {
+  color:#ff0000;
+  font-variant:small-caps;
+  }</pre>
+
+        <p class="note"><span style="background-color: yellow;"><b><span>注释：</span>"::first-line" 伪元素只能用于块级元素。</b></span></p>
+
+        <p class="note"><span>注释：</span>下面的属性可应用于 "first-line" 伪元素：</p>
+
+        <ul>
+          <li>font</li>
+          <li>color</li>
+          <li>background</li>
+          <li>word-spacing</li>
+          <li>letter-spacing</li>
+          <li>text-decoration</li>
+          <li>vertical-align</li>
+          <li>text-transform</li>
+          <li>line-height</li>
+          <li>clear</li>
+        </ul>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle48"><b>::first-letter 伪元素</b></h2>
+
+        <p>"first-letter" 伪元素用于向文本的首字母设置特殊样式：</p>
+
+        <pre>p::first-letter
+  {
+  color:#ff0000;
+  font-size:xx-large;
+  }</pre>
+
+        <p class="note"><span>注释：</span>"first-letter" 伪元素只能用于块级元素。</p>
+
+        <p class="note"><span>注释：</span>下面的属性可应用于 "first-letter" 伪元素：</p>
+
+        <ul>
+          <li>font</li>
+          <li>color</li>
+          <li>background</li>
+          <li>margin</li>
+          <li>padding</li>
+          <li>border</li>
+          <li>text-decoration</li>
+          <li>vertical-align (仅当 float 为 none 时)</li>
+          <li>text-transform</li>
+          <li>line-height</li>
+          <li>float</li>
+          <li>clear</li>
+        </ul>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle49"><b>伪元素和 CSS 类</b></h2>
+
+        <p>伪元素可以与 CSS 类配合使用：</p>
+
+        <pre><code class="css">p.article::first-letter</code>
+  {
+  color: #FF0000;
+  }
+
+&lt;p <span class="marked">class="article"</span>&gt;This is a paragraph in an article。&lt;/p&gt;
+</pre>
+
+        <p>上面的例子会使所有 class 为 article 的段落的首字母变为红色。</p>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle50"><b>多重伪元素</b></h2>
+
+        <p>可以结合多个伪元素来使用。</p>
+
+        <p>在下面的例子中，段落的第一个字母将显示为红色，其字体大小为 xx-large。第一行中的其余文本将为蓝色，并以小型大写字母显示。段落中的其余文本将以默认字体大小和颜色来显示：</p>
+
+        <pre>p::first-letter
+  {
+  color:#ff0000;
+  font-size:xx-large;
+  }
+
+p::first-line
+  {
+  color:#0000ff;
+  font-variant:small-caps;
+  }</pre>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle51"><b>::before 伪元素</b></h2>
+
+        <p>"::before" 伪元素可以在元素的内容前面插入新内容。</p>
+
+        <p>下面的例子在每个 &lt;h1&gt; 元素前面插入一幅图片：</p>
+
+        <pre>h1::before
+  {
+  content:url(logo.gif);
+  }</pre>
+      </div>
+
+
+      <div>
+        <h2 id="blogTitle52"><b>::after 伪元素</b></h2>
+
+        <p>"::after" 伪元素可以在元素的内容之后插入新内容。</p>
+
+        <p>下面的例子在每个 &lt;h1&gt; 元素后面插入一幅图片：</p>
+
+        <pre>h1::after
+  {
+  content:url(logo.gif);
+  }</pre></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div></div>
+
+
+  </article>
+</div>
+{% endblock %} 

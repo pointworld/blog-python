@@ -1,0 +1,103 @@
+/**
+ * 文档公共样式
+ * C by Point at .
+ * M by Point at .
+ *
+ *
+ */
+
+ /*文档背景*/
+ html {
+ 	background-color: rgb(220, 237, 199);
+ }
+
+ /*文档文字*/
+
+ /*被选中文字*/
+ ::selection {
+ 	background: #ff5500;
+ 	opacity: 1;
+ }
+
+ /*分类 - 基于 URN 实现分类，促进 URN 的发展*/
+
+/* container */
+article {
+  font-family: cursive!important;
+}
+
+ /*目录*/
+
+ /*主标题*/
+ h1 {
+ 	text-align: center;
+ }
+
+ /*次标题*/
+ h2,h3,h4,h5,h6 {
+ 	padding-left: 4px;
+ 	border-left: 6px solid blue;
+ }
+
+ /*摘要*/
+
+ /*正文*/
+
+ /*块定义*/
+ blockquote {
+ 	padding-left: 36px;
+ 	border-left: 4px solid red;
+ 	/*margin-left: 0;*/
+ }
+
+ /*参考文献*/
+ /*附录*/
+
+ /*代码*/
+ pre {
+   padding: 1em;
+   border-radius: 3px;
+   overflow: auto;
+   background: rgb(45, 45, 45);
+   font-size: 0.8em;
+   font-family: Consolas, Monaco, "Andale Mono", monospace;
+   word-break: normal;
+   line-height: 1.5;
+   tab-size: 2;
+   hyphens: none;
+   color: rgb(204, 204, 204);
+ }
+ pre > code {
+ 	/*width: 100%!important;*/
+ }
+
+ /*列表*/
+ ul, ol {
+
+ }
+
+ /*表格*/
+ article table {
+ 	border-top: 2px solid #131415!important;
+ 	border-bottom: 2px solid #131415!important;
+ 	collapse: collapse;
+ 	border-collapse: collapse;
+ 	width: 100%;
+ }
+ article table th,
+ article table thead{
+ 	text-align: left;
+ 	border-bottom: 1px solid #334455!important;
+ 	background-color: #71D6FF!important;
+ }
+ article table tr:nth-of-type(2n-1){
+ 	background-color: #9a9a9a;
+ }
+ article table td{
+ 	border:none;
+ }
+
+ /*图片*/
+ article img {
+ 	width: 100%;
+ }
