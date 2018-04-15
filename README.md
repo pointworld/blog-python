@@ -1,4 +1,3 @@
-awesome-python3-webapp
+personal blog based on python
 ======================
-
-A python webapp tutorial.# point.github.io
+This blog is a personal blog and only used to help author make mind clear.
