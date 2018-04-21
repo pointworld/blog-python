@@ -293,6 +293,12 @@ async def data_structure():
         '__template__': 'data_structure.html',
     }
 
+@get('/thesis')
+async def thesis():
+    return {
+        '__template__': 'thesis.html',
+    }
+
 # end data  =================================================================================
 
 # extend algorithm  =================================================================================
@@ -745,6 +751,12 @@ async def python_webspider():
 # extend end Python 爬虫  =================================================================================
 
 # extend HTML 文档  =================================================================================
+@get('/html')
+async def html():
+    return {
+        '__template__': 'html.html',
+    }
+
 @get('/html/tags')
 async def html_tags():
     return {
