@@ -388,6 +388,30 @@ async def frontEnd_engineering():
     }
 # end front_end  =================================================================================
 
+
+# extend mv*  =================================================================================
+@get('/angular')
+async def angular():
+    return {
+        '__template__': 'angular.html',
+    }
+
+@get('/react')
+async def react():
+    return {
+        '__template__': 'react.html',
+    }
+
+@get('/vue')
+async def vue():
+    return {
+        '__template__': 'vue.html',
+    }
+
+
+# end mv*  =================================================================================
+
+
 # extend tools  =================================================================================
 @get('/tools')
 async def tools():
@@ -427,6 +451,13 @@ async def app():
     return {
         '__template__': 'app.html',
     }
+
+@get('/wechat_mini_program')
+async def wechat_mini_program():
+    return {
+        '__template__': 'wechat_mini_program.html',
+    }
+
 
 # end app  =================================================================================
 
