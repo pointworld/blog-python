@@ -1,0 +1,38 @@
+{% extends 'c-word.html' %}
+
+{% block title %} algorithm - recursion {% endblock title %}
+
+{% block point1 %}
+<article contenteditable="true">
+  <p>Category: algorithm - recursion</p>
+  <h1 id="blogTitle0">recursion</h1><p><br></p><pre>// ./data.js
+
+export default [<br><span style="white-space:pre">	</span>{<br><span style="white-space:pre">		</span>id: 1,<br><span style="white-space:pre">		</span>name: '广东省',<br><span style="white-space:pre">		</span>children: [<br><span style="white-space:pre">			</span>{<br><span style="white-space:pre">				</span>id: 11,<br><span style="white-space:pre">				</span>name: '深圳',<br><span style="white-space:pre">				</span>isShow: false,<br><span style="white-space:pre">				</span>children: [<br><span style="white-space:pre">					</span>{<br><span style="white-space:pre">						</span>id: 111,<br><span style="white-space:pre">						</span>name: '宝安',<br><span style="white-space:pre">						</span>isShow: false,<br><span style="white-space:pre">						</span>children: [<br><span style="white-space:pre">							</span>{<br><span style="white-space:pre">								</span>id: 1111,<br><span style="white-space:pre">								</span>name: '西乡',<br><span style="white-space:pre">								</span>isShow: false,<br><span style="white-space:pre">								</span>children: [<br><span style="white-space:pre">									</span>{<br><span style="white-space:pre">										</span>id: 11111,<br><span style="white-space:pre">										</span>name: '坪洲',<br><span style="white-space:pre">										</span>isShow: false,<br><span style="white-space:pre">										</span>children: []<br><span style="white-space:pre">									</span>},<br><span style="white-space:pre">									</span>{<br><span style="white-space:pre">										</span>id: 11112,<br><span style="white-space:pre">										</span>name: '灵芝',<br><span style="white-space:pre">										</span>isShow: false,<br><span style="white-space:pre">										</span>children: []<br><span style="white-space:pre">									</span>}<br><span style="white-space:pre">								</span>]<br><span style="white-space:pre">							</span>},<br><span style="white-space:pre">							</span>{<br><span style="white-space:pre">								</span>id: 1112,<br><span style="white-space:pre">								</span>name: '南山',<br><span style="white-space:pre">								</span>isShow: false,<br><span style="white-space:pre">								</span>children: [<br><span style="white-space:pre">									</span>{<br><span style="white-space:pre">										</span>id: 11121,<br><span style="white-space:pre">										</span>name: '科技园',<br><span style="white-space:pre">										</span>isShow: false,<br><span style="white-space:pre">										</span>children: []<br><span style="white-space:pre">									</span>}<br><span style="white-space:pre">								</span>]<br><span style="white-space:pre">							</span>}<br><span style="white-space:pre">						</span>]<br><span style="white-space:pre">					</span>},<br><span style="white-space:pre">					</span>{<br><span style="white-space:pre">						</span>id: 112,<br><span style="white-space:pre">						</span>name: '福田',<br><span style="white-space:pre">						</span>isShow: false,<br><span style="white-space:pre">						</span>children: []<br><span style="white-space:pre">					</span>}<br><span style="white-space:pre">				</span>]<br><span style="white-space:pre">			</span>},<br><span style="white-space:pre">			</span>{<br><span style="white-space:pre">				</span>id: 12,<br><span style="white-space:pre">				</span>name: '广州',<br><span style="white-space:pre">				</span>isShow: false,<br><span style="white-space:pre">				</span>children: [<br><span style="white-space:pre">					</span>{<br><span style="white-space:pre">						</span>id: 122,<br><span style="white-space:pre">						</span>name: '白云区',<br><span style="white-space:pre">						</span>isShow: false,<br><span style="white-space:pre">						</span>children: [<br><span style="white-space:pre">							</span>{<br><span style="white-space:pre">								</span>id: 1222,<br><span style="white-space:pre">								</span>name: '白云区',<br><span style="white-space:pre">								</span>isShow: false,<br><span style="white-space:pre">								</span>children: []<br><span style="white-space:pre">							</span>}<br><span style="white-space:pre">						</span>]<br><span style="white-space:pre">					</span>},<br><span style="white-space:pre">					</span>{<br><span style="white-space:pre">						</span>id: 122,<br><span style="white-space:pre">						</span>name: '珠海区',<br><span style="white-space:pre">						</span>isShow: false,<br><span style="white-space:pre">						</span>children: []<br><span style="white-space:pre">					</span>}<br><span style="white-space:pre">				</span>]<br><span style="white-space:pre">			</span>}<br><span style="white-space:pre">		</span>]<br><span style="white-space:pre">	</span>},<br><span style="white-space:pre">	</span>{<br><span style="white-space:pre">		</span>id: 2,<br><span style="white-space:pre">		</span>name: '湖南省',<br><span style="white-space:pre">		</span>isShow: false,<br><span style="white-space:pre">		</span>children: []<br><span style="white-space:pre">	</span>}<br>]</pre><p><br></p><pre>// ./main1.js
+
+import data from './data.js'
+
+function getServerName(list, id) {
+  let serverName
+  ;(function getName(list, id) {
+    for (let i=0; i&lt;list.length; i++) {
+      let children = list[i].children
+      if (list[i].id === id) {
+        serverName = list[i].name
+      } else {
+        if (!serverName) {
+          children &amp;&amp; getName(children, id)
+        }
+      }
+    }
+  })(list, id)
+}
+
+getServerName(data, 122)</pre><p><br></p><pre>// ./main2.js
+
+import data from './data.js'
+
+function getName (list, id) {<br><span style="white-space:pre">	</span>return list.reduce((pre, cur) =&gt; {<br><span style="white-space:pre">		</span>if (cur.id === id) {<br><span style="white-space:pre">			</span>return pre + cur.name<br><span style="white-space:pre">		</span>} else if (cur.children) {<br><span style="white-space:pre">			</span>return pre + getName(cur.children, id)<br><span style="white-space:pre">		</span>}<br><span style="white-space:pre">	</span>}, '')<br>}
+
+getName(data, 122)</pre><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p>
+</article>
+{% endblock point1 %}

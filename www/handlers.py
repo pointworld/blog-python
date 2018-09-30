@@ -318,6 +318,12 @@ async def algorithm():
         '__template__': 'algorithm.html',
     }
 
+@get('/algorithm/recursion')
+async def algorithm_recursion():
+    return {
+        '__template__': 'recursion.html',
+    }
+
 # end algorithm  =================================================================================
 
 # extend machine  =================================================================================
@@ -453,6 +459,19 @@ async def tools_database_mysql():
         '__template__': 'tools_database_mysql.html',
     }
 
+@get('/cron')
+async def cron():
+    return {
+        '__template__': 'cron.html',
+    }
+
+
+@get('/topo')
+async def topo():
+    return {
+        '__template__': 'topo.html',
+    }
+
 # end tools  =================================================================================
 
 # extend app  =================================================================================
@@ -488,6 +507,12 @@ async def web_tools():
 async def webpack():
     return {
         '__template__': 'webpack.html',
+    }
+
+@get('/cooking')
+async def cooking():
+    return {
+        '__template__': 'cooking.html',
     }
 
 @get('/web/api')
@@ -583,10 +608,16 @@ async def bom_window_event():
         '__template__': 'bom_window_event.html',
     }
 
-@get('/js/ajax')
+@get('/js/bom/ajax')
 async def js_ajax():
     return {
         '__template__': 'js_ajax.html',
+    }
+
+@get('/js/bom/xmlHttpRequest')
+async def js_bom_xmlHttpRequest():
+    return {
+        '__template__': 'xmlHttpRequest.html',
     }
 
 # end bom  =================================================================================
@@ -820,6 +851,18 @@ async def html_attrs():
 async def html_tiy():
     return {
         '__template__': 'html_tiy.html',
+    }
+
+@get('/canvas')
+async def canvas():
+    return {
+        '__template__': 'canvas.html',
+    }
+
+@get('/bigFileUpload')
+async def bigFileUpload():
+    return {
+        '__template__': 'bigFileUpload.html',
     }
 
 # extend end HTML  =================================================================================

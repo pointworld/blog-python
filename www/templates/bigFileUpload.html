@@ -1,0 +1,10 @@
+{% extends 'c-word.html' %}
+
+{% block title %} bigFileUpload {% endblock title %}
+
+{% block point1 %}
+<article contenteditable="true">
+  <p>Category: bigFileUpload</p>
+  <h1 id="blogTitle0">bigFileUpload</h1><p>利用 HTML5 实现超大文件分片上传</p><h2>Introduction</h2><h3>Background</h3><h4>存在的问题</h4><p>在网页中直接上传大文件一直是个比较头疼的问题，主要面临的问题一般包括两类：</p><p><ul><li>一是上传时间长中途一旦出错会导致前功尽弃；<br></li><li>二是服务端配置复杂，要考虑接收超大表单和超时问题，如果是托管主机没准还改不了配置，默认只能接收小于4MB的附件。<br></li></ul></p><h4>解决思路</h4><p><ul><li>比较理想的方案是能够把大文件分片，一片一片的传到服务端，再由服务端合并。这么做的好处在于一旦上传失败只是损失一个分片而已，不用整个文件重传，而且每个分片的大小可以控制在4MB以内，服务端不用做任何设置就可适应。<br></li></ul></p><h4>解决方案 - 利用 HTML5 中的 XMLHttpRequest 对象</h4><p>在 HTML5 标准中，XMLHttpRequest 对象被重新定义，被称为 “XMLHttpRequest Level 2”，其中包含了一下 5 个新特性：</p><p><ul><li>支持上传、下载字节流，比如文件、blob 以及表单数据<br></li><li>增加了上传、下载中的进度事件</li><li>跨域请求的支持</li><li>允许发送匿名请求（即不发送 HTTP 的 Referer 部分）</li><li>允许设置请求的超时</li></ul></p><h4>目标</h4><p><ul><li>显示上传的文件信息，比如文件名、类型、尺寸<br></li><li>一个能够显示真实进度的进度条</li><li>上传的速度</li><li>剩余时间的估算</li><li>已上传的数据量</li><li>上传结束后服务器返回的响应</li></ul></p><p>另外，凭借XMLHttpRequest，我们的上传过程整个都是异步的，因此用户在上传文件的时候，依然可以操作网页当中的其它元素，并不需要专门等待上传的完成。而在上传结束后，我们能够获取服务器发回的响应，因此整个上传过程都显得相当顺理成章。<br></p><h2>实现</h2><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p>
+</article>
+{% endblock point1 %}
