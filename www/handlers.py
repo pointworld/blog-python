@@ -695,6 +695,12 @@ async def js_es_obj_builtin():
         '__template__': 'js_es_obj_builtin.html',
     }
 
+@get('/js/es/obj_builtin_number')
+async def js_es_obj_builtin_number():
+    return {
+        '__template__': 'js_es_obj_builtin_number.html',
+    }
+
 @get('/js/es/obj_builtin_array')
 async def js_es_obj_builtin_array():
     return {
