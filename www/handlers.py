@@ -825,6 +825,12 @@ async def py():
     return {
         '__template__': 'py.html',
     }
+
+@get('/py/glossary')
+async def py_glossary():
+    return {
+        '__template__': 'py_glossary.html',
+    }
 # extend end Python  =================================================================================
 
 # extend Python 爬虫  =================================================================================
