@@ -847,6 +847,13 @@ async def py_stdlib_builtin_functions():
         '__template__': 'py_stdlib_builtin_functions.html',
     }
 
+# python standard library: built-in constants
+@get('/py/stdlib/builtin_constants')
+async def py_stdlib_builtin_constants():
+    return {
+        '__template__': 'py_stdlib_builtin_constants.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
