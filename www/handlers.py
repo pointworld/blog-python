@@ -826,10 +826,22 @@ async def py():
         '__template__': 'py.html',
     }
 
+@get('/py/spec')
+async def py_spec():
+    return {
+        '__template__': 'py_spec.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
         '__template__': 'py_glossary.html',
+    }
+
+@get('/py/interpreter')
+async def py_interpreter():
+    return {
+        '__template__': 'py_interpreter.html',
     }
 # extend end Python  =================================================================================
 
