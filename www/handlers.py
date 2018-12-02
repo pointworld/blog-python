@@ -854,6 +854,20 @@ async def py_stdlib_builtin_constants():
         '__template__': 'py_stdlib_builtin_constants.html',
     }
 
+# python standard library: built-in types
+@get('/py/stdlib/builtin_types')
+async def py_stdlib_builtin_types():
+    return {
+        '__template__': 'py_stdlib_builtin_types.html',
+    }
+
+# python standard library: built-in types: numerics
+@get('/py/stdlib/builtin_types_numerics')
+async def py_stdlib_builtin_types_numerics():
+    return {
+        '__template__': 'py_stdlib_builtin_types_numerics.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
