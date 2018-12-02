@@ -840,6 +840,13 @@ async def py_stdlib():
         '__template__': 'py_stdlib.html',
     }
 
+# python standard library: built-in functions
+@get('/py/stdlib/builtin_functions')
+async def py_stdlib_builtin_functions():
+    return {
+        '__template__': 'py_stdlib_builtin_functions.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
