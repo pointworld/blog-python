@@ -826,10 +826,18 @@ async def py():
         '__template__': 'py.html',
     }
 
+# python language reference
 @get('/py/spec')
 async def py_spec():
     return {
         '__template__': 'py_spec.html',
+    }
+
+# python standard library
+@get('/py/stdlib')
+async def py_stdlib():
+    return {
+        '__template__': 'py_stdlib.html',
     }
 
 @get('/py/glossary')
