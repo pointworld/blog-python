@@ -868,6 +868,13 @@ async def py_stdlib_builtin_types_numerics():
         '__template__': 'py_stdlib_builtin_types_numerics.html',
     }
 
+# python standard library: built-in types: sequences
+@get('/py/stdlib/builtin_types_sequences')
+async def py_stdlib_builtin_types_sequences():
+    return {
+        '__template__': 'py_stdlib_builtin_types_sequences.html',
+    }
+
 # python standard library: built-in types: str
 @get('/py/stdlib/builtin_types_str')
 async def py_stdlib_builtin_types_str():
