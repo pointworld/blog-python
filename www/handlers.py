@@ -875,6 +875,13 @@ async def py_stdlib_builtin_types_str():
         '__template__': 'py_stdlib_builtin_types_str.html',
     }
 
+# python standard library: built-in types: list
+@get('/py/stdlib/builtin_types_list')
+async def py_stdlib_builtin_types_list():
+    return {
+        '__template__': 'py_stdlib_builtin_types_list.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
