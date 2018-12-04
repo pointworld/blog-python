@@ -903,6 +903,13 @@ async def py_stdlib_builtin_types_set():
         '__template__': 'py_stdlib_builtin_types_set.html',
     }
 
+# python standard library: built-in types: dict
+@get('/py/stdlib/builtin_types_dict')
+async def py_stdlib_builtin_types_dict():
+    return {
+        '__template__': 'py_stdlib_builtin_types_dict.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
