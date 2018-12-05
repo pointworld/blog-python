@@ -840,6 +840,13 @@ async def py_spec_statement():
         '__template__': 'py_spec_statement.html',
     }
 
+# python language spec data_model
+@get('/py/spec/data_model')
+async def py_spec_data_model():
+    return {
+        '__template__': 'py_spec_data_model.html',
+    }
+
 # python standard library
 @get('/py/stdlib')
 async def py_stdlib():
