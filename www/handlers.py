@@ -833,6 +833,13 @@ async def py_spec():
         '__template__': 'py_spec.html',
     }
 
+# python language spec statement
+@get('/py/spec/statement')
+async def py_spec_statement():
+    return {
+        '__template__': 'py_spec_statement.html',
+    }
+
 # python standard library
 @get('/py/stdlib')
 async def py_stdlib():
