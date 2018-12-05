@@ -847,6 +847,13 @@ async def py_spec_data_model():
         '__template__': 'py_spec_data_model.html',
     }
 
+# python language spec import_system
+@get('/py/spec/import_system')
+async def py_spec_import_system():
+    return {
+        '__template__': 'py_spec_import_system.html',
+    }
+
 # python standard library
 @get('/py/stdlib')
 async def py_stdlib():
