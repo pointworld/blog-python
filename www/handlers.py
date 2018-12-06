@@ -861,6 +861,13 @@ async def py_spec_function():
         '__template__': 'py_spec_function.html',
     }
 
+# python language spec object
+@get('/py/spec/object')
+async def py_spec_object():
+    return {
+        '__template__': 'py_spec_object.html',
+    }
+
 # python standard library
 @get('/py/stdlib')
 async def py_stdlib():
