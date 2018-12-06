@@ -854,6 +854,13 @@ async def py_spec_import_system():
         '__template__': 'py_spec_import_system.html',
     }
 
+# python language spec function
+@get('/py/spec/function')
+async def py_spec_function():
+    return {
+        '__template__': 'py_spec_function.html',
+    }
+
 # python standard library
 @get('/py/stdlib')
 async def py_stdlib():
