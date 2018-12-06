@@ -945,6 +945,13 @@ async def py_stdlib_builtin_types_dict():
         '__template__': 'py_stdlib_builtin_types_dict.html',
     }
 
+# python standard library: re
+@get('/py/stdlib/re')
+async def py_stdlib_re():
+    return {
+        '__template__': 'py_stdlib_re.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
