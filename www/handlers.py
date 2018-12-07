@@ -952,6 +952,13 @@ async def py_stdlib_re():
         '__template__': 'py_stdlib_re.html',
     }
 
+# python standard library: json
+@get('/py/stdlib/json')
+async def py_stdlib_json():
+    return {
+        '__template__': 'py_stdlib_json.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
