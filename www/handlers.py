@@ -959,6 +959,13 @@ async def py_stdlib_json():
         '__template__': 'py_stdlib_json.html',
     }
 
+# python standard library: enum
+@get('/py/stdlib/enum')
+async def py_stdlib_enum():
+    return {
+        '__template__': 'py_stdlib_enum.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
