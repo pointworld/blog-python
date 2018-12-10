@@ -311,6 +311,22 @@ async def thesis():
 
 # end data  =================================================================================
 
+# extend math  =================================================================================
+@get('/math')
+async def math():
+    return {
+        '__template__': 'math.html',
+    }
+
+@get('/math/thought')
+async def math_thought():
+    return {
+        '__template__': 'math_thought.html',
+    }
+
+
+# end math  =================================================================================
+
 # extend algorithm  =================================================================================
 @get('/algorithm')
 async def algorithm():
