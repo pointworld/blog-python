@@ -989,6 +989,13 @@ async def py_stdlib_enum():
         '__template__': 'py_stdlib_enum.html',
     }
 
+# python standard library: enum
+@get('/py/stdlib/urllib')
+async def py_stdlib_urllib():
+    return {
+        '__template__': 'py_stdlib_urllib.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
