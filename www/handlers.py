@@ -503,6 +503,13 @@ async def wechat_mini_program():
         '__template__': 'wechat_mini_program.html',
     }
 
+# 正则表达式
+@get('/regexp')
+async def regexp():
+    return {
+        '__template__': 'regexp.html',
+    }
+
 
 # end app  =================================================================================
 
