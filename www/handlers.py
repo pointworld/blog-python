@@ -996,6 +996,13 @@ async def py_stdlib_urllib():
         '__template__': 'py_stdlib_urllib.html',
     }
 
+# python standard library: time
+@get('/py/stdlib/time')
+async def py_stdlib_time():
+    return {
+        '__template__': 'py_stdlib_time.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
