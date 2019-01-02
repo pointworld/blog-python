@@ -1003,6 +1003,13 @@ async def py_stdlib_time():
         '__template__': 'py_stdlib_time.html',
     }
 
+# python standard library: os
+@get('/py/stdlib/os')
+async def py_stdlib_os():
+    return {
+        '__template__': 'py_stdlib_os.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
