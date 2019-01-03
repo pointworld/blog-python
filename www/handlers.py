@@ -849,6 +849,13 @@ async def py():
         '__template__': 'py.html',
     }
 
+# python 面试
+@get('/py/interview')
+async def py_interview():
+    return {
+        '__template__': 'py_interview.html',
+    }
+
 # python language reference
 @get('/py/spec')
 async def py_spec():
