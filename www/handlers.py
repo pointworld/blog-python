@@ -469,10 +469,22 @@ async def tools_git():
         '__template__': 'tools_git.html',
     }
 
-@get('/tools/database/mysql')
-async def tools_database_mysql():
+@get('/database')
+async def database():
     return {
-        '__template__': 'tools_database_mysql.html',
+        '__template__': 'database.html',
+    }
+
+@get('/database/mysql')
+async def database_mysql():
+    return {
+        '__template__': 'database_mysql.html',
+    }
+
+@get('/database/redis')
+async def database_redis():
+    return {
+        '__template__': 'database_redis.html',
     }
 
 @get('/cron')
