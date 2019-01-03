@@ -487,6 +487,12 @@ async def database_redis():
         '__template__': 'database_redis.html',
     }
 
+@get('/database/mongodb')
+async def database_mongodb():
+    return {
+        '__template__': 'database_mongodb.html',
+    }
+
 @get('/cron')
 async def cron():
     return {
