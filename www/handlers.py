@@ -1035,6 +1035,13 @@ async def py_stdlib_os():
         '__template__': 'py_stdlib_os.html',
     }
 
+# python standard library: os
+@get('/py/stdlib/pickle')
+async def py_stdlib_pickle():
+    return {
+        '__template__': 'py_stdlib_pickle.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
