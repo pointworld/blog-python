@@ -881,6 +881,13 @@ async def py_spec():
         '__template__': 'py_spec.html',
     }
 
+# python language spec expression
+@get('/py/spec/expression')
+async def py_spec_expression():
+    return {
+        '__template__': 'py_spec_expression.html',
+    }
+
 # python language spec statement
 @get('/py/spec/statement')
 async def py_spec_statement():
