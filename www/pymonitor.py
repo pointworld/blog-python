@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-__author__ = 'Michael Liao'
-
 import os, sys, time, subprocess
 
 from watchdog.observers import Observer
