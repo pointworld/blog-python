@@ -1042,11 +1042,18 @@ async def py_stdlib_os():
         '__template__': 'py_stdlib_os.html',
     }
 
-# python standard library: os
+# python standard library: pickle
 @get('/py/stdlib/pickle')
 async def py_stdlib_pickle():
     return {
         '__template__': 'py_stdlib_pickle.html',
+    }
+
+# python standard library: builtins
+@get('/py/stdlib/builtins')
+async def py_stdlib_builtins():
+    return {
+        '__template__': 'py_stdlib_builtins.html',
     }
 
 @get('/py/glossary')
