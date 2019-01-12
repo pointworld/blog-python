@@ -397,11 +397,16 @@ async def os():
         '__template__': 'os.html',
     }
 
-
 @get('/os/win10')
 async def os_win10():
     return {
         '__template__': 'os_win10.html',
+    }
+
+@get('/os/linux')
+async def os_linux():
+    return {
+        '__template__': 'os_linux.html',
     }
 
 # end os  =================================================================================
