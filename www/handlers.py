@@ -1077,6 +1077,17 @@ async def python_webspider():
     }
 # extend end Python 爬虫  =================================================================================
 
+# extend python web frame ===================================================================================
+
+# python web frame - django
+@get('/django')
+async def django():
+    return {
+        '__template__': 'django.html',
+    }
+
+# extend end python web frame
+
 # extend HTML 文档  =================================================================================
 @get('/html')
 async def html():
