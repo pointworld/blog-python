@@ -1061,6 +1061,20 @@ async def py_stdlib_builtins():
         '__template__': 'py_stdlib_builtins.html',
     }
 
+# python standard library: sys
+@get('/py/stdlib/sys')
+async def py_stdlib_sys():
+    return {
+        '__template__': 'py_stdlib_sys.html',
+    }
+
+# python standard library: functools
+@get('/py/stdlib/functools')
+async def py_stdlib_functools():
+    return {
+        '__template__': 'py_stdlib_functools.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
