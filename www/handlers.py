@@ -1075,6 +1075,13 @@ async def py_stdlib_functools():
         '__template__': 'py_stdlib_functools.html',
     }
 
+# python standard library: runtime_services
+@get('/py/stdlib/runtime_services')
+async def py_stdlib_runtime_services():
+    return {
+        '__template__': 'py_stdlib_runtime_services.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
