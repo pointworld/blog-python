@@ -70,6 +70,16 @@ async def cookie2user(cookie_str):
         logging.exception(e)
         return None
 
+# extend new ====================================================================================
+# editor: vim
+@get('/vim')
+async def vim():
+    return {
+        '__template__': 'vim.html',
+    }
+
+# end new ====================================================================================
+
 # extend point  =================================================================================
 @get('/')
 async def index():
@@ -1080,6 +1090,13 @@ async def py_stdlib_functools():
 async def py_stdlib_runtime_services():
     return {
         '__template__': 'py_stdlib_runtime_services.html',
+    }
+
+# python standard library: debugging_and_profiling
+@get('/py/stdlib/debugging_and_profiling')
+async def py_stdlib_debugging_and_profiling():
+    return {
+        '__template__': 'py_stdlib_debugging_and_profiling.html',
     }
 
 @get('/py/glossary')
