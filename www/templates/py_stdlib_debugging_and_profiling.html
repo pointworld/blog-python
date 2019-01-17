@@ -1,0 +1,1167 @@
+{% extends 'c-word.html' %}
+
+{% block title %} debugging and profiling - Python | standard library {% endblock title %}
+
+{% block point1 %}
+<article contenteditable="true">
+  <p><span style="background-color: yellow;"><b>Category: 计算机 | 程序设计语言 | Python | standard library | debugging and profiling</b></span></p>
+  <h1 id="blogTitle0">Debugging and Profiling</h1><p>These libraries help you with Python development:&nbsp;</p><p><ul><li>the debugger enables you to step through code, analyze stack frames and set breakpoints etc.,&nbsp;<br></li><li>and the profilers run code and give you a detailed breakdown of execution times, allowing you to identify bottlenecks in your programs.</li></ul></p><hr style="box-sizing: content-box; height: 0px; margin: 15px 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; border-image: initial; border-top-style: solid; border-top-color: rgb(221, 221, 221); color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);"><div class="x-wiki-content x-main-content" style="background-color: rgb(255, 255, 255);"><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px 0px 15px; overflow-wrap: break-word; white-space: pre-wrap;">在程序运行过程中，总会遇到各种各样的错误。</p><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 15px 0px; overflow-wrap: break-word; white-space: pre-wrap;">错误的种类：</p><p style="margin: 15px 0px; overflow-wrap: break-word;"><ul><li>程序编写有问题造成的：bug<br></li><li>用户的非法输入造成的未预处理错误<br></li><li>程序运行时，不可预测的错误<br></li></ul></p><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 15px 0px; overflow-wrap: break-word; white-space: pre-wrap;">有的错误是程序编写有问题造成的，比如本来应该输出整数结果输出了字符串，这种错误我们通常称之为 bug，bug 是必须修复的。</p><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 15px 0px; overflow-wrap: break-word; white-space: pre-wrap;">有的错误是用户输入造成的，比如让用户输入email地址，结果得到一个空字符串，这种错误可以通过检查用户输入来做相应的处理。</p><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 15px 0px; overflow-wrap: break-word; white-space: pre-wrap;">还有一类错误是完全无法在程序运行过程中预测的，比如写入文件的时候，磁盘满了，写不进去了，或者从网络抓取数据，网络突然断掉了。这类错误也称为异常，在程序中通常是必须处理的，否则，程序会因为各种问题终止并退出。</p><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 15px 0px; overflow-wrap: break-word; white-space: pre-wrap;">Python内置了一套异常处理机制，来帮助我们进行错误处理。</p><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 15px 0px; overflow-wrap: break-word; white-space: pre-wrap;">此外，我们也需要跟踪程序的执行，查看变量的值是否正确，这个过程称为调试。Python 的 pdb 可以让我们以单步方式执行代码。</p><p style="color: rgb(102, 102, 102); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; margin: 15px 0px; overflow-wrap: break-word; white-space: pre-wrap;">最后，编写测试也很重要。有了良好的测试，就可以在程序修改后反复运行，确保程序输出符合我们编写的测试。</p></div><ul style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><li class="toctree-l1" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/bdb.html" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">bdb</span></code>&nbsp;— Debugger framework</a></li><li class="toctree-l1" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/faulthandler.html" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">faulthandler</span></code>&nbsp;— Dump the Python traceback</a><ul><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/faulthandler.html#dumping-the-traceback" style="color: rgb(99, 99, 187); text-decoration-line: none;">Dumping the traceback</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/faulthandler.html#fault-handler-state" style="color: rgb(99, 99, 187); text-decoration-line: none;">Fault handler state</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/faulthandler.html#dumping-the-tracebacks-after-a-timeout" style="color: rgb(99, 99, 187); text-decoration-line: none;">Dumping the tracebacks after a timeout</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/faulthandler.html#dumping-the-traceback-on-a-user-signal" style="color: rgb(99, 99, 187); text-decoration-line: none;">Dumping the traceback on a user signal</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/faulthandler.html#issue-with-file-descriptors" style="color: rgb(99, 99, 187); text-decoration-line: none;">Issue with file descriptors</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/faulthandler.html#example" style="color: rgb(99, 99, 187); text-decoration-line: none;">Example</a></li></ul></li><li class="toctree-l1" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/pdb.html" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">pdb</span></code>&nbsp;— The Python Debugger</a><ul><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/pdb.html#debugger-commands" style="color: rgb(99, 99, 187); text-decoration-line: none;">Debugger Commands</a></li></ul></li><li class="toctree-l1" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html" style="color: rgb(99, 99, 187); text-decoration-line: none;">The Python Profilers</a><ul><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#introduction-to-the-profilers" style="color: rgb(99, 99, 187); text-decoration-line: none;">Introduction to the profilers</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#instant-user-s-manual" style="color: rgb(99, 99, 187); text-decoration-line: none;">Instant User’s Manual</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#module-cProfile" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">profile</span></code>&nbsp;and&nbsp;<code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">cProfile</span></code>&nbsp;Module Reference</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#the-stats-class" style="color: rgb(99, 99, 187); text-decoration-line: none;">The&nbsp;<code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">Stats</span></code>&nbsp;Class</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#what-is-deterministic-profiling" style="color: rgb(99, 99, 187); text-decoration-line: none;">What Is Deterministic Profiling?</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#limitations" style="color: rgb(99, 99, 187); text-decoration-line: none;">Limitations</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#calibration" style="color: rgb(99, 99, 187); text-decoration-line: none;">Calibration</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/profile.html#using-a-custom-timer" style="color: rgb(99, 99, 187); text-decoration-line: none;">Using a custom timer</a></li></ul></li><li class="toctree-l1" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/timeit.html" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">timeit</span></code>&nbsp;— Measure execution time of small code snippets</a><ul><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/timeit.html#basic-examples" style="color: rgb(99, 99, 187); text-decoration-line: none;">Basic Examples</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/timeit.html#python-interface" style="color: rgb(99, 99, 187); text-decoration-line: none;">Python Interface</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/timeit.html#command-line-interface" style="color: rgb(99, 99, 187); text-decoration-line: none;">Command-Line Interface</a></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/timeit.html#examples" style="color: rgb(99, 99, 187); text-decoration-line: none;">Examples</a></li></ul></li><li class="toctree-l1" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/trace.html" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">trace</span></code>&nbsp;— Trace or track Python statement execution</a><ul><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/trace.html#command-line-usage" style="color: rgb(99, 99, 187); text-decoration-line: none;">Command-Line Usage</a><ul><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/trace.html#main-options" style="color: rgb(99, 99, 187); text-decoration-line: none;">Main options</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/trace.html#modifiers" style="color: rgb(99, 99, 187); text-decoration-line: none;">Modifiers</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/trace.html#filters" style="color: rgb(99, 99, 187); text-decoration-line: none;">Filters</a></li></ul></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/trace.html#programmatic-interface" style="color: rgb(99, 99, 187); text-decoration-line: none;">Programmatic Interface</a></li></ul></li><li class="toctree-l1" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">tracemalloc</span></code>&nbsp;— Trace memory allocations</a><ul><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#examples" style="color: rgb(99, 99, 187); text-decoration-line: none;">Examples</a><ul><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#display-the-top-10" style="color: rgb(99, 99, 187); text-decoration-line: none;">Display the top 10</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#compute-differences" style="color: rgb(99, 99, 187); text-decoration-line: none;">Compute differences</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#get-the-traceback-of-a-memory-block" style="color: rgb(99, 99, 187); text-decoration-line: none;">Get the traceback of a memory block</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#pretty-top" style="color: rgb(99, 99, 187); text-decoration-line: none;">Pretty top</a></li></ul></li><li class="toctree-l2" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#api" style="color: rgb(99, 99, 187); text-decoration-line: none;">API</a><ul><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#functions" style="color: rgb(99, 99, 187); text-decoration-line: none;">Functions</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#domainfilter" style="color: rgb(99, 99, 187); text-decoration-line: none;">DomainFilter</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#filter" style="color: rgb(99, 99, 187); text-decoration-line: none;">Filter</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#frame" style="color: rgb(99, 99, 187); text-decoration-line: none;">Frame</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#snapshot" style="color: rgb(99, 99, 187); text-decoration-line: none;">Snapshot</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#statistic" style="color: rgb(99, 99, 187); text-decoration-line: none;">Statistic</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#statisticdiff" style="color: rgb(99, 99, 187); text-decoration-line: none;">StatisticDiff</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#trace" style="color: rgb(99, 99, 187); text-decoration-line: none;">Trace</a></li><li class="toctree-l3" style="hyphens: auto; text-align: justify; line-height: 20.8px;"><a class="reference internal" href="https://docs.python.org/3/library/tracemalloc.html#traceback" style="color: rgb(99, 99, 187); text-decoration-line: none;">Traceback</a></li></ul></li></ul></li></ul><p><br></p><h2>bdb</h2><h2>faulthandler</h2><h2>pdb</h2><div>-- The Python Debugger<br></div><pre><h3>Help on module pdb</h3>
+<h4>NAME</h4>    pdb
+
+<h4>MODULE REFERENCE</h4>    https://docs.python.org/3.7/library/pdb
+
+    The following documentation is automatically generated from the Python
+    source files.  It may be incomplete, incorrect or include features that
+    are considered implementation detail and may vary between Python
+    implementations.  When in doubt, consult the module reference at the
+    location listed above.
+
+<h4>DESCRIPTION</h4>    The Python Debugger Pdb
+    =======================
+
+    To use the debugger in its simplest form:
+
+            &gt;&gt;&gt; import pdb
+            &gt;&gt;&gt; pdb.run('&lt;a statement&gt;')
+
+    The debugger's prompt is '(Pdb) '.  This will stop in the first
+    function call in &lt;a statement&gt;.
+
+    Alternatively, if a statement terminated with an unhandled exception,
+    you can use pdb's post-mortem facility to inspect the contents of the
+    traceback:
+
+            &gt;&gt;&gt; &lt;a statement&gt;
+            &lt;exception traceback&gt;
+            &gt;&gt;&gt; import pdb
+            &gt;&gt;&gt; pdb.pm()
+
+    The commands recognized by the debugger are listed in the next
+    section.  Most can be abbreviated as indicated; e.g., h(elp) means
+    that 'help' can be typed as 'h' or 'help' (but not as 'he' or 'hel',
+    nor as 'H' or 'Help' or 'HELP').  Optional arguments are enclosed in
+    square brackets.  Alternatives in the command syntax are separated
+    by a vertical bar (|).
+
+    A blank line repeats the previous command literally, except for
+    'list', where it lists the next 11 lines.
+
+    Commands that the debugger doesn't recognize are assumed to be Python
+    statements and are executed in the context of the program being
+    debugged.  Python statements can also be prefixed with an exclamation
+    point ('!').  This is a powerful way to inspect the program being
+    debugged; it is even possible to change variables or call functions.
+    When an exception occurs in such a statement, the exception name is
+    printed but the debugger's state is not changed.
+
+    The debugger supports aliases, which can save typing.  And aliases can
+    have parameters (see the alias help entry) which allows one a certain
+    level of adaptability to the context under examination.
+
+    Multiple commands may be entered on a single line, separated by the
+    pair ';;'.  No intelligence is applied to separating the commands; the
+    input is split at the first ';;', even if it is in the middle of a
+    quoted string.
+
+    If a file ".pdbrc" exists in your home directory or in the current
+    directory, it is read in and executed as if it had been typed at the
+    debugger prompt.  This is particularly useful for aliases.  If both
+    files exist, the one in the home directory is read first and aliases
+    defined there can be overridden by the local file.  This behavior can be
+    disabled by passing the "readrc=False" argument to the Pdb constructor.
+
+    Aside from aliases, the debugger is not directly programmable; but it
+    is implemented as a class from which you can derive your own debugger
+    class, which you can make as fancy as you like.
+
+
+    Debugger commands
+    =================
+
+    h(elp)
+            Without argument, print the list of available commands.
+            With a command name as argument, print help about that command.
+            "help pdb" shows the full pdb documentation.
+            "help exec" gives help on the ! command.
+
+    w(here)
+            Print a stack trace, with the most recent frame at the bottom.
+            An arrow indicates the "current frame", which determines the
+            context of most commands.  'bt' is an alias for this command.
+
+    d(own) [count]
+            Move the current frame count (default one) levels down in the
+            stack trace (to a newer frame).
+
+    u(p) [count]
+            Move the current frame count (default one) levels up in the
+            stack trace (to an older frame).
+
+    b(reak) [ ([filename:]lineno | function) [, condition] ]
+            Without argument, list all breaks.
+
+            With a line number argument, set a break at this line in the
+            current file.  With a function name, set a break at the first
+            executable line of that function.  If a second argument is
+            present, it is a string specifying an expression which must
+            evaluate to true before the breakpoint is honored.
+
+            The line number may be prefixed with a filename and a colon,
+            to specify a breakpoint in another file (probably one that
+            hasn't been loaded yet).  The file is searched for on
+            sys.path; the .py suffix may be omitted.
+
+    tbreak [ ([filename:]lineno | function) [, condition] ]
+            Same arguments as break, but sets a temporary breakpoint: it
+            is automatically deleted when first hit.
+
+    cl(ear) filename:lineno
+    cl(ear) [bpnumber [bpnumber...]]
+            With a space separated list of breakpoint numbers, clear
+            those breakpoints.  Without argument, clear all breaks (but
+            first ask confirmation).  With a filename:lineno argument,
+            clear all breaks at that line in that file.
+
+    disable bpnumber [bpnumber ...]
+            Disables the breakpoints given as a space separated list of
+            breakpoint numbers.  Disabling a breakpoint means it cannot
+            cause the program to stop execution, but unlike clearing a
+            breakpoint, it remains in the list of breakpoints and can be
+            (re-)enabled.
+
+    enable bpnumber [bpnumber ...]
+            Enables the breakpoints given as a space separated list of
+            breakpoint numbers.
+
+    ignore bpnumber [count]
+            Set the ignore count for the given breakpoint number.  If
+            count is omitted, the ignore count is set to 0.  A breakpoint
+            becomes active when the ignore count is zero.  When non-zero,
+            the count is decremented each time the breakpoint is reached
+            and the breakpoint is not disabled and any associated
+            condition evaluates to true.
+
+    condition bpnumber [condition]
+            Set a new condition for the breakpoint, an expression which
+            must evaluate to true before the breakpoint is honored.  If
+            condition is absent, any existing condition is removed; i.e.,
+            the breakpoint is made unconditional.
+
+    commands [bpnumber]
+            (com) ...
+            (com) end
+            (Pdb)
+
+            Specify a list of commands for breakpoint number bpnumber.
+            The commands themselves are entered on the following lines.
+            Type a line containing just 'end' to terminate the commands.
+            The commands are executed when the breakpoint is hit.
+
+            To remove all commands from a breakpoint, type commands and
+            follow it immediately with end; that is, give no commands.
+
+            With no bpnumber argument, commands refers to the last
+            breakpoint set.
+
+            You can use breakpoint commands to start your program up
+            again.  Simply use the continue command, or step, or any other
+            command that resumes execution.
+
+            Specifying any command resuming execution (currently continue,
+            step, next, return, jump, quit and their abbreviations)
+            terminates the command list (as if that command was
+            immediately followed by end).  This is because any time you
+            resume execution (even with a simple next or step), you may
+            encounter another breakpoint -- which could have its own
+            command list, leading to ambiguities about which list to
+            execute.
+
+            If you use the 'silent' command in the command list, the usual
+            message about stopping at a breakpoint is not printed.  This
+            may be desirable for breakpoints that are to print a specific
+            message and then continue.  If none of the other commands
+            print anything, you will see no sign that the breakpoint was
+            reached.
+
+    s(tep)
+            Execute the current line, stop at the first possible occasion
+            (either in a function that is called or in the current
+            function).
+
+    n(ext)
+            Continue execution until the next line in the current function
+            is reached or it returns.
+
+    unt(il) [lineno]
+            Without argument, continue execution until the line with a
+            number greater than the current one is reached.  With a line
+            number, continue execution until a line with a number greater
+            or equal to that is reached.  In both cases, also stop when
+            the current frame returns.
+
+    j(ump) lineno
+            Set the next line that will be executed.  Only available in
+            the bottom-most frame.  This lets you jump back and execute
+            code again, or jump forward to skip code that you don't want
+            to run.
+
+            It should be noted that not all jumps are allowed -- for
+            instance it is not possible to jump into the middle of a
+            for loop or out of a finally clause.
+
+    r(eturn)
+            Continue execution until the current function returns.
+
+    retval
+            Print the return value for the last return of a function.
+
+    run [args...]
+            Restart the debugged python program. If a string is supplied
+            it is split with "shlex", and the result is used as the new
+            sys.argv.  History, breakpoints, actions and debugger options
+            are preserved.  "restart" is an alias for "run".
+
+    c(ont(inue))
+            Continue execution, only stop when a breakpoint is encountered.
+
+    l(ist) [first [,last] | .]
+
+            List source code for the current file.  Without arguments,
+            list 11 lines around the current line or continue the previous
+            listing.  With . as argument, list 11 lines around the current
+            line.  With one argument, list 11 lines starting at that line.
+            With two arguments, list the given range; if the second
+            argument is less than the first, it is a count.
+
+            The current line in the current frame is indicated by "-&gt;".
+            If an exception is being debugged, the line where the
+            exception was originally raised or propagated is indicated by
+            "&gt;&gt;", if it differs from the current line.
+
+    longlist | ll
+            List the whole source code for the current function or frame.
+
+    a(rgs)
+            Print the argument list of the current function.
+
+    p expression
+            Print the value of the expression.
+
+    pp expression
+            Pretty-print the value of the expression.
+
+    whatis arg
+            Print the type of the argument.
+
+    source expression
+            Try to get source code for the given object and display it.
+
+    display [expression]
+
+            Display the value of the expression if it changed, each time execution
+            stops in the current frame.
+
+            Without expression, list all display expressions for the current frame.
+
+    undisplay [expression]
+
+            Do not display the expression any more in the current frame.
+
+            Without expression, clear all display expressions for the current frame.
+
+    interact
+
+            Start an interactive interpreter whose global namespace
+            contains all the (global and local) names found in the current scope.
+
+    alias [name [command [parameter parameter ...] ]]
+            Create an alias called 'name' that executes 'command'.  The
+            command must *not* be enclosed in quotes.  Replaceable
+            parameters can be indicated by %1, %2, and so on, while %* is
+            replaced by all the parameters.  If no command is given, the
+            current alias for name is shown. If no name is given, all
+            aliases are listed.
+
+            Aliases may be nested and can contain anything that can be
+            legally typed at the pdb prompt.  Note!  You *can* override
+            internal pdb commands with aliases!  Those internal commands
+            are then hidden until the alias is removed.  Aliasing is
+            recursively applied to the first word of the command line; all
+            other words in the line are left alone.
+
+            As an example, here are two useful aliases (especially when
+            placed in the .pdbrc file):
+
+            # Print instance variables (usage "pi classInst")
+            alias pi for k in %1.__dict__.keys(): print("%1.",k,"=",%1.__dict__[k])
+            # Print instance variables in self
+            alias ps pi self
+
+    unalias name
+            Delete the specified alias.
+
+    debug code
+            Enter a recursive debugger that steps through the code
+            argument (which is an arbitrary expression or statement to be
+            executed in the current environment).
+
+    q(uit)
+    exit
+            Quit from the debugger. The program being executed is aborted.
+
+    (!) statement
+            Execute the (one-line) statement in the context of the current
+            stack frame.  The exclamation point can be omitted unless the
+            first word of the statement resembles a debugger command.  To
+            assign to a global variable you must always prefix the command
+            with a 'global' command, e.g.:
+            (Pdb) global list_options; list_options = ['-l']
+            (Pdb)
+
+<h4>CLASSES</h4>    bdb.Bdb(builtins.object)
+        Pdb(bdb.Bdb, cmd.Cmd)
+    cmd.Cmd(builtins.object)
+        Pdb(bdb.Bdb, cmd.Cmd)
+
+    class Pdb(bdb.Bdb, cmd.Cmd)
+     |  Pdb(completekey='tab', stdin=None, stdout=None, skip=None, nosigint=False, readrc=True)
+     |
+     |  Generic Python debugger base class.
+     |
+     |  This class takes care of details of the trace facility;
+     |  a derived class should implement user interaction.
+     |  The standard debugger class (pdb.Pdb) is an example.
+     |
+     |  The optional skip argument must be an iterable of glob-style
+     |  module name patterns.  The debugger will not step into frames
+     |  that originate in a module that matches one of these patterns.
+     |  Whether a frame is considered to originate in a certain module
+     |  is determined by the __name__ in the frame globals.
+     |
+     |  Method resolution order:
+     |      Pdb
+     |      bdb.Bdb
+     |      cmd.Cmd
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, completekey='tab', stdin=None, stdout=None, skip=None, nosigint=False, readrc=True)
+     |      Instantiate a line-oriented interpreter framework.
+     |
+     |      The optional argument 'completekey' is the readline name of a
+     |      completion key; it defaults to the Tab key. If completekey is
+     |      not None and the readline module is available, command completion
+     |      is done automatically. The optional arguments stdin and stdout
+     |      specify alternate input and output file objects; if not specified,
+     |      sys.stdin and sys.stdout are used.
+     |
+     |  bp_commands(self, frame)
+     |      Call every command that was set for the current active breakpoint
+     |      (if there is one).
+     |
+     |      Returns True if the normal interaction function must be called,
+     |      False otherwise.
+     |
+     |  checkline(self, filename, lineno)
+     |      Check whether specified line seems to be executable.
+     |
+     |      Return `lineno` if it is, 0 if not (e.g. a docstring, comment, blank
+     |      line or EOF). Warning: testing is not comprehensive.
+     |
+     |  complete_b = _complete_location(self, text, line, begidx, endidx)
+     |
+     |  complete_break = _complete_location(self, text, line, begidx, endidx)
+     |
+     |  complete_cl = _complete_location(self, text, line, begidx, endidx)
+     |
+     |  complete_clear = _complete_location(self, text, line, begidx, endidx)
+     |
+     |  complete_commands = _complete_bpnumber(self, text, line, begidx, endidx)
+     |
+     |  complete_condition = _complete_bpnumber(self, text, line, begidx, endidx)
+     |
+     |  complete_debug = _complete_expression(self, text, line, begidx, endidx)
+     |
+     |  complete_disable = _complete_bpnumber(self, text, line, begidx, endidx)
+     |
+     |  complete_display = _complete_expression(self, text, line, begidx, endidx)
+     |
+     |  complete_enable = _complete_bpnumber(self, text, line, begidx, endidx)
+     |
+     |  complete_ignore = _complete_bpnumber(self, text, line, begidx, endidx)
+     |
+     |  complete_p = _complete_expression(self, text, line, begidx, endidx)
+     |
+     |  complete_pp = _complete_expression(self, text, line, begidx, endidx)
+     |
+     |  complete_print = _complete_expression(self, text, line, begidx, endidx)
+     |
+     |  complete_source = _complete_expression(self, text, line, begidx, endidx)
+     |
+     |  complete_tbreak = _complete_location(self, text, line, begidx, endidx)
+     |
+     |  complete_unalias(self, text, line, begidx, endidx)
+     |
+     |  complete_undisplay(self, text, line, begidx, endidx)
+     |
+     |  complete_whatis = _complete_expression(self, text, line, begidx, endidx)
+     |
+     |  default(self, line)
+     |      Called on an input line when the command prefix is not recognized.
+     |
+     |      If this method is not overridden, it prints an error message and
+     |      returns.
+     |
+     |  defaultFile(self)
+     |      Produce a reasonable default.
+     |
+     |  displayhook(self, obj)
+     |      Custom displayhook for the exec in default(), which prevents
+     |      assignment of the _ variable in the builtins.
+     |
+     |  do_EOF(self, arg)
+     |      EOF
+     |      Handles the receipt of EOF as a command.
+     |
+     |  do_a = do_args(self, arg)
+     |
+     |  do_alias(self, arg)
+     |      alias [name [command [parameter parameter ...] ]]
+     |      Create an alias called 'name' that executes 'command'.  The
+     |      command must *not* be enclosed in quotes.  Replaceable
+     |      parameters can be indicated by %1, %2, and so on, while %* is
+     |      replaced by all the parameters.  If no command is given, the
+     |      current alias for name is shown. If no name is given, all
+     |      aliases are listed.
+     |
+     |      Aliases may be nested and can contain anything that can be
+     |      legally typed at the pdb prompt.  Note!  You *can* override
+     |      internal pdb commands with aliases!  Those internal commands
+     |      are then hidden until the alias is removed.  Aliasing is
+     |      recursively applied to the first word of the command line; all
+     |      other words in the line are left alone.
+     |
+     |      As an example, here are two useful aliases (especially when
+     |      placed in the .pdbrc file):
+     |
+     |      # Print instance variables (usage "pi classInst")
+     |      alias pi for k in %1.__dict__.keys(): print("%1.",k,"=",%1.__dict__[k])
+     |      # Print instance variables in self
+     |      alias ps pi self
+     |
+     |  do_args(self, arg)
+     |      a(rgs)
+     |      Print the argument list of the current function.
+     |
+     |  do_b = do_break(self, arg, temporary=0)
+     |
+     |  do_break(self, arg, temporary=0)
+     |      b(reak) [ ([filename:]lineno | function) [, condition] ]
+     |      Without argument, list all breaks.
+     |
+     |      With a line number argument, set a break at this line in the
+     |      current file.  With a function name, set a break at the first
+     |      executable line of that function.  If a second argument is
+     |      present, it is a string specifying an expression which must
+     |      evaluate to true before the breakpoint is honored.
+     |
+     |      The line number may be prefixed with a filename and a colon,
+     |      to specify a breakpoint in another file (probably one that
+     |      hasn't been loaded yet).  The file is searched for on
+     |      sys.path; the .py suffix may be omitted.
+     |
+     |  do_bt = do_where(self, arg)
+     |
+     |  do_c = do_continue(self, arg)
+     |
+     |  do_cl = do_clear(self, arg)
+     |
+     |  do_clear(self, arg)
+     |      cl(ear) filename:lineno
+     |      cl(ear) [bpnumber [bpnumber...]]
+     |              With a space separated list of breakpoint numbers, clear
+     |              those breakpoints.  Without argument, clear all breaks (but
+     |              first ask confirmation).  With a filename:lineno argument,
+     |              clear all breaks at that line in that file.
+     |
+     |  do_commands(self, arg)
+     |      commands [bpnumber]
+     |      (com) ...
+     |      (com) end
+     |      (Pdb)
+     |
+     |      Specify a list of commands for breakpoint number bpnumber.
+     |      The commands themselves are entered on the following lines.
+     |      Type a line containing just 'end' to terminate the commands.
+     |      The commands are executed when the breakpoint is hit.
+     |
+     |      To remove all commands from a breakpoint, type commands and
+     |      follow it immediately with end; that is, give no commands.
+     |
+     |      With no bpnumber argument, commands refers to the last
+     |      breakpoint set.
+     |
+     |      You can use breakpoint commands to start your program up
+     |      again.  Simply use the continue command, or step, or any other
+     |      command that resumes execution.
+     |
+     |      Specifying any command resuming execution (currently continue,
+     |      step, next, return, jump, quit and their abbreviations)
+     |      terminates the command list (as if that command was
+     |      immediately followed by end).  This is because any time you
+     |      resume execution (even with a simple next or step), you may
+     |      encounter another breakpoint -- which could have its own
+     |      command list, leading to ambiguities about which list to
+     |      execute.
+     |
+     |      If you use the 'silent' command in the command list, the usual
+     |      message about stopping at a breakpoint is not printed.  This
+     |      may be desirable for breakpoints that are to print a specific
+     |      message and then continue.  If none of the other commands
+     |      print anything, you will see no sign that the breakpoint was
+     |      reached.
+     |
+     |  do_condition(self, arg)
+     |      condition bpnumber [condition]
+     |      Set a new condition for the breakpoint, an expression which
+     |      must evaluate to true before the breakpoint is honored.  If
+     |      condition is absent, any existing condition is removed; i.e.,
+     |      the breakpoint is made unconditional.
+     |
+     |  do_cont = do_continue(self, arg)
+     |
+     |  do_continue(self, arg)
+     |      c(ont(inue))
+     |      Continue execution, only stop when a breakpoint is encountered.
+     |
+     |  do_d = do_down(self, arg)
+     |
+     |  do_debug(self, arg)
+     |      debug code
+     |      Enter a recursive debugger that steps through the code
+     |      argument (which is an arbitrary expression or statement to be
+     |      executed in the current environment).
+     |
+     |  do_disable(self, arg)
+     |      disable bpnumber [bpnumber ...]
+     |      Disables the breakpoints given as a space separated list of
+     |      breakpoint numbers.  Disabling a breakpoint means it cannot
+     |      cause the program to stop execution, but unlike clearing a
+     |      breakpoint, it remains in the list of breakpoints and can be
+     |      (re-)enabled.
+     |
+     |  do_display(self, arg)
+     |      display [expression]
+     |
+     |      Display the value of the expression if it changed, each time execution
+     |      stops in the current frame.
+     |
+     |      Without expression, list all display expressions for the current frame.
+     |
+     |  do_down(self, arg)
+     |      d(own) [count]
+     |      Move the current frame count (default one) levels down in the
+     |      stack trace (to a newer frame).
+     |
+     |  do_enable(self, arg)
+     |      enable bpnumber [bpnumber ...]
+     |      Enables the breakpoints given as a space separated list of
+     |      breakpoint numbers.
+     |
+     |  do_exit = do_quit(self, arg)
+     |
+     |  do_h = do_help(self, arg)
+     |
+     |  do_help(self, arg)
+     |      h(elp)
+     |      Without argument, print the list of available commands.
+     |      With a command name as argument, print help about that command.
+     |      "help pdb" shows the full pdb documentation.
+     |      "help exec" gives help on the ! command.
+     |
+     |  do_ignore(self, arg)
+     |      ignore bpnumber [count]
+     |      Set the ignore count for the given breakpoint number.  If
+     |      count is omitted, the ignore count is set to 0.  A breakpoint
+     |      becomes active when the ignore count is zero.  When non-zero,
+     |      the count is decremented each time the breakpoint is reached
+     |      and the breakpoint is not disabled and any associated
+     |      condition evaluates to true.
+     |
+     |  do_interact(self, arg)
+     |      interact
+     |
+     |      Start an interactive interpreter whose global namespace
+     |      contains all the (global and local) names found in the current scope.
+     |
+     |  do_j = do_jump(self, arg)
+     |
+     |  do_jump(self, arg)
+     |      j(ump) lineno
+     |      Set the next line that will be executed.  Only available in
+     |      the bottom-most frame.  This lets you jump back and execute
+     |      code again, or jump forward to skip code that you don't want
+     |      to run.
+     |
+     |      It should be noted that not all jumps are allowed -- for
+     |      instance it is not possible to jump into the middle of a
+     |      for loop or out of a finally clause.
+     |
+     |  do_l = do_list(self, arg)
+     |
+     |  do_list(self, arg)
+     |      l(ist) [first [,last] | .]
+     |
+     |      List source code for the current file.  Without arguments,
+     |      list 11 lines around the current line or continue the previous
+     |      listing.  With . as argument, list 11 lines around the current
+     |      line.  With one argument, list 11 lines starting at that line.
+     |      With two arguments, list the given range; if the second
+     |      argument is less than the first, it is a count.
+     |
+     |      The current line in the current frame is indicated by "-&gt;".
+     |      If an exception is being debugged, the line where the
+     |      exception was originally raised or propagated is indicated by
+     |      "&gt;&gt;", if it differs from the current line.
+     |
+     |  do_ll = do_longlist(self, arg)
+     |
+     |  do_longlist(self, arg)
+     |      longlist | ll
+     |      List the whole source code for the current function or frame.
+     |
+     |  do_n = do_next(self, arg)
+     |
+     |  do_next(self, arg)
+     |      n(ext)
+     |      Continue execution until the next line in the current function
+     |      is reached or it returns.
+     |
+     |  do_p(self, arg)
+     |      p expression
+     |      Print the value of the expression.
+     |
+     |  do_pp(self, arg)
+     |      pp expression
+     |      Pretty-print the value of the expression.
+     |
+     |  do_q = do_quit(self, arg)
+     |
+     |  do_quit(self, arg)
+     |      q(uit)
+     |      exit
+     |              Quit from the debugger. The program being executed is aborted.
+     |
+     |  do_r = do_return(self, arg)
+     |
+     |  do_restart = do_run(self, arg)
+     |
+     |  do_return(self, arg)
+     |      r(eturn)
+     |      Continue execution until the current function returns.
+     |
+     |  do_retval(self, arg)
+     |      retval
+     |      Print the return value for the last return of a function.
+     |
+     |  do_run(self, arg)
+     |      run [args...]
+     |      Restart the debugged python program. If a string is supplied
+     |      it is split with "shlex", and the result is used as the new
+     |      sys.argv.  History, breakpoints, actions and debugger options
+     |      are preserved.  "restart" is an alias for "run".
+     |
+     |  do_rv = do_retval(self, arg)
+     |
+     |  do_s = do_step(self, arg)
+     |
+     |  do_source(self, arg)
+     |      source expression
+     |      Try to get source code for the given object and display it.
+     |
+     |  do_step(self, arg)
+     |      s(tep)
+     |      Execute the current line, stop at the first possible occasion
+     |      (either in a function that is called or in the current
+     |      function).
+     |
+     |  do_tbreak(self, arg)
+     |      tbreak [ ([filename:]lineno | function) [, condition] ]
+     |      Same arguments as break, but sets a temporary breakpoint: it
+     |      is automatically deleted when first hit.
+     |
+     |  do_u = do_up(self, arg)
+     |
+     |  do_unalias(self, arg)
+     |      unalias name
+     |      Delete the specified alias.
+     |
+     |  do_undisplay(self, arg)
+     |      undisplay [expression]
+     |
+     |      Do not display the expression any more in the current frame.
+     |
+     |      Without expression, clear all display expressions for the current frame.
+     |
+     |  do_unt = do_until(self, arg)
+     |
+     |  do_until(self, arg)
+     |      unt(il) [lineno]
+     |      Without argument, continue execution until the line with a
+     |      number greater than the current one is reached.  With a line
+     |      number, continue execution until a line with a number greater
+     |      or equal to that is reached.  In both cases, also stop when
+     |      the current frame returns.
+     |
+     |  do_up(self, arg)
+     |      u(p) [count]
+     |      Move the current frame count (default one) levels up in the
+     |      stack trace (to an older frame).
+     |
+     |  do_w = do_where(self, arg)
+     |
+     |  do_whatis(self, arg)
+     |      whatis arg
+     |      Print the type of the argument.
+     |
+     |  do_where(self, arg)
+     |      w(here)
+     |      Print a stack trace, with the most recent frame at the bottom.
+     |      An arrow indicates the "current frame", which determines the
+     |      context of most commands.  'bt' is an alias for this command.
+     |
+     |  error(self, msg)
+     |
+     |  execRcLines(self)
+     |      # Can be executed earlier than 'setup' if desired
+     |
+     |  forget(self)
+     |
+     |  handle_command_def(self, line)
+     |      Handles one command line during command list definition.
+     |
+     |  help_exec(self)
+     |      (!) statement
+     |      Execute the (one-line) statement in the context of the current
+     |      stack frame.  The exclamation point can be omitted unless the
+     |      first word of the statement resembles a debugger command.  To
+     |      assign to a global variable you must always prefix the command
+     |      with a 'global' command, e.g.:
+     |      (Pdb) global list_options; list_options = ['-l']
+     |      (Pdb)
+     |
+     |  help_pdb(self)
+     |
+     |  interaction(self, frame, traceback)
+     |
+     |  lineinfo(self, identifier)
+     |
+     |  lookupmodule(self, filename)
+     |      Helper function for break/clear parsing -- may be overridden.
+     |
+     |      lookupmodule() translates (possibly incomplete) file or module name
+     |      into an absolute file name.
+     |
+     |  message(self, msg)
+     |
+     |  onecmd(self, line)
+     |      Interpret the argument as though it had been typed in response
+     |      to the prompt.
+     |
+     |      Checks whether this line is typed at the normal prompt or in
+     |      a breakpoint command list definition.
+     |
+     |  precmd(self, line)
+     |      Handle alias expansion and ';;' separator.
+     |
+     |  preloop(self)
+     |      Hook method executed once when the cmdloop() method is called.
+     |
+     |  print_stack_entry(self, frame_lineno, prompt_prefix='\n-&gt; ')
+     |
+     |  print_stack_trace(self)
+     |
+     |  reset(self)
+     |      Set values of attributes as ready to start debugging.
+     |
+     |  setup(self, f, tb)
+     |
+     |  sigint_handler(self, signum, frame)
+     |
+     |  user_call(self, frame, argument_list)
+     |      This method is called when there is the remote possibility
+     |      that we ever need to stop in this function.
+     |
+     |  user_exception(self, frame, exc_info)
+     |      This function is called if an exception occurs,
+     |      but only if we are to stop at or just below this level.
+     |
+     |  user_line(self, frame)
+     |      This function is called when we stop or break at this line.
+     |
+     |  user_return(self, frame, return_value)
+     |      This function is called when a return trap is set here.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  commands_resuming = ['do_continue', 'do_step', 'do_next', 'do_return',...
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from bdb.Bdb:
+     |
+     |  break_anywhere(self, frame)
+     |      Return True if there is any breakpoint for frame's filename.
+     |
+     |  break_here(self, frame)
+     |      Return True if there is an effective breakpoint for this line.
+     |
+     |      Check for line or function breakpoint and if in effect.
+     |      Delete temporary breakpoints if effective() says to.
+     |
+     |  canonic(self, filename)
+     |      Return canonical form of filename.
+     |
+     |      For real filenames, the canonical form is a case-normalized (on
+     |      case insenstive filesystems) absolute path.  'Filenames' with
+     |      angle brackets, such as "&lt;stdin&gt;", generated in interactive
+     |      mode, are returned unchanged.
+     |
+     |  clear_all_breaks(self)
+     |      Delete all existing breakpoints.
+     |
+     |      If none were set, return an error message.
+     |
+     |  clear_all_file_breaks(self, filename)
+     |      Delete all breakpoints in filename.
+     |
+     |      If none were set, return an error message.
+     |
+     |  clear_bpbynumber(self, arg)
+     |      Delete a breakpoint by its index in Breakpoint.bpbynumber.
+     |
+     |      If arg is invalid, return an error message.
+     |
+     |  clear_break(self, filename, lineno)
+     |      Delete breakpoints for filename:lineno.
+     |
+     |      If no breakpoints were set, return an error message.
+     |
+     |  dispatch_call(self, frame, arg)
+     |      Invoke user function and return trace function for call event.
+     |
+     |      If the debugger stops on this function call, invoke
+     |      self.user_call(). Raise BbdQuit if self.quitting is set.
+     |      Return self.trace_dispatch to continue tracing in this scope.
+     |
+     |  dispatch_exception(self, frame, arg)
+     |      Invoke user function and return trace function for exception event.
+     |
+     |      If the debugger stops on this exception, invoke
+     |      self.user_exception(). Raise BdbQuit if self.quitting is set.
+     |      Return self.trace_dispatch to continue tracing in this scope.
+     |
+     |  dispatch_line(self, frame)
+     |      Invoke user function and return trace function for line event.
+     |
+     |      If the debugger stops on the current line, invoke
+     |      self.user_line(). Raise BdbQuit if self.quitting is set.
+     |      Return self.trace_dispatch to continue tracing in this scope.
+     |
+     |  dispatch_return(self, frame, arg)
+     |      Invoke user function and return trace function for return event.
+     |
+     |      If the debugger stops on this function return, invoke
+     |      self.user_return(). Raise BdbQuit if self.quitting is set.
+     |      Return self.trace_dispatch to continue tracing in this scope.
+     |
+     |  format_stack_entry(self, frame_lineno, lprefix=': ')
+     |      Return a string with information about a stack entry.
+     |
+     |      The stack entry frame_lineno is a (frame, lineno) tuple.  The
+     |      return string contains the canonical filename, the function name
+     |      or '&lt;lambda&gt;', the input arguments, the return value, and the
+     |      line of code (if it exists).
+     |
+     |  get_all_breaks(self)
+     |      Return all breakpoints that are set.
+     |
+     |  get_bpbynumber(self, arg)
+     |      Return a breakpoint by its index in Breakpoint.bybpnumber.
+     |
+     |      For invalid arg values or if the breakpoint doesn't exist,
+     |      raise a ValueError.
+     |
+     |      self.user_line(). Raise BdbQuit if self.quitting is set.
+     |      Return self.trace_dispatch to continue tracing in this scope.
+     |
+     |  dispatch_return(self, frame, arg)
+     |      Invoke user function and return trace function for return event.
+     |
+     |      If the debugger stops on this function return, invoke
+     |      self.user_return(). Raise BdbQuit if self.quitting is set.
+     |      Return self.trace_dispatch to continue tracing in this scope.
+     |
+     |  format_stack_entry(self, frame_lineno, lprefix=': ')
+     |      Return a string with information about a stack entry.
+     |
+     |      The stack entry frame_lineno is a (frame, lineno) tuple.  The
+     |      return string contains the canonical filename, the function name
+     |      or '&lt;lambda&gt;', the input arguments, the return value, and the
+     |      line of code (if it exists).
+     |
+     |  get_all_breaks(self)
+     |      Return all breakpoints that are set.
+     |
+     |  get_bpbynumber(self, arg)
+     |      Return a breakpoint by its index in Breakpoint.bybpnumber.
+     |
+     |      For invalid arg values or if the breakpoint doesn't exist,
+     |      raise a ValueError.
+     |
+     |  get_break(self, filename, lineno)
+     |      Return True if there is a breakpoint for filename:lineno.
+     |
+     |  get_breaks(self, filename, lineno)
+     |      Return all breakpoints for filename:lineno.
+     |
+     |      If no breakpoints are set, return an empty list.
+     |
+     |  get_file_breaks(self, filename)
+     |      Return all lines with breakpoints for filename.
+     |
+     |      If no breakpoints are set, return an empty list.
+     |
+     |  get_stack(self, f, t)
+     |      Return a list of (frame, lineno) in a stack trace and a size.
+     |
+     |      List starts with original calling frame, if there is one.
+     |      Size may be number of frames above or below f.
+     |
+     |  is_skipped_module(self, module_name)
+     |      Return True if module_name matches any skip pattern.
+     |
+     |  run(self, cmd, globals=None, locals=None)
+     |      Debug a statement executed via the exec() function.
+     |
+     |      globals defaults to __main__.dict; locals defaults to globals.
+     |
+     |  runcall(self, func, *args, **kwds)
+     |      Debug a single function call.
+     |
+     |      Return the result of the function call.
+     |
+     |  runctx(self, cmd, globals, locals)
+     |      For backwards-compatibility.  Defers to run().
+     |
+     |  runeval(self, expr, globals=None, locals=None)
+     |      Debug an expression executed via the eval() function.
+     |
+     |      globals defaults to __main__.dict; locals defaults to globals.
+     |
+     |  set_break(self, filename, lineno, temporary=False, cond=None, funcname=None)
+     |      Set a new breakpoint for filename:lineno.
+     |
+     |      If lineno doesn't exist for the filename, return an error message.
+     |      The filename should be in canonical form.
+     |
+     |  set_continue(self)
+     |      Stop only at breakpoints or when finished.
+     |
+     |      If there are no breakpoints, set the system trace function to None.
+     |
+     |  set_next(self, frame)
+     |      Stop on the next line in or below the given frame.
+     |
+     |  set_quit(self)
+     |      Set quitting attribute to True.
+     |
+     |      Raises BdbQuit exception in the next call to a dispatch_*() method.
+     |
+     |  set_return(self, frame)
+     |      Stop when returning from the given frame.
+     |
+     |  set_step(self)
+     |      Stop after one line of code.
+     |
+     |  set_trace(self, frame=None)
+     |      Start debugging from frame.
+     |
+     |      If frame is not specified, debugging starts from caller's frame.
+     |
+     |  set_until(self, frame, lineno=None)
+     |      Stop when the line with the lineno greater than the current one is
+     |      reached or when returning from current frame.
+     |
+     |  stop_here(self, frame)
+     |      Return True if frame is below the starting frame in the stack.
+     |
+     |  trace_dispatch(self, frame, event, arg)
+     |      Dispatch a trace function for debugged frames based on the event.
+     |
+     |      This function is installed as the trace function for debugged
+     |      frames. Its return value is the new trace function, which is
+     |      usually itself. The default implementation decides how to
+     |      dispatch a frame, depending on the type of event (passed in as a
+     |      string) that is about to be executed.
+     |
+     |      The event can be one of the following:
+     |          line: A new line of code is going to be executed.
+     |          call: A function is about to be called or another code block
+     |                is entered.
+     |          return: A function or other code block is about to return.
+     |          exception: An exception has occurred.
+     |          c_call: A C function is about to be called.
+     |          c_return: A C function has returned.
+     |          c_exception: A C function has raised an exception.
+     |
+     |      For the Python events, specialized functions (see the dispatch_*()
+     |      methods) are called.  For the C events, no action is taken.
+     |
+     |      The arg parameter depends on the previous event.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from bdb.Bdb:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from cmd.Cmd:
+     |
+     |  cmdloop(self, intro=None)
+     |      Repeatedly issue a prompt, accept input, parse an initial prefix
+     |      off the received input, and dispatch to action methods, passing them
+     |      the remainder of the line as argument.
+     |
+     |  columnize(self, list, displaywidth=80)
+     |      Display a list of strings as a compact set of columns.
+     |
+     |      Each column is only as wide as necessary.
+     |      Columns are separated by two spaces (one was not legible enough).
+     |
+     |  complete(self, text, state)
+     |      Return the next possible completion for 'text'.
+     |
+     |      If a command has not been entered, then complete against command list.
+     |      Otherwise try to call complete_&lt;command&gt; to get list of completions.
+     |
+     |  complete_help(self, *args)
+     |
+     |  completedefault(self, *ignored)
+     |      Method called to complete an input line when no command-specific
+     |      complete_*() method is available.
+     |
+     |      By default, it returns an empty list.
+     |
+     |  completenames(self, text, *ignored)
+     |
+     |  emptyline(self)
+     |      Called when an empty line is entered in response to the prompt.
+     |
+     |      If this method is not overridden, it repeats the last nonempty
+     |      command entered.
+     |
+     |  get_names(self)
+     |
+     |  parseline(self, line)
+     |      Parse the line into a command name and a string containing
+     |      the arguments.  Returns a tuple containing (command, args, line).
+     |      'command' and 'args' may be None if the line couldn't be parsed.
+     |
+     |  postcmd(self, stop, line)
+     |      Hook method executed just after a command dispatch is finished.
+     |
+     |  postloop(self)
+     |      Hook method executed once when the cmdloop() method is about to
+     |      return.
+     |
+     |  print_topics(self, header, cmds, cmdlen, maxcol)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from cmd.Cmd:
+     |
+     |  doc_header = 'Documented commands (type help &lt;topic&gt;):'
+     |
+     |  doc_leader = ''
+     |
+     |  identchars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123...
+     |
+     |  intro = None
+     |
+     |  lastcmd = ''
+     |
+     |  misc_header = 'Miscellaneous help topics:'
+     |
+     |  nohelp = '*** No help on %s'
+     |
+     |  prompt = '(Cmd) '
+     |
+     |  ruler = '='
+     |
+     |  undoc_header = 'Undocumented commands:'
+     |
+     |  use_rawinput = 1
+
+<h4>FUNCTIONS</h4>    help()
+        # print help
+
+    pm()
+
+    post_mortem(t=None)
+
+    run(statement, globals=None, locals=None)
+
+    runcall(*args, **kwds)
+
+    runctx(statement, globals, locals)
+
+    runeval(expression, globals=None, locals=None)
+
+    set_trace(*, header=None)
+
+<h4>DATA</h4>    __all__ = ['run', 'pm', 'Pdb', 'runeval', 'runctx', 'runcall', 'set_tr...
+
+<h4>FILE</h4>    /usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/pdb.py<br></pre><div><br></div><div><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The module&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#module-pdb" title="pdb: The Python debugger for interactive interpreters." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">pdb</span></code></a>&nbsp;defines an interactive source code debugger for Python programs. It supports setting (conditional) breakpoints and single stepping at the source line level, inspection of stack frames, source code listing, and evaluation of arbitrary Python code in the context of any stack frame. It also supports post-mortem debugging and can be called under program control.</p><p id="index-1" style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The debugger is extensible – it is actually defined as the class&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb" title="pdb.Pdb" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">Pdb</span></code></a>. This is currently undocumented but easily understood by reading the source. The extension interface uses the modules&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/bdb.html#module-bdb" title="bdb: Debugger framework." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">bdb</span></code></a>&nbsp;and&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/cmd.html#module-cmd" title="cmd: Build line-oriented command interpreters." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">cmd</span></code></a>.</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The debugger’s prompt is&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">(Pdb)</span></code>. Typical usage to run a program under control of the debugger is:</p><div class="highlight-python3 notranslate" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><span class="copybutton" title="Hide the prompts and output" style="cursor: pointer; position: absolute; top: 0px; right: 0px; border-color: rgb(170, 204, 153); border-style: solid; border-width: 1px; color: rgb(170, 204, 153); font-family: monospace; padding-left: 0.2em; padding-right: 0.2em; border-radius: 0px 3px 0px 0px;">&gt;&gt;&gt;</span><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="gp" style="color: rgb(198, 93, 9); font-weight: bold;">&gt;&gt;&gt; </span><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">pdb</span>
+<span class="gp" style="color: rgb(198, 93, 9); font-weight: bold;">&gt;&gt;&gt; </span><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">mymodule</span>
+<span class="gp" style="color: rgb(198, 93, 9); font-weight: bold;">&gt;&gt;&gt; </span><span class="n">pdb</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">run</span><span class="p">(</span><span class="s1" style="color: rgb(64, 112, 160);">'mymodule.test()'</span><span class="p">)</span>
+<span class="go">&gt; &lt;string&gt;(0)?()</span>
+<span class="go">(Pdb) continue</span>
+<span class="go">&gt; &lt;string&gt;(1)?()</span>
+<span class="go">(Pdb) continue</span>
+<span class="go">NameError: 'spam'</span>
+<span class="go">&gt; &lt;string&gt;(1)?()</span>
+<span class="go">(Pdb)</span>
+</pre></div></div><div class="versionchanged" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><p style="hyphens: auto; text-align: justify; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Changed in version 3.3:&nbsp;</span>Tab-completion via the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/readline.html#module-readline" title="readline: GNU readline support for Python. (Unix)" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">readline</span></code></a>&nbsp;module is available for commands and command arguments, e.g. the current global and local names are offered as arguments of the&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">p</span></code>&nbsp;command.</p></div><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><code class="file docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">pdb.py</span></code>&nbsp;can also be invoked as a script to debug other scripts. For example:</p><div class="highlight-python3 notranslate" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="n">python3</span> <span class="o" style="color: rgb(102, 102, 102);">-</span><span class="n">m</span> <span class="n">pdb</span> <span class="n">myscript</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">py</span>
+</pre></div></div><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">When invoked as a script, pdb will automatically enter post-mortem debugging if the program being debugged exits abnormally. After post-mortem debugging (or after normal exit of the program), pdb will restart the program. Automatic restarting preserves pdb’s state (such as breakpoints) and in most cases is more useful than quitting the debugger upon program’s exit.</p><div class="versionadded" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><p style="hyphens: auto; text-align: justify; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2:&nbsp;</span><code class="file docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">pdb.py</span></code>&nbsp;now accepts a&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">-c</span></code>&nbsp;option that executes commands as if given in a&nbsp;<code class="file docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">.pdbrc</span></code>&nbsp;file, see&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#debugger-commands" style="color: rgb(99, 99, 187); text-decoration-line: none;">Debugger Commands</a>.</p></div><div class="versionadded" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><p style="hyphens: auto; text-align: justify; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.7:&nbsp;</span><code class="file docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">pdb.py</span></code>&nbsp;now accepts a&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">-m</span></code>&nbsp;option that execute modules similar to the way<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">python3</span>&nbsp;<span class="pre" style="hyphens: none;">-m</span></code>&nbsp;does. As with a script, the debugger will pause execution just before the first line of the module.</p></div><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The typical usage to break into the debugger from a running program is to insert</p><div class="highlight-python3 notranslate" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">pdb</span><span class="p">;</span> <span class="n">pdb</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">set_trace</span><span class="p">()</span>
+</pre></div></div><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">at the location you want to break into the debugger. You can then step through the code following this statement, and continue running without the debugger using the&nbsp;<code class="xref std std-pdbcmd docutils literal notranslate" style="color: rgb(99, 99, 187); text-decoration-line: none; background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;"><a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-continue" style="color: rgb(99, 99, 187); text-decoration-line: none;">continue</a>&nbsp;</span></code>command.</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The typical usage to inspect a crashed program is:</p><div class="highlight-python3 notranslate" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><span class="copybutton" title="Hide the prompts and output" style="cursor: pointer; position: absolute; top: 0px; right: 0px; border-color: rgb(170, 204, 153); border-style: solid; border-width: 1px; color: rgb(170, 204, 153); font-family: monospace; padding-left: 0.2em; padding-right: 0.2em; border-radius: 0px 3px 0px 0px;">&gt;&gt;&gt;</span><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="gp" style="color: rgb(198, 93, 9); font-weight: bold;">&gt;&gt;&gt; </span><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">pdb</span>
+<span class="gp" style="color: rgb(198, 93, 9); font-weight: bold;">&gt;&gt;&gt; </span><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">mymodule</span>
+<span class="gp" style="color: rgb(198, 93, 9); font-weight: bold;">&gt;&gt;&gt; </span><span class="n">mymodule</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">test</span><span class="p">()</span>
+<span class="gt" style="color: rgb(0, 68, 221);">Traceback (most recent call last):</span>
+  File <span class="nb" style="color: rgb(0, 112, 32);">"&lt;stdin&gt;"</span>, line <span class="m" style="color: rgb(32, 128, 80);">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb" style="color: rgb(0, 112, 32);">"./mymodule.py"</span>, line <span class="m" style="color: rgb(32, 128, 80);">4</span>, in <span class="n">test</span>
+    <span class="n">test2</span><span class="p">()</span>
+  File <span class="nb" style="color: rgb(0, 112, 32);">"./mymodule.py"</span>, line <span class="m" style="color: rgb(32, 128, 80);">3</span>, in <span class="n">test2</span>
+    <span class="nb" style="color: rgb(0, 112, 32);">print</span><span class="p">(</span><span class="n">spam</span><span class="p">)</span>
+<span class="gr" style="color: rgb(255, 0, 0);">NameError</span>: <span class="n">spam</span>
+<span class="gp" style="color: rgb(198, 93, 9); font-weight: bold;">&gt;&gt;&gt; </span><span class="n">pdb</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">pm</span><span class="p">()</span>
+<span class="go">&gt; ./mymodule.py(3)test2()</span>
+<span class="go">-&gt; print(spam)</span>
+<span class="go">(Pdb)</span></pre></div></div></div><div><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The module defines the following functions; each enters the debugger in a slightly different way:</p><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdb.run"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">pdb.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">run</code><span class="sig-paren" style="font-size: larger;">(</span><em>statement</em>,&nbsp;<em>globals=None</em>,&nbsp;<em>locals=None</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.run" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Execute the&nbsp;<em>statement</em>&nbsp;(given as a string or a code object) under debugger control. The debugger prompt appears before any code is executed; you can set breakpoints and type&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-continue" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">continue</span></code></a>, or you can step through the statement using&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-step" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">step</span></code></a>&nbsp;or&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-next" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">next</span></code></a>&nbsp;(all these commands are explained below). The optional&nbsp;<em>globals</em>&nbsp;and&nbsp;<em>locals</em>&nbsp;arguments specify the environment in which the code is executed; by default the dictionary of the module&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/__main__.html#module-__main__" title="__main__: The environment where the top-level script is run." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__main__</span></code></a>&nbsp;is used. (See the explanation of the built-in&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#exec" title="exec" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">exec()</span></code></a>&nbsp;or&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#eval" title="eval" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">eval()</span></code></a>&nbsp;functions.)</p></dd></dl><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdb.runeval"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">pdb.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">runeval</code><span class="sig-paren" style="font-size: larger;">(</span><em>expression</em>,&nbsp;<em>globals=None</em>,&nbsp;<em>locals=None</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.runeval" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Evaluate the&nbsp;<em>expression</em>&nbsp;(given as a string or a code object) under debugger control. When&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdb.runeval" title="pdb.runeval" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">runeval()</span></code></a>&nbsp;returns, it returns the value of the expression. Otherwise this function is similar to&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdb.run" title="pdb.run" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">run()</span></code></a>.</p></dd></dl><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdb.runcall"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">pdb.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">runcall</code><span class="sig-paren" style="font-size: larger;">(</span><em>function</em>,&nbsp;<em>*args</em>,&nbsp;<em>**kwds</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.runcall" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Call the&nbsp;<em>function</em>&nbsp;(a function or method object, not a string) with the given arguments. When&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdb.runcall" title="pdb.runcall" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">runcall()</span></code></a>&nbsp;returns, it returns whatever the function call returned. The debugger prompt appears as soon as the function is entered.</p></dd></dl><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdb.set_trace"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">pdb.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">set_trace</code><span class="sig-paren" style="font-size: larger;">(</span><em>*</em>,&nbsp;<em>header=None</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.set_trace" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Enter the debugger at the calling stack frame. This is useful to hard-code a breakpoint at a given point in a program, even if the code is not otherwise being debugged (e.g. when an assertion fails). If given,&nbsp;<em>header</em>&nbsp;is printed to the console just before debugging begins.</p><div class="versionchanged"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Changed in version 3.7:&nbsp;</span>The keyword-only argument&nbsp;<em>header</em>.</p></div></dd></dl><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdb.post_mortem"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">pdb.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">post_mortem</code><span class="sig-paren" style="font-size: larger;">(</span><em>traceback=None</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.post_mortem" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Enter post-mortem debugging of the given&nbsp;<em>traceback</em>&nbsp;object. If no&nbsp;<em>traceback</em>&nbsp;is given, it uses the one of the exception that is currently being handled (an exception must be being handled if the default is to be used).</p></dd></dl><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdb.pm"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">pdb.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">pm</code><span class="sig-paren" style="font-size: larger;">(</span><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.pm" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Enter post-mortem debugging of the traceback found in&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/sys.html#sys.last_traceback" title="sys.last_traceback" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-data docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">sys.last_traceback</span></code></a>.</p></dd></dl><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">run*</span></code>&nbsp;functions and&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdb.set_trace" title="pdb.set_trace" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">set_trace()</span></code></a>&nbsp;are aliases for instantiating the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb" title="pdb.Pdb" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">Pdb</span></code></a>&nbsp;class and calling the method of the same name. If you want to access further features, you have to do this yourself:</p><dl class="class" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdb.Pdb"><em class="property">class&nbsp;</em><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">pdb.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">Pdb</code><span class="sig-paren" style="font-size: larger;">(</span><em>completekey='tab'</em>,&nbsp;<em>stdin=None</em>,&nbsp;<em>stdout=None</em>,&nbsp;<em>skip=None</em>,&nbsp;<em>nosigint=False</em>,&nbsp;<em>readrc=True</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb" title="pdb.Pdb" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">Pdb</span></code></a>&nbsp;is the debugger class.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">The&nbsp;<em>completekey</em>,&nbsp;<em>stdin</em>&nbsp;and&nbsp;<em>stdout</em>&nbsp;arguments are passed to the underlying&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/cmd.html#cmd.Cmd" title="cmd.Cmd" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">cmd.Cmd</span></code></a>&nbsp;class; see the description there.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">The&nbsp;<em>skip</em>&nbsp;argument, if given, must be an iterable of glob-style module name patterns. The debugger will not step into frames that originate in a module that matches one of these patterns.&nbsp;<a class="footnote-reference" href="https://docs.python.org/3/library/pdb.html#id3" id="id1" style="color: rgb(99, 99, 187); text-decoration-line: none;">[1]</a></p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">By default, Pdb sets a handler for the SIGINT signal (which is sent when the user presses&nbsp;<kbd class="kbd docutils literal notranslate">Ctrl-C</kbd>&nbsp;on the console) when you give a&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">continue</span></code>&nbsp;command. This allows you to break into the debugger again by pressing&nbsp;<kbd class="kbd docutils literal notranslate">Ctrl-C</kbd>. If you want Pdb not to touch the SIGINT handler, set&nbsp;<em>nosigint</em>&nbsp;to true.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">The&nbsp;<em>readrc</em>&nbsp;argument defaults to true and controls whether Pdb will load .pdbrc files from the filesystem.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Example call to enable tracing with&nbsp;<em>skip</em>:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">pdb</span><span class="p">;</span> <span class="n">pdb</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">Pdb</span><span class="p">(</span><span class="n">skip</span><span class="o" style="color: rgb(102, 102, 102);">=</span><span class="p">[</span><span class="s1" style="color: rgb(64, 112, 160);">'django.*'</span><span class="p">])</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">set_trace</span><span class="p">()</span>
+</pre></div></div><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.1:&nbsp;</span>The&nbsp;<em>skip</em>&nbsp;argument.</p></div><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2:&nbsp;</span>The&nbsp;<em>nosigint</em>&nbsp;argument. Previously, a SIGINT handler was never set by Pdb.</p></div><div class="versionchanged"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Changed in version 3.6:&nbsp;</span>The&nbsp;<em>readrc</em>&nbsp;argument.</p></div><dl class="method" style="margin-bottom: 15px;"><dt id="pdb.Pdb.run"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">run</code><span class="sig-paren" style="font-size: larger;">(</span><em>statement</em>,&nbsp;<em>globals=None</em>,&nbsp;<em>locals=None</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb.run" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dt id="pdb.Pdb.runeval"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">runeval</code><span class="sig-paren" style="font-size: larger;">(</span><em>expression</em>,&nbsp;<em>globals=None</em>,&nbsp;<em>locals=None</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb.runeval" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dt id="pdb.Pdb.runcall"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">runcall</code><span class="sig-paren" style="font-size: larger;">(</span><em>function</em>,&nbsp;<em>*args</em>,&nbsp;<em>**kwds</em><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb.runcall" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: visible; font-size: 0.8em; padding: 0px 4px;">¶</a></dt><dt id="pdb.Pdb.set_trace"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">set_trace</code><span class="sig-paren" style="font-size: larger;">(</span><span class="sig-paren" style="font-size: larger;">)</span><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdb.Pdb.set_trace" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">See the documentation for the functions explained above.</p></dd></dl></dd></dl></div><h3>Debugger Commands</h3><div><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The commands recognized by the debugger are listed below. Most commands can be abbreviated to one or two letters as indicated; e.g.&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">h(elp)</span></code>&nbsp;means that either&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">h</span></code>&nbsp;or&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">help</span></code>&nbsp;can be used to enter the help command (but not&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">he</span></code>&nbsp;or&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">hel</span></code>, nor&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">H</span></code>&nbsp;or&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">Help</span></code>&nbsp;or&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">HELP</span></code>). Arguments to commands must be separated by whitespace (spaces or tabs). Optional arguments are enclosed in square brackets (<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">[]</span></code>) in the command syntax; the square brackets must not be typed. Alternatives in the command syntax are separated by a vertical bar (<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">|</span></code>).</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">Entering a blank line repeats the last command entered. Exception: if the last command was a&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-list" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">list</span></code></a>&nbsp;command, the next 11 lines are listed.</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">Commands that the debugger doesn’t recognize are assumed to be Python statements and are executed in the context of the program being debugged. Python statements can also be prefixed with an exclamation point (<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">!</span></code>). This is a powerful way to inspect the program being debugged; it is even possible to change a variable or call a function. When an exception occurs in such a statement, the exception name is printed but the debugger’s state is not changed.</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The debugger supports&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#debugger-aliases" style="color: rgb(99, 99, 187); text-decoration-line: none;">aliases</a>. Aliases can have parameters which allows one a certain level of adaptability to the context under examination.</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">Multiple commands may be entered on a single line, separated by&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">;;</span></code>. (A single&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">;</span></code>&nbsp;is not used as it is the separator for multiple commands in a line that is passed to the Python parser.) No intelligence is applied to separating the commands; the input is split at the first&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">;;</span></code>&nbsp;pair, even if it is in the middle of a quoted string.</p><p id="index-2" style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">If a file&nbsp;<code class="file docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">.pdbrc</span></code>&nbsp;exists in the user’s home directory or in the current directory, it is read in and executed as if it had been typed at the debugger prompt. This is particularly useful for aliases. If both files exist, the one in the home directory is read first and aliases defined there can be overridden by the local file.</p><div class="versionchanged" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><p style="hyphens: auto; text-align: justify; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Changed in version 3.2:&nbsp;</span><code class="file docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">.pdbrc</span></code>&nbsp;can now contain commands that continue debugging, such as<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-continue" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">continue</span></code></a>&nbsp;or&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-next" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">next</span></code></a>. Previously, these commands had no effect.</p></div><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-help"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">h(elp)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[command]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-help" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Without argument, print the list of available commands. With a&nbsp;<em>command</em>&nbsp;as argument, print help about that command.&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">help</span>&nbsp;<span class="pre" style="hyphens: none;">pdb</span></code>&nbsp;displays the full documentation (the docstring of the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#module-pdb" title="pdb: The Python debugger for interactive interpreters." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">pdb</span></code></a>&nbsp;module). Since the&nbsp;<em>command</em>&nbsp;argument must be an identifier,&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">help</span>&nbsp;<span class="pre" style="hyphens: none;">exec</span></code>&nbsp;must be entered to get help on the&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">!</span></code>&nbsp;command.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-where"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">w(here)</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-where" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Print a stack trace, with the most recent frame at the bottom. An arrow indicates the current frame, which determines the context of most commands.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-down"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">d(own)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[count]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-down" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Move the current frame&nbsp;<em>count</em>&nbsp;(default one) levels down in the stack trace (to a newer frame).</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-up"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">u(p)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[count]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-up" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Move the current frame&nbsp;<em>count</em>&nbsp;(default one) levels up in the stack trace (to an older frame).</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-break"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">b(reak)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[([filename:]lineno | function) [, condition]]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-break" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">With a&nbsp;<em>lineno</em>&nbsp;argument, set a break there in the current file. With a&nbsp;<em>function</em>&nbsp;argument, set a break at the first executable statement within that function. The line number may be prefixed with a filename and a colon, to specify a breakpoint in another file (probably one that hasn’t been loaded yet). The file is searched on&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/sys.html#sys.path" title="sys.path" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-data docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">sys.path</span></code></a>. Note that each breakpoint is assigned a number to which all the other breakpoint commands refer.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">If a second argument is present, it is an expression which must evaluate to true before the breakpoint is honored.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Without argument, list all breaks, including for each breakpoint, the number of times that breakpoint has been hit, the current ignore count, and the associated condition if any.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-tbreak"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">tbreak</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[([filename:]lineno | function) [, condition]]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-tbreak" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Temporary breakpoint, which is removed automatically when it is first hit. The arguments are the same as for&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-break" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">break</span></code></a>.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-clear"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">cl(ear)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[filename:lineno | bpnumber [bpnumber ...]]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-clear" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">With a&nbsp;<em>filename:lineno</em>&nbsp;argument, clear all the breakpoints at this line. With a space separated list of breakpoint numbers, clear those breakpoints. Without argument, clear all breaks (but first ask confirmation).</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-disable"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">disable</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[bpnumber [bpnumber ...]]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-disable" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Disable the breakpoints given as a space separated list of breakpoint numbers. Disabling a breakpoint means it cannot cause the program to stop execution, but unlike clearing a breakpoint, it remains in the list of breakpoints and can be (re-)enabled.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-enable"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">enable</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[bpnumber [bpnumber ...]]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-enable" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Enable the breakpoints specified.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-ignore"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">ignore</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;bpnumber [count]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-ignore" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Set the ignore count for the given breakpoint number. If count is omitted, the ignore count is set to 0. A breakpoint becomes active when the ignore count is zero. When non-zero, the count is decremented each time the breakpoint is reached and the breakpoint is not disabled and any associated condition evaluates to true.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-condition"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">condition</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;bpnumber [condition]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-condition" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Set a new&nbsp;<em>condition</em>&nbsp;for the breakpoint, an expression which must evaluate to true before the breakpoint is honored. If&nbsp;<em>condition</em>&nbsp;is absent, any existing condition is removed; i.e., the breakpoint is made unconditional.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-commands"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">commands</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[bpnumber]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-commands" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Specify a list of commands for breakpoint number&nbsp;<em>bpnumber</em>. The commands themselves appear on the following lines. Type a line containing just&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">end</span></code>&nbsp;to terminate the commands. An example:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">commands</span> <span class="mi" style="color: rgb(32, 128, 80);">1</span>
+<span class="p">(</span><span class="n">com</span><span class="p">)</span> <span class="n">p</span> <span class="n">some_variable</span>
+<span class="p">(</span><span class="n">com</span><span class="p">)</span> <span class="n">end</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span>
+</pre></div></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">To remove all commands from a breakpoint, type&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">commands</span></code>&nbsp;and follow it immediately with&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">end</span></code>; that is, give no commands.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">With no&nbsp;<em>bpnumber</em>&nbsp;argument,&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">commands</span></code>&nbsp;refers to the last breakpoint set.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">You can use breakpoint commands to start your program up again. Simply use the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-continue" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">continue</span></code></a>&nbsp;command, or&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-step" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">step</span></code></a>, or any other command that resumes execution.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Specifying any command resuming execution (currently&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-continue" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">continue</span></code></a>,&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-step" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">step</span></code></a>,&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-next" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">next</span></code></a>,&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-return" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">return</span></code></a>,&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-jump" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">jump</span></code></a>,&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-quit" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">quit</span></code></a>&nbsp;and their abbreviations) terminates the command list (as if that command was immediately followed by end). This is because any time you resume execution (even with a simple next or step), you may encounter another breakpoint—which could have its own command list, leading to ambiguities about which list to execute.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">If you use the ‘silent’ command in the command list, the usual message about stopping at a breakpoint is not printed. This may be desirable for breakpoints that are to print a specific message and then continue. If none of the other commands print anything, you see no sign that the breakpoint was reached.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-step"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">s(tep)</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-step" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Execute the current line, stop at the first possible occasion (either in a function that is called or on the next line in the current function).</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-next"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">n(ext)</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-next" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Continue execution until the next line in the current function is reached or it returns. (The difference between&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-next" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">next</span></code></a>&nbsp;and&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-step" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">step</span></code></a>&nbsp;is that&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-step" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">step</span></code></a>&nbsp;stops inside a called function, while&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-next" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">next</span></code></a>executes called functions at (nearly) full speed, only stopping at the next line in the current function.)</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-until"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">unt(il)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[lineno]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-until" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Without argument, continue execution until the line with a number greater than the current one is reached.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">With a line number, continue execution until a line with a number greater or equal to that is reached. In both cases, also stop when the current frame returns.</p><div class="versionchanged"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Changed in version 3.2:&nbsp;</span>Allow giving an explicit line number.</p></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-return"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">r(eturn)</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-return" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Continue execution until the current function returns.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-continue"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">c(ont(inue))</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-continue" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Continue execution, only stop when a breakpoint is encountered.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-jump"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">j(ump)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;lineno</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-jump" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Set the next line that will be executed. Only available in the bottom-most frame. This lets you jump back and execute code again, or jump forward to skip code that you don’t want to run.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">It should be noted that not all jumps are allowed – for instance it is not possible to jump into the middle of a&nbsp;<a class="reference internal" href="https://docs.python.org/3/reference/compound_stmts.html#for" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-keyword docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">for</span></code></a>&nbsp;loop or out of a&nbsp;<a class="reference internal" href="https://docs.python.org/3/reference/compound_stmts.html#finally" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-keyword docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">finally</span></code></a>&nbsp;clause.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-list"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">l(ist)</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[first[, last]]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-list" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">List source code for the current file. Without arguments, list 11 lines around the current line or continue the previous listing. With&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">.</span></code>&nbsp;as argument, list 11 lines around the current line. With one argument, list 11 lines around at that line. With two arguments, list the given range; if the second argument is less than the first, it is interpreted as a count.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">The current line in the current frame is indicated by&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">-&gt;</span></code>. If an exception is being debugged, the line where the exception was originally raised or propagated is indicated by&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">&gt;&gt;</span></code>, if it differs from the current line.</p><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2:&nbsp;</span>The&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">&gt;&gt;</span></code>&nbsp;marker.</p></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-ll"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">ll</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;| longlist</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-ll" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">List all source code for the current function or frame. Interesting lines are marked as for&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-list" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">list</span></code></a>.</p><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2.</span></p></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-args"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">a(rgs)</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-args" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Print the argument list of the current function.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-p"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">p</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;expression</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-p" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Evaluate the&nbsp;<em>expression</em>&nbsp;in the current context and print its value.</p><div class="admonition note" style="margin-top: 10px; margin-bottom: 10px; padding: 7px; background-color: rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204); border-radius: 3px;"><p class="first admonition-title" style="margin: 0px 10px 5px 0px; font-weight: bold; display: inline; hyphens: auto; line-height: 22.4px;">Note</p>&nbsp;<p class="last" style="margin-top: 0px; hyphens: auto; line-height: 22.4px; margin-bottom: 5px; display: inline;"><code class="docutils literal notranslate" style="background: rgb(214, 214, 214); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">print()</span></code>&nbsp;can also be used, but is not a debugger command — this executes the Python&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#print" title="print" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background: rgb(214, 214, 214); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">print()</span></code></a>&nbsp;function.</p></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-pp"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">pp</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;expression</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-pp" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Like the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-p" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">p</span></code></a>&nbsp;command, except the value of the expression is pretty-printed using the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pprint.html#module-pprint" title="pprint: Data pretty printer." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">pprint</span></code></a>module.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-whatis"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">whatis</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;expression</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-whatis" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Print the type of the&nbsp;<em>expression</em>.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-source"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">source</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;expression</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-source" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Try to get source code for the given object and display it.</p><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2.</span></p></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-display"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">display</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[expression]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-display" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Display the value of the expression if it changed, each time execution stops in the current frame.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Without expression, list all display expressions for the current frame.</p><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2.</span></p></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-undisplay"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">undisplay</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[expression]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-undisplay" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Do not display the expression any more in the current frame. Without expression, clear all display expressions for the current frame.</p><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2.</span></p></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-interact"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">interact</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-interact" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Start an interactive interpreter (using the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/code.html#module-code" title="code: Facilities to implement read-eval-print loops." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">code</span></code></a>&nbsp;module) whose global namespace contains all the (global and local) names found in the current scope.</p><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2.</span></p></div></dd></dl><span class="target" id="debugger-aliases" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"></span><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-alias"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">alias</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[name [command]]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-alias" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Create an alias called&nbsp;<em>name</em>&nbsp;that executes&nbsp;<em>command</em>. The command must&nbsp;<em>not</em>&nbsp;be enclosed in quotes. Replaceable parameters can be indicated by&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">%1</span></code>,&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">%2</span></code>, and so on, while&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">%*</span></code>&nbsp;is replaced by all the parameters. If no command is given, the current alias for&nbsp;<em>name</em>&nbsp;is shown. If no arguments are given, all aliases are listed.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Aliases may be nested and can contain anything that can be legally typed at the pdb prompt. Note that internal pdb commands&nbsp;<em>can</em>&nbsp;be overridden by aliases. Such a command is then hidden until the alias is removed. Aliasing is recursively applied to the first word of the command line; all other words in the line are left alone.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">As an example, here are two useful aliases (especially when placed in the&nbsp;<code class="file docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">.pdbrc</span></code>&nbsp;file):</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="c1" style="color: rgb(64, 128, 144); font-style: italic;"># Print instance variables (usage "pi classInst")</span>
+<span class="n">alias</span> <span class="n">pi</span> <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">for</span> <span class="n">k</span> <span class="ow" style="color: rgb(0, 112, 32); font-weight: bold;">in</span> <span class="o" style="color: rgb(102, 102, 102);">%</span><span class="mf" style="color: rgb(32, 128, 80);">1.</span><span class="vm" style="color: rgb(187, 96, 213);">__dict__</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">keys</span><span class="p">():</span> <span class="nb" style="color: rgb(0, 112, 32);">print</span><span class="p">(</span><span class="s2" style="color: rgb(64, 112, 160);">"%1."</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s2" style="color: rgb(64, 112, 160);">"="</span><span class="p">,</span><span class="o" style="color: rgb(102, 102, 102);">%</span><span class="mf" style="color: rgb(32, 128, 80);">1.</span><span class="vm" style="color: rgb(187, 96, 213);">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+<span class="c1" style="color: rgb(64, 128, 144); font-style: italic;"># Print instance variables in self</span>
+<span class="n">alias</span> <span class="n">ps</span> <span class="n">pi</span> <span class="bp" style="color: rgb(0, 112, 32);">self</span>
+</pre></div></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-unalias"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">unalias</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;name</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-unalias" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Delete the specified alias.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-!"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">!</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;statement</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-!" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Execute the (one-line)&nbsp;<em>statement</em>&nbsp;in the context of the current stack frame. The exclamation point can be omitted unless the first word of the statement resembles a debugger command. To set a global variable, you can prefix the assignment command with a&nbsp;<a class="reference internal" href="https://docs.python.org/3/reference/simple_stmts.html#global" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-keyword docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">global</span></code></a>statement on the same line, e.g.:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">global</span> <span class="n">list_options</span><span class="p">;</span> <span class="n">list_options</span> <span class="o" style="color: rgb(102, 102, 102);">=</span> <span class="p">[</span><span class="s1" style="color: rgb(64, 112, 160);">'-l'</span><span class="p">]</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span>
+</pre></div></div></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-run"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">run</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[args ...]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-run" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dt id="pdbcommand-restart"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">restart</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">&nbsp;[args ...]</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-restart" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Restart the debugged Python program. If an argument is supplied, it is split with&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/shlex.html#module-shlex" title="shlex: Simple lexical analysis for Unix shell-like languages." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">shlex</span></code></a>&nbsp;and the result is used as the new&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/sys.html#sys.argv" title="sys.argv" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-data docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">sys.argv</span></code></a>. History, breakpoints, actions and debugger options are preserved.&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-restart" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">restart</span></code></a>&nbsp;is an alias for&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/pdb.html#pdbcommand-run" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref std std-pdbcmd docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">run</span></code></a>.</p></dd></dl><dl class="pdbcommand" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><dt id="pdbcommand-quit"><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">q(uit)</code><a class="headerlink" href="https://docs.python.org/3/library/pdb.html#pdbcommand-quit" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Quit from the debugger. The program being executed is aborted.</p></dd></dl></div><div><br></div><div><br></div><h2>The Python Profilers</h2><h2>timeit</h2><h2>trace</h2><h2>tracemalloc&nbsp;</h2><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><div><br></div>
+</article>
+{% endblock point1 %}
