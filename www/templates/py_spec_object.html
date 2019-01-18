@@ -453,7 +453,321 @@ AttributeError: 'list' object has no attribute 'add'
 <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">MySubclass</span><span class="p">(</span><span class="n">MyClass</span><span class="p">):</span>
     <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">pass</span>
 </pre></div></div><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">在类定义内指定的任何其他关键字参数都会在下面所描述的所有元类操作中进行传递。</p><h3 style="hyphens: auto; line-height: 22.4px;" id="blogTitle64">类定义的执行过程</h3><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">当一个类定义被执行时，将发生以下步骤:</p><ul class="simple" style="font-size: 16px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);"><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">解析 MRO 条目</li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">确定适当的元类</li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">准备类命名空间</li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">执行类主体</li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">创建类对象</li></ul><h4 id="blogTitle65">解析 MRO 条目</h4><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">如果在类定义中出现的基类不是&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#type" title="type" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type</span></code></a>&nbsp;的实例，则使用&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__mro_entries__</span></code>&nbsp;方法对其进行搜索，当找到结果时，它会以原始基类元组做参数进行调用。此方法必须返回类的元组以替代此基类被使用。元组可以为空，在此情况下原始基类将被忽略。</p><div class="admonition seealso" style="font-size: 16px; margin-top: 10px; margin-bottom: 10px; padding: 7px; background-color: rgb(255, 255, 204); border: 1px solid rgb(221, 221, 102); border-radius: 3px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif;"><p class="first admonition-title" style="margin: 0px 10px 5px 0px; font-weight: bold; display: inline; hyphens: auto; text-align: justify; line-height: 22.4px;">参见</p>&nbsp;<p class="last" style="hyphens: auto; text-align: justify; line-height: 22.4px; margin-bottom: 5px; display: inline;"><span class="target" id="index-115"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0560" style="color: rgb(99, 99, 187); text-decoration-line: none;"><strong>PEP 560</strong></a>&nbsp;- 对类型模块和泛型类型的核心支持</p></div><h4 id="blogTitle66">确定适当的元类</h4><p id="index-83" style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">为一个类定义确定适当的元类是根据以下规则:</p><ul class="simple" style="font-size: 16px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);"><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">如果没有给出基类也没有显式元类，则使用&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#type" title="type" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type()</span></code></a></li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">如果给出一个显式元类而且&nbsp;<em>不是</em>&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#type" title="type" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type()</span></code></a>&nbsp;的实例，则其会被直接用作元类</li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">如果给出一个&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#type" title="type" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type()</span></code></a>&nbsp;的实例作为显式元类，或是定义了基类，则使用最近派生的元类</li></ul><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">最近派生的元类会从显式指定的元类（如果有）以及所有指定的基类的元类（即&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type(cls)</span></code>）中选取。最近派生的元类应为&nbsp;<em>所有</em>&nbsp;这些候选元类的一个子类型。如果没有一个候选元类符合该条件，则类定义将失败并抛出&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">TypeError</span></code>。</p><h4 id="blogTitle67">准备类命名空间</h4><p id="index-84" style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">一旦适当的元类被确定，则类命名空间将会准备好。如果元类具有&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__prepare__</span></code>&nbsp;属性，它会以&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">namespace</span>&nbsp;<span class="pre" style="hyphens: none;">=</span>&nbsp;<span class="pre" style="hyphens: none;">metaclass.__prepare__(name,</span>&nbsp;<span class="pre" style="hyphens: none;">bases,</span>&nbsp;<span class="pre" style="hyphens: none;">**kwds)</span></code>的形式被调用（其中如果有附加的关键字参数，应来自类定义）。</p><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">如果元类没有&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__prepare__</span></code>&nbsp;属性，则类命名空间将初始化为一个空的有序映射。</p><div class="admonition seealso" style="font-size: 16px; margin-top: 10px; margin-bottom: 10px; padding: 7px; background-color: rgb(255, 255, 204); border: 1px solid rgb(221, 221, 102); border-radius: 3px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif;"><p class="first admonition-title" style="margin: 0px 10px 5px 0px; font-weight: bold; display: inline; hyphens: auto; text-align: justify; line-height: 22.4px;">参见</p><dl class="last docutils" style="margin-bottom: 0px;"><dt style="font-weight: bold;"><span class="target" id="index-116"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3115" style="color: rgb(99, 99, 187); text-decoration-line: none;">PEP 3115</a>&nbsp;- Python 3000 中的元类</dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;">引入&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__prepare__</span></code>&nbsp;命名空间钩子</dd></dl></div><h4 id="blogTitle68">执行类主体</h4><p id="index-86" style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">类主体会以（类似于）&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">exec(body,</span>&nbsp;<span class="pre" style="hyphens: none;">globals(),</span>&nbsp;<span class="pre" style="hyphens: none;">namespace)</span></code>&nbsp;的形式被执行。普通调用与&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#exec" title="exec" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">exec()</span></code></a>&nbsp;的关键区别在于当类定义发生于函数内部时，词法作用域允许类主体（包括任何方法）引用来自当前和外部作用域的名称。</p><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">但是，即使当类定义发生于函数内部时，在类内部定义的方法仍然无法看到在类作用域层次上定义的名称。类变量必须通过实例的第一个形参或类方法来访问，或者是通过下一节中描述的隐式词法作用域的&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__class__</span></code>&nbsp;引用。</p><h4 id="blogTitle69">创建类对象</h4><p id="index-87" style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">一旦执行类主体完成填充类命名空间，将通过调用&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">metaclass(name,</span>&nbsp;<span class="pre" style="hyphens: none;">bases,&nbsp;</span><span class="pre" style="hyphens: none;">namespace,</span>&nbsp;<span class="pre" style="hyphens: none;">**kwds)</span></code>&nbsp;创建类对象（此处的附加关键字参数与传入&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__prepare__</span></code>的相同）。</p><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">如果类主体中有任何方法引用了&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__class__</span></code>&nbsp;或&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">super</span></code>，这个类对象会通过零参数形式的&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#super" title="super" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">super()</span></code></a>.&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__class__</span></code>&nbsp;所引用，这是由编译器所创建的隐式闭包引用。这使用零参数形式的&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#super" title="super" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">super()</span></code></a>&nbsp;能够正确标识正在基于词法作用域来定义的类，而被用于进行当前调用的类或实例则是基于传递给方法的第一个参数来标识的。</p><div class="impl-detail compound" style="font-size: 16px; border-radius: 3px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);"><p style="hyphens: auto; text-align: justify; line-height: 22.4px; margin: 0px;"><strong>CPython implementation detail:</strong>&nbsp;在 CPython 3.6 及之后的版本中，<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__class__</span></code>单元会被作为类命名空间中的&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__classcell__</span></code>&nbsp;一项传递给元类。如果存在，这必须被向上传播给&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type.__new__</span></code>&nbsp;调用，以便能正确地初始化该类。如果不这样做，在 Python 3.6 中将导致&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/exceptions.html#DeprecationWarning" title="DeprecationWarning" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-exc docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">DeprecationWarning</span></code></a>，而在 Python 3.8 中将引发&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/exceptions.html#RuntimeError" title="RuntimeError" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-exc docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">RuntimeError</span></code></a>。</p></div><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">当使用默认的元类&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/functions.html#type" title="type" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type</span></code></a>&nbsp;或者任何最终会调用&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type.__new__</span></code>&nbsp;的元类时，以下额外的自定义步骤将在创建类对象之后被发起调用:</p><ul class="simple" style="font-size: 16px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);"><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">首先，<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type.__new__</span></code>&nbsp;将收集类命名空间中所有定义了&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__set_name__" title="object.__set_name__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__set_name__()</span></code></a>&nbsp;方法的描述器；</li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">接下来，所有这些&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__set_name__</span></code>&nbsp;方法将使用所定义的类和特定描述器所赋的名称进行调用；</li><li style="hyphens: auto; text-align: justify; line-height: 20.8px;">最后，将在新类根据方法解析顺序所确定的直接父类上调用&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__init_subclass__" title="object.__init_subclass__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__init_subclass__()</span></code></a>&nbsp;钩子。</li></ul><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">在类对象创建之后，它会被传给包含在类定义中的类装饰器（如果有的话），得到的对象将作为已定义的类绑定到局部命名空间。</p><p style="font-size: 16px; hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; background-color: rgb(255, 255, 255);">当通过&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">type.__new__</span></code>&nbsp;创建一个新类时，提供以作为命名空间形参的对象会被复制到一个新的有序映射并丢弃原对象。这个新副本包装于一个只读代理中，后者则成为类对象的&nbsp;<a class="reference internal" href="https://docs.python.org/zh-cn/3/library/stdtypes.html#object.__dict__" title="object.__dict__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-attr docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__dict__</span></code></a>&nbsp;属性。</p><div class="admonition seealso" style="font-size: 16px; margin-top: 10px; margin-bottom: 10px; padding: 7px; background-color: rgb(255, 255, 204); border: 1px solid rgb(221, 221, 102); border-radius: 3px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif;"><p class="first admonition-title" style="margin: 0px 10px 5px 0px; font-weight: bold; display: inline; hyphens: auto; text-align: justify; line-height: 22.4px;">参见</p><dl class="last docutils" style="margin-bottom: 0px;"><dt style="font-weight: bold;"><span class="target" id="index-117"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3135" style="color: rgb(99, 99, 187); text-decoration-line: none;">PEP 3135</a>&nbsp;- 新的超类型</dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;">描述隐式的&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__class__</span></code>&nbsp;闭包引用</dd></dl></div></div></div><h3 id="blogTitle70">装饰类</h3><div>使用装饰器装饰类</div><h3 id="blogTitle71">元类、类（类对象）、类实例之间的区别</h3><div><table style=""><thead style="box-sizing: border-box;"><tr style="box-sizing: border-box;"><th style="box-sizing: border-box; padding: 8px; text-align: inherit; border-top: 1px solid rgb(221, 221, 221); border-right: 1px solid rgb(221, 221, 221); border-left: 1px solid rgb(221, 221, 221); border-bottom-color: rgb(221, 221, 221); border-image: initial; line-height: 20px; vertical-align: middle;">类对象</th><th style="box-sizing: border-box; padding: 8px; text-align: inherit; border-top: 1px solid rgb(221, 221, 221); border-right: 1px solid rgb(221, 221, 221); border-left: 1px solid rgb(221, 221, 221); border-bottom-color: rgb(221, 221, 221); border-image: initial; line-height: 20px; vertical-align: middle;">类对象的基类</th><th style="box-sizing: border-box; padding: 8px; text-align: inherit; border-top: 1px solid rgb(221, 221, 221); border-right: 1px solid rgb(221, 221, 221); border-left: 1px solid rgb(221, 221, 221); border-bottom-color: rgb(221, 221, 221); border-image: initial; line-height: 20px; vertical-align: middle;">类对象的类型</th></tr></thead><tbody style="box-sizing: border-box;"><tr style="box-sizing: border-box;"><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">普通类型</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">object/object 派生类</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">type/type 派生类</td></tr><tr style="box-sizing: border-box; background-color: rgba(181, 181, 181, 0.1);"><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">元类</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">type</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">type</td></tr><tr style="box-sizing: border-box;"><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">object（默认基类）</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">-</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">type</td></tr><tr style="box-sizing: border-box; background-color: rgba(181, 181, 181, 0.1);"><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">type（默认元类）</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">object</td><td style="box-sizing: border-box; padding: 8px; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); line-height: 20px; vertical-align: middle;">type</td></tr></tbody></table></div><div><br></div><h4 id="blogTitle72">变量</h4><div><ul><li>Python 中的变量，实际上是一个名字，指向所引用的对象<br></li><li>Python 中有“命名空间”的概念，类似于其他编程语言中的作用域<br></li><li>Python 中，命名空间底层由一个 dict 实现，变量名就是字典中的键，而变量引用的对象就是字典中键对应的值<br></li></ul></div><div><img src="data:image/png;base64,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"><br></div><div><br></div><h4 id="blogTitle73">Python 一切皆对象</h4><div><ul><li>Python 中的整数、布尔值、字符串等类型的变量均是一个对象而不是简单的值<br></li><li>更进一步的，Python 中的所有语法元素，全部都是对象<br></li><li>函数是函数对象，模块是模块对象，最特殊的是，对象的类型也是一个对象<br></li></ul></div><h4 id="blogTitle74">类（类对象）</h4><div><ul><li>Python 中所有类型默认继承自基类 object，或者 object 的某个派生类型</li><li>Python 中类型也是一个对象，所以包含基类 object 在内的所有类型，都是对象实例。</li><li>区别于普通对象，我们姑且把描述类型的对象叫做 类对象<br></li></ul></div><h4 id="blogTitle75">元类（metaclass）</h4><div><ul><li>所有类对象的类型被叫做元类（metaclass）<br></li><li>元类默认是一个 type 类对象，或者继承自 type 的某个类对象<br></li><li>type 类对象的类型是 type 自身<br></li></ul></div><pre>&gt;&gt;&gt; type(type)
-&lt;class 'type'&gt;<br></pre><div><br></div><div><br></div><div><br></div><h2 id="blogTitle76">抽象基类</h2><div>ABC</div><div><br></div><div><div>1、协议是 Python 中非正式的接口；</div><div>2、了解抽象基类的基本概念以及标准库中的抽象基类；</div><div>3、掌握抽象基类的使用方法。</div></div><h3 id="blogTitle77">定义</h3><div>Python 的抽象基类类似于 Java、C++ 等面向对象语言中的接口的概念。抽象基类提供了一种要求子类实现指定协议的方式，如果一个抽象基类要求实现指定的方法，而子类没有实现的话，当试图创建子类或者执行子类代码时会抛出异常。</div><h3 id="blogTitle78">Python 实现抽象基类的三种方法</h3><h4 id="blogTitle79">使用 NotImplementedError</h4><div>见下面的测试代码，只有子类实现了 run 方法才能运行 run。<br></div><pre># demo.py
+&lt;class 'type'&gt;</pre><div><br></div><div><br></div><h3>元类的多重继承</h3><div>假如我们定义了一个元类 Meta1, 并定义了类 ClassWithMeta1 (指定它的元类为 Meta1), 示例代码如下：<br></div><pre>class Meta1(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta1.__name__)
+        return type.__new__(Meta1, *args, **kwargs)
+
+
+class ClassWithMeta1(metaclass=Meta1):
+    pass
+
+
+""" output
+ClassWithMeta1 is created by Meta1
+"""<font color="#000000" face="Times New Roman, serif" size="3"><span style="white-space: normal;"></span></font></pre><div><p>根据输出可以看到，当定义元类为 Meta1 的类 ClassWithMeta1 时，Python 会用元类控制类的生成，换句话说，<span style="background-color: yellow;"><b>“class ClassWithMeta1(metaclass=Meta1)”，"ClassWithMeta1 = Meta1(“ClassWithMeta1”, (), {})" 这两句代码的作用基本一样</b></span>。因此元类中的 __new__ 方法会被调用，输出语句后，最终由 "type.__new__" 返回实例对象(类)，并将名字 "ClassWithMetal" 绑定到该对象上。</p><h4>元类冲突</h4><p>若现在需求是创建一个类，可以通过元类 Meta1 控制并还具有抽象类的功能。不难发现 Python 不支持为某个类同时指定多个元类，类似 (class B(metaclass=[Meta1, ABC]))。于是我们会想通过多重继承的方式实现相同的功能，例如以下代码。</p></div><pre>import abc
+
+
+class AbstractCls(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def hello(self):
+        pass
+
+
+class ClassA(AbstractCls):
+    pass
+
+
+class Meta1(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta1.__name__)
+        return type.__new__(Meta1, *args, **kwargs)
+
+
+class ClassWithMeta1(metaclass=Meta1):
+    pass
+
+
+class ClassWithAbstractAndMeta1(abc.ABC, ClassWithMeta1):
+    pass
+
+
+""" output
+TypeError: metaclass conflict: the metaclass of a derived class must
+ be a (non-strict) subclass of the metaclasses of all its bases
+"""<font color="#000000" face="Times New Roman, serif" size="3"><span style="white-space: normal;"></span></font></pre><div>像上述方式定义的类 ClassWithAbstractAndMeta1，想通过继承不同的元类 abc.ABC 和 ClassWithMeta1 实现对类控制，但编译器会报上面 output 中的错误。这个错误通俗地讲，ClassWithAbstractAndMeta1 的所有父类（abc.ABC, ClassWithMeta1) 的各自的所有元类（abc.ABCMeta, Meta1)，不能找到某个元类使该元类为这些元类的子类。在这个例子中元类 abc.ABCMeta 和 Meta1 都不是各自的子类，因此会报元类冲突的错误。下面将介绍当一个类继承于多个类，并且，存在多个包含不同元类的父类时，编译器是如何找到为该类创建的元类的。</div><h4>类继承包含不同元类的多个父类</h4><p>先直接看一个例子:<br></p><pre>class Meta1(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta1.__name__)
+        return type.__new__(Meta1, *args, **kwargs)
+
+
+class Meta2(Meta1):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta2.__name__)
+        return type.__new__(Meta2, *args, **kwargs)
+
+
+class ClassWithMeta1(metaclass=Meta1):
+    pass
+
+
+class ClassWithMeta2(metaclass=Meta2):
+    pass
+
+
+class ClassWithMeta1AndMeta2(ClassWithMeta1, ClassWithMeta2):
+    pass
+
+
+print(type(ClassWithMeta1AndMeta2))
+
+""" output
+ClassWithMeta1 is created by Meta1
+ClassWithMeta2 is created by Meta2
+ClassWithMeta1AndMeta2 is created by Meta2
+&lt;class '__main__.Meta2'&gt;
+"""<font color="#000000" face="Times New Roman, serif" size="3"><span style="white-space: normal;">
+</span></font></pre><div><div>在这里， 我们新建了两个元类（Meta1 和 Meta2），而且 Meta2 继承自 Meta1，因此在定义 ClassWithMeta1 和 ClassWithMeta2 类时，会触发各自元类的 __new__ 方法和 __init__ 方法。而当我们定义继承自这两个类的 ClassWithMeta1AndMeta2 类时，编译器可以找到一个元类 (Meta2)，该元类是 ClassWithMeta1AndMeta2 所有父类包含的不同元类的子类，因此不会发生元类冲突。ClassWithMeta1AndMeta2 类成功定义后，我们通过type(ClassWithMeta1AndMeta2) 得到 ClassWithMeta1AndMeta2 的元类为 Meta2。</div><div>这里，在定义 ClassWithMeta1AndMeta2 时判断出它的元类为 Meta2，因此触发 Meta2(‘ClassWithMeta1AndMeta2’, (ClassWithMeta1, ClassWithMeta2), {})，进入 Meta2 的 __new__ 方法，最终由 return type.new(Meta2, *args, **kwargs)，创建出 ClassWithMeta1AndMeta2 类。</div></div><h4>通过多个元类控制</h4><div>前面通过 Meta2 继承 Meta1 的方式，解决了元类冲突的问题，但如果有多个元类(互相不是各自的子类)，而又需要用到这两个元类控制类的创建，那么则需要一个新的元类利用多重继承这些元类的方式实现。<br></div><pre>class Meta1(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta1.__name__)
+        return type.__new__(Meta1, *args, **kwargs)
+
+
+class Meta2(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta2.__name__)
+        return type.__new__(Meta2, *args, **kwargs)
+
+
+class ClassWithMeta1(metaclass=Meta1):
+    pass
+
+
+class ClassWithMeta2(metaclass=Meta2):
+    pass
+
+
+class CombinedMeta(Meta1, Meta2):
+    pass
+
+
+class ClassWithMeta1AndMeta2(metaclass=CombinedMeta):
+    pass
+
+
+print(type(ClassWithMeta1AndMeta2))
+
+""" output
+ClassWithMeta1 is created by Meta1
+ClassWithMeta2 is created by Meta2
+ClassWithMeta1AndMeta2 is created by Meta1
+&lt;class '__main__.Meta1'&gt;
+"""<font color="#000000" face="Times New Roman, serif" size="3"><span style="white-space: normal;">
+</span></font></pre><div><p>我们看到此时 Meta2 不再继承自 Meta1，用了新的元类 CombinedMeta 多重继承了这两个元类，并将 ClassWithMeta1AndMeta2 的元类指定为 CombinedMeta。但存在问题是，ClassWithMeta1AndMeta2 的元类是 Meta1，指执行了 Meta1 里的 __new__ 方法。这个问题主要是由于多重继承中的 mro 顺序，因为 ClassWithMeta1AndMeta2 没有重写 __new__ 方法，因此会默认调用 super().__new__ 方法，这里就会发现 Meta1 中有 __new__ 方法，在调用 return type.new(Meta1, *args, **kwargs) 时结束，因此 type(ClassWithMeta1AndMeta2) 会显示 ClassWithMeta1AndMeta2 的元类为 Meta1。</p><p>若想解决上述问题，我们需要改造实现 __new__ 方法的元类中的 return 语句。</p></div><pre>class Meta1(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta1.__name__)
+        return super().__new__(cls, *args, **kwargs)
+
+
+class Meta2(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta2.__name__)
+        return super().__new__(cls, *args, **kwargs)
+
+
+class ClassWithMeta1(metaclass=Meta1):
+    pass
+
+
+class ClassWithMeta2(metaclass=Meta2):
+    pass
+
+
+class CombinedMeta(Meta1, Meta2):
+    pass
+
+
+class ClassWithMeta1AndMeta2(metaclass=CombinedMeta):
+    pass
+
+
+print(type(ClassWithMeta1AndMeta2))
+
+""" output
+ClassWithMeta1 is created by Meta1
+ClassWithMeta2 is created by Meta2
+ClassWithMeta1AndMeta2 is created by Meta1
+ClassWithMeta1AndMeta2 is created by Meta2
+&lt;class '__main__.CombinedMeta'&gt;
+"""<font color="#000000" face="Times New Roman, serif" size="3"><span style="white-space: normal;">
+</span></font></pre><div><div>在定义 ClassWithMeta1AndMeta2 时，通过前面的元类检查顺序得到该类的元类为 CombinedMeta，因此会调用 CombinedMeta(‘ClassWithMeta1AndMeta2’, (), {}) 生成 ClassWithMeta1AndMeta2 类，而我们没有重写 CombinedMeta 的 __new__ 方法，因此在 __new__ 方法中会直接返回 super().__new__(CombinedMeta, *args, **kwargs)，根据多重继承的 mro 顺序，会调用 Meta1 的 __new__ 方法，打印出 ’ClassWithMeta1AndMeta2 is created by Meta1’ 语句，接着根据 super 的原则，会调用 Meta2 中的 __new__ 方法，打印 ’ClassWithMeta1AndMeta2 is created by Meta2’ 语句，最后 Meta2 中的 super.__new__ 等同于 type.__new__(CombinedMeta, *args, **kwargs)。于是类 ClassWithMeta1AndMeta2 通过指定继承了 Meta1 和 Met2 的元类 CombinedMeta 被这个两个元类控制，实现了我们的目的。</div><div>因此我们注意在实现每个独立的元类的 __new__ 方法时，需要注意最后应该使用 super().__new__ 作为 return。</div></div><div><br></div><h4>最终实现</h4><div>最后，为了使用方便，写了几个简单的函数来实现继承的封装，屏蔽了元类的冲突。<br></div><pre>import itertools
+
+META_CLS = 0
+HAS_META_CLS = 1
+COMMON_CLS = 2
+
+
+def is_metaclass(cls):
+    return issubclass(cls, type)
+
+
+def get_metaclass(cls):
+    return cls if is_metaclass(cls) else type(cls)
+
+
+def has_defined_metaclass(cls):
+    return get_metaclass(cls) is not type
+
+
+def _get_class_flag(cls):
+    if is_metaclass(cls):
+        return META_CLS
+    if has_defined_metaclass(cls):
+        return HAS_META_CLS
+    else:
+        return COMMON_CLS
+
+
+def _get_three_kinds_of_classes(*mixins):
+    all_mixins_group = itertools.groupby(mixins, _get_class_flag)
+
+    mixin_metaclass_list = []
+    mixin_has_metaclass_list = []
+    mixin_common_list = []
+
+    for mixin_group in all_mixins_group:
+        if mixin_group[0] == META_CLS:
+            mixin_metaclass_list = list(mixin_group[1])
+        elif mixin_group[0] == HAS_META_CLS:
+            mixin_has_metaclass_list = list(mixin_group[1])
+        elif mixin_group[0] == COMMON_CLS:
+            mixin_common_list = list(mixin_group[1])
+
+    return mixin_metaclass_list, mixin_has_metaclass_list, mixin_common_list
+
+
+def _get_meta_cls_and_original_class(cls):
+    bases = cls.__bases__
+    new_bases = []
+    meta_cls = type(cls)
+
+    for base in bases:
+        if has_defined_metaclass(base):
+            _, new_base = _get_meta_cls_and_original_class(base)
+            new_bases.append(new_base)
+
+        else:
+            new_bases.append(base)
+    return meta_cls, type(cls.__name__, tuple(new_bases), dict(cls.__dict__))
+
+
+def _combined_metaclass(*metas):
+    class CombinedMeta(*metas):
+        pass
+
+    return CombinedMeta
+
+
+def generate_base(*mixins):
+    mixin_metaclass_list, mixin_has_metaclass_list, mixin_common_list = \
+        _get_three_kinds_of_classes(*mixins)
+
+    meta_and_common_list = [_get_meta_cls_and_original_class(mixin_has_metaclass)
+                            for mixin_has_metaclass in mixin_has_metaclass_list]
+
+    for metacls, commoncls in meta_and_common_list:
+        mixin_metaclass_list.append(metacls)
+        mixin_common_list.append(commoncls)
+
+    meta_cls = _combined_metaclass(*mixin_metaclass_list) \
+        if mixin_metaclass_list else type
+
+    class BaseClass(metaclass=meta_cls, *mixin_common_list):
+        @classmethod
+        def get_metas(cls):
+            mro = meta_cls.mro(meta_cls)
+
+            def filter_name(name):
+                filters = ['type', 'CombinedMeta', 'object']
+
+                return not any((i in name for i in filters))
+
+            metas = [m for m in mro if filter_name(m.__name__)]
+
+            return metas
+
+    return BaseClass<font color="#000000" face="Times New Roman, serif" size="3"><span style="white-space: normal;">
+</span></font></pre><div><div>通过调用generate_base函数，我们可以传入三种类（元类，包含自定义元类的类，普通类），该函数会返回一个BaseClass类，该类由所有传入的元类控制，并继承了普通类和拥有自定义元类的类，下面通过例子来说明。在该函数中，我们会检查到包含自定义元类的类，并将它的元类剥离，和普通的元类组合并由一个元类继承它们实现对所有元类的控制，并且可以将普通元类和剥离元类后的类组合并有BaseClass继承，返回后的类便有了这些类的功能，而且是由所有元类控制。</div></div><pre>class Meta1(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta1.__name__)
+        return super().__new__(cls, *args, **kwargs)
+
+
+class Meta2(type):
+    def __new__(cls, *args, **kwargs):
+        clsname, bases, namespace = args
+
+        print(clsname, "is created by", Meta2.__name__)
+        return super().__new__(cls, *args, **kwargs)
+
+
+class ClassWithMeta1(metaclass=Meta1):
+    pass
+
+
+class Common:
+    pass
+
+
+class Test(generate_base(abc.ABC, ClassWithMeta1, Meta2, Common)):
+    pass
+
+""" output
+ClassWithMeta1 is created by Meta1
+BaseClass is created by Meta2
+BaseClass is created by Meta1
+Test is created by Meta2
+Test is created by Meta1
+[&lt;class '__main__.Meta2'&gt;, &lt;class 'abc.ABCMeta'&gt;, &lt;class '__main__.Meta1'&gt;]
+"""<font color="#000000" face="Times New Roman, serif" size="3"><span style="white-space: normal;">
+</span></font></pre><div><div>Test类通过generate_base函数传入希望继承的类，我们这里传入了元类(Meta2), 有自定义元类的类(abc.ABC, ClassWithMeta1)，和普通类Common。Test类现在会被Meta1和Meta2控制，并具有抽象类的功能。这里输出的BaseClass它的元类类似上文中的CombinedMeta继承了这三个元类(abc.ABC, Meta1, Meta2)。我们可以通过函数get_metas看到Test类由这三个元类控制。</div></div><div><br></div><div><br></div><div><br></div><div><br></div><h2 id="blogTitle76">抽象基类</h2><div>ABC</div><div><br></div><div><div>1、协议是 Python 中非正式的接口；</div><div>2、了解抽象基类的基本概念以及标准库中的抽象基类；</div><div>3、掌握抽象基类的使用方法。</div></div><h3 id="blogTitle77">定义</h3><div>Python 的抽象基类类似于 Java、C++ 等面向对象语言中的接口的概念。抽象基类提供了一种要求子类实现指定协议的方式，如果一个抽象基类要求实现指定的方法，而子类没有实现的话，当试图创建子类或者执行子类代码时会抛出异常。</div><h3 id="blogTitle78">抽象基类不能被实例化</h3><div>我们可以通过继承 ABC 类或是指定元类为 ABCMeta 的方式来自定义类，使该类具有抽象类的特征。例如以下代码：<br></div><pre>import abc
+
+
+class AbstractCls(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def hello(self):
+        pass
+
+
+class ClassA(AbstractCls):
+    pass
+
+
+ClassA()
+
+""" output
+TypeError: Can't instantiate abstract class ClassA with abstract methods hello
+"""
+
+<br></pre><p>当我们定义 AbstractCls 类时指定了元类为 abc.ABCMeta，此时若该类或者该类的子类没有实现由装饰器 "@abc.abstractmethod" 装饰的方法时，都会被当做抽象类，当实例化的时候会报 TypeError 的错误。</p><p>若有子类实现了抽象基类中定义的抽象方法时，该子类才能被实例化。</p><div><br></div><h3 id="blogTitle78">Python 实现抽象基类的三种方法</h3><h4 id="blogTitle79">使用 NotImplementedError</h4><div>见下面的测试代码，只有子类实现了 run 方法才能运行 run。<br></div><pre># demo.py
 
 class Task:
     def __init__(self, x, y):

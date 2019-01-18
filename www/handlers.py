@@ -1092,6 +1092,13 @@ async def py_stdlib_runtime_services():
         '__template__': 'py_stdlib_runtime_services.html',
     }
 
+# python standard library: runtime_services_abc
+@get('/py/stdlib/runtime_services_abc')
+async def py_stdlib_runtime_services_abc():
+    return {
+        '__template__': 'py_stdlib_runtime_services_abc.html',
+    }
+
 # python standard library: debugging_and_profiling
 @get('/py/stdlib/debugging_and_profiling')
 async def py_stdlib_debugging_and_profiling():

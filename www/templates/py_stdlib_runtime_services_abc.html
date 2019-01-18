@@ -1,0 +1,481 @@
+{% extends 'c-word.html' %}
+
+{% block title %} abc - Python | Standard Library | Runtime Services {% endblock title %}
+
+{% block point1 %}
+<article contenteditable="true">
+  <p><span style="background-color: yellow;"><b>Category: Computer | PDL | Python | Standard Library | Runtime Services</b></span></p>
+  <h1 id="blogTitle0">abc&nbsp;</h1><p>-- Abstract Base Classes</p><p><strong style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; text-align: justify; background-color: rgb(255, 255, 255);">Source code:</strong><span style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; text-align: justify; background-color: rgb(255, 255, 255);">&nbsp;</span><a class="reference external" href="https://github.com/python/cpython/tree/3.7/Lib/abc.py" style="color: rgb(99, 99, 187); text-decoration-line: none; font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; text-align: justify; background-color: rgb(255, 255, 255);">Lib/abc.py</a></p><h2 style="" id="blogTitle1">Overview</h2><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">This module provides the infrastructure for defining&nbsp;<a class="reference internal" href="https://docs.python.org/3/glossary.html#term-abstract-base-class" style="color: rgb(99, 99, 187); text-decoration-line: none;">abstract base classes</a>&nbsp;(ABCs) in Python, as outlined in&nbsp;<span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119" style="color: rgb(99, 99, 187); text-decoration-line: none;"><strong>PEP 3119</strong></a>; see the PEP for why this was added to Python. (See also&nbsp;<span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3141" style="color: rgb(99, 99, 187); text-decoration-line: none;"><strong>PEP 3141</strong></a>&nbsp;and the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/numbers.html#module-numbers" title="numbers: Numeric abstract base classes (Complex, Real, Integral, etc.)." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">numbers</span></code></a>&nbsp;module regarding a type hierarchy for numbers based on ABCs.)</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/collections.html#module-collections" title="collections: Container datatypes" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">collections</span></code></a>&nbsp;module has some concrete classes that derive from ABCs; these can, of course, be further derived. In addition, the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/collections.abc.html#module-collections.abc" title="collections.abc: Abstract base classes for containers" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">collections.abc</span></code></a>&nbsp;submodule has some ABCs that can be used to test whether a class or instance provides a particular interface, for example, if it is hashable or if it is a mapping.</p><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">This module provides the metaclass&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="abc.ABCMeta" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta</span></code></a>&nbsp;for defining ABCs and a helper class&nbsp;<code class="xref py py-class docutils literal notranslate" style="color: rgb(99, 99, 187); text-decoration-line: none; background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;"><a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" style="color: rgb(99, 99, 187); text-decoration-line: none;">ABC</a>&nbsp;</span></code>to alternatively define ABCs through inheritance:</p><pre style="line-height: 22.4px; hyphens: auto;"><h3 id="blogTitle2">Help on module abc</h3>
+<h4 id="blogTitle3">NAME</h4>    abc - Abstract Base Classes (ABCs) according to PEP 3119.
+
+<h4 id="blogTitle4">MODULE REFERENCE</h4>    https://docs.python.org/3.7/library/abc
+
+    The following documentation is automatically generated from the Python
+    source files.  It may be incomplete, incorrect or include features that
+    are considered implementation detail and may vary between Python
+    implementations.  When in doubt, consult the module reference at the
+    location listed above.
+
+<h4 id="blogTitle5">CLASSES</h4>    builtins.classmethod(builtins.object)
+        abstractclassmethod
+    builtins.object
+        ABC
+    builtins.property(builtins.object)
+        abstractproperty
+    builtins.staticmethod(builtins.object)
+        abstractstaticmethod
+    builtins.type(builtins.object)
+        ABCMeta
+
+    class ABC(builtins.object)
+     |  Helper class that provides a standard way to create an ABC using
+     |  inheritance.
+     |
+     |  Data and other attributes defined here:
+     |
+     |  __abstractmethods__ = frozenset()
+
+    class ABCMeta(builtins.type)
+     |  ABCMeta(name, bases, namespace, **kwargs)
+     |
+     |  Metaclass for defining Abstract Base Classes (ABCs).
+     |
+     |  Use this metaclass to create an ABC.  An ABC can be subclassed
+     |  directly, and then acts as a mix-in class.  You can also register
+     |  unrelated concrete classes (even built-in classes) and unrelated
+     |  ABCs as 'virtual subclasses' -- these and their descendants will
+     |  be considered subclasses of the registering ABC by the built-in
+     |  issubclass() function, but the registering ABC won't show up in
+     |  their MRO (Method Resolution Order) nor will method
+     |  implementations defined by the registering ABC be callable (not
+     |  even via super()).
+     |
+     |  Method resolution order:
+     |      ABCMeta
+     |      builtins.type
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __instancecheck__(cls, instance)
+     |      Override for isinstance(instance, cls).
+     |
+     |  __subclasscheck__(cls, subclass)
+     |      Override for issubclass(subclass, cls).
+     |
+     |  register(cls, subclass)
+     |      Register a virtual subclass of an ABC.
+     |
+     |      Returns the subclass, to allow usage as a class decorator.
+     |
+     |  ----------------------------------------------------------------------
+     |  Static methods defined here:
+     |
+     |  __new__(mcls, name, bases, namespace, **kwargs)
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.type:
+     |
+     |  __call__(self, /, *args, **kwargs)
+     |      Call self as a function.
+     |
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |
+     |  __dir__(self, /)
+     |      Specialized __dir__ implementation for types.
+     |
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |
+     |  __init__(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |
+     |  __sizeof__(self, /)
+     |      Return memory consumption of the type object.
+     |
+     |  __subclasses__(self, /)
+     |      Return a list of immediate subclasses.
+     |
+     |  mro(self, /)
+     |      Return a type's method resolution order.
+     |
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from builtins.type:
+     |
+     |  __prepare__(...) from builtins.type
+     |      __prepare__() -&gt; dict
+     |      used to create the namespace for the class statement
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.type:
+     |
+     |  __abstractmethods__
+     |
+     |  __dict__
+     |
+     |  __text_signature__
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from builtins.type:
+     |
+     |  __base__ = &lt;class 'type'&gt;
+     |      type(object_or_name, bases, dict)
+     |      type(object) -&gt; the object's type
+     |      type(name, bases, dict) -&gt; a new type
+     |
+     |  __bases__ = (&lt;class 'type'&gt;,)
+     |
+     |  __basicsize__ = 864
+     |
+     |  __dictoffset__ = 264
+     |
+     |  __flags__ = 2148292097
+     |
+     |  __itemsize__ = 40
+     |
+     |  __mro__ = (&lt;class 'abc.ABCMeta'&gt;, &lt;class 'type'&gt;, &lt;class 'object'&gt;)
+     |
+     |  __weakrefoffset__ = 368
+
+    class abstractclassmethod(builtins.classmethod)
+     |  abstractclassmethod(callable)
+     |
+     |  A decorator indicating abstract classmethods.
+     |
+     |  Similar to abstractmethod.
+     |
+     |  Usage:
+     |
+     |      class C(metaclass=ABCMeta):
+     |          @abstractclassmethod
+     |          def my_abstract_classmethod(cls, ...):
+     |              ...
+     |
+     |  'abstractclassmethod' is deprecated. Use 'classmethod' with
+     |  'abstractmethod' instead.
+     |
+     |  Method resolution order:
+     |      abstractclassmethod
+     |      builtins.classmethod
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, callable)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __isabstractmethod__ = True
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.classmethod:
+     |
+     |  __get__(self, instance, owner, /)
+     |      Return an attribute of instance, which is of type owner.
+     |
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from builtins.classmethod:
+     |
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.classmethod:
+     |
+     |  __dict__
+     |
+     |  __func__
+
+    class abstractproperty(builtins.property)
+     |  abstractproperty(fget=None, fset=None, fdel=None, doc=None)
+     |
+     |  A decorator indicating abstract properties.
+     |
+     |  Requires that the metaclass is ABCMeta or derived from it.  A
+     |  class that has a metaclass derived from ABCMeta cannot be
+     |  instantiated unless all of its abstract properties are overridden.
+     |  The abstract properties can be called using any of the normal
+     |  'super' call mechanisms.
+     |
+     |  Usage:
+     |
+     |      class C(metaclass=ABCMeta):
+     |          @abstractproperty
+     |          def my_abstract_property(self):
+     |              ...
+     |
+     |  This defines a read-only property; you can also define a read-write
+     |  abstract property using the 'long' form of property declaration:
+     |
+     |      class C(metaclass=ABCMeta):
+     |          def getx(self): ...
+     |          def setx(self, value): ...
+     |          x = abstractproperty(getx, setx)
+     |
+     |  'abstractproperty' is deprecated. Use 'property' with 'abstractmethod'
+     |  instead.
+     |
+     |  Method resolution order:
+     |      abstractproperty
+     |      builtins.property
+     |      builtins.object
+     |
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __isabstractmethod__ = True
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.property:
+     |
+     |  __delete__(self, instance, /)
+     |      Delete an attribute of instance.
+     |
+     |  __get__(self, instance, owner, /)
+     |      Return an attribute of instance, which is of type owner.
+     |
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |
+     |  __init__(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  __set__(self, instance, value, /)
+     |      Set an attribute of instance to value.
+     |
+     |  deleter(...)
+     |      Descriptor to change the deleter on a property.
+     |
+     |  getter(...)
+     |      Descriptor to change the getter on a property.
+     |
+     |  setter(...)
+     |      Descriptor to change the setter on a property.
+     |
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from builtins.property:
+     |
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.property:
+     |
+     |  fdel
+     |
+     |  fget
+     |
+     |  fset
+
+    class abstractstaticmethod(builtins.staticmethod)
+     |  abstractstaticmethod(callable)
+     |
+     |  A decorator indicating abstract staticmethods.
+     |
+     |  Similar to abstractmethod.
+     |
+     |  Usage:
+     |
+     |      class C(metaclass=ABCMeta):
+     |          @abstractstaticmethod
+     |          def my_abstract_staticmethod(...):
+     |              ...
+     |
+     |  'abstractstaticmethod' is deprecated. Use 'staticmethod' with
+     |  'abstractmethod' instead.
+     |
+     |  Method resolution order:
+     |      abstractstaticmethod
+     |      builtins.staticmethod
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, callable)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  __isabstractmethod__ = True
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.staticmethod:
+     |
+     |  __get__(self, instance, owner, /)
+     |      Return an attribute of instance, which is of type owner.
+     |
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from builtins.staticmethod:
+     |
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.staticmethod:
+     |
+     |  __dict__
+     |
+     |  __func__
+
+<h4 id="blogTitle6">FUNCTIONS</h4>    abstractmethod(funcobj)
+        A decorator indicating abstract methods.
+
+        Requires that the metaclass is ABCMeta or derived from it.  A
+        class that has a metaclass derived from ABCMeta cannot be
+        instantiated unless all of its abstract methods are overridden.
+        The abstract methods can be called using any of the normal
+        'super' call mechanisms.
+
+        Usage:
+
+            class C(metaclass=ABCMeta):
+                @abstractmethod
+                def my_abstract_method(self, ...):
+                    ...
+
+    get_cache_token()
+        Returns the current ABC cache token.
+
+        The token is an opaque object (supporting equality testing) identifying the
+        current version of the ABC cache for virtual subclasses. The token changes
+        with every call to register() on any ABC.
+
+<h4 id="blogTitle7">FILE</h4>    /usr/local/Cellar/python/3.7.1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/abc.py</pre><h2 id="blogTitle8">abc</h2><h3 id="blogTitle9">classes</h3><dl class="class" style="margin-bottom: 15px;"><h4 id="blogTitle10" style="">class&nbsp;<span style="padding-right: 1px; padding-left: 1px; border-radius: 3px;">abc.</span><span style="padding-right: 1px; padding-left: 1px; border-radius: 3px;">ABC</span></h4><dt id="abc.ABC" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">A helper class that has&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="abc.ABCMeta" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta</span></code></a>&nbsp;as its metaclass. With this class, an abstract base class can be created by simply deriving from&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABC</span></code></a>&nbsp;avoiding sometimes confusing metaclass usage, for example:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">from</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">abc</span> <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="n">ABC</span>
+
+<span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">MyABC</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">pass</span>
+</pre></div></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Note that the type of&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABC</span></code></a>&nbsp;is still&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="abc.ABCMeta" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta</span></code></a>, therefore inheriting from&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABC</span></code></a>&nbsp;requires the usual precautions regarding metaclass usage, as multiple inheritance may lead to metaclass conflicts. One may also define an abstract base class by passing the metaclass keyword and using&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="abc.ABCMeta" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta</span></code></a>&nbsp;directly, for example:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">from</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">abc</span> <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="n">ABCMeta</span>
+
+<span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">MyABC</span><span class="p">(</span><span class="n">metaclass</span><span class="o" style="color: rgb(102, 102, 102);">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">pass</span>
+</pre></div></div><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.4.</span></p></div></dd></dl><dl class="class" style="margin-bottom: 15px;"><h4 id="blogTitle11" style="">class&nbsp;<span style="padding-right: 1px; padding-left: 1px; border-radius: 3px;">abc.</span><span style="padding-right: 1px; padding-left: 1px; border-radius: 3px;">ABCMeta</span></h4><dt id="abc.ABCMeta" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">Metaclass for defining Abstract Base Classes (ABCs).</p><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">Use this metaclass to create an ABC. An ABC can be subclassed directly, and then acts as a mix-in class. You can also register unrelated concrete classes (even built-in classes) and unrelated ABCs as “virtual subclasses” – these and their descendants will be considered subclasses of the registering ABC by the built-in&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#issubclass" title="issubclass" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">issubclass()</span></code></a>&nbsp;function, but the registering ABC won’t show up in their MRO (Method Resolution Order) nor will method implementations defined by the registering ABC be callable (not even via&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#super" title="super" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">super()</span></code></a>).&nbsp;<a class="footnote-reference" href="https://docs.python.org/3/library/abc.html#id2" id="id1" style="color: rgb(99, 99, 187); text-decoration-line: none;">[1]</a></p><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">Classes created with a metaclass of&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="abc.ABCMeta" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta</span></code></a>&nbsp;have the following method:</p><dl class="method" style="margin-bottom: 15px;"><h5 style=""><span style="padding-right: 1px; padding-left: 1px; border-radius: 3px;">register</span><span class="sig-paren" style="">(</span>subclass<span class="sig-paren" style="">)</span></h5><dt id="abc.ABCMeta.register" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta.register" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Register&nbsp;<em>subclass</em>&nbsp;as a “virtual subclass” of this ABC. For example:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="kn" style="color: rgb(0, 112, 32); font-weight: bold;">from</span> <span class="nn" style="color: rgb(14, 132, 181); font-weight: bold;">abc</span> <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">import</span> <span class="n">ABC</span>
+
+<span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">MyABC</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">pass</span>
+
+<span class="n">MyABC</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">register</span><span class="p">(</span><span class="nb" style="color: rgb(0, 112, 32);">tuple</span><span class="p">)</span>
+
+<span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">assert</span> <span class="nb" style="color: rgb(0, 112, 32);">issubclass</span><span class="p">(</span><span class="nb" style="color: rgb(0, 112, 32);">tuple</span><span class="p">,</span> <span class="n">MyABC</span><span class="p">)</span>
+<span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">assert</span> <span class="nb" style="color: rgb(0, 112, 32);">isinstance</span><span class="p">((),</span> <span class="n">MyABC</span><span class="p">)</span>
+</pre></div></div><div class="versionchanged"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Changed in version 3.3:&nbsp;</span>Returns the registered subclass, to allow usage as a class decorator.</p></div><div class="versionchanged"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Changed in version 3.4:&nbsp;</span>To detect calls to&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta.register" title="abc.ABCMeta.register" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">register()</span></code></a>, you can use the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.get_cache_token" title="abc.get_cache_token" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">get_cache_token()</span></code></a>&nbsp;function.</p></div></dd></dl><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">You can also override this method in an abstract base class:</p><dl class="method" style="margin-bottom: 15px;"><h5 style=""><span style="padding-right: 1px; padding-left: 1px; border-radius: 3px;">__subclasshook__</span><span class="sig-paren" style="">(</span>subclass<span class="sig-paren" style="">)</span></h5><dt id="abc.ABCMeta.__subclasshook__" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta.__subclasshook__" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">(Must be defined as a class method.)</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Check whether&nbsp;<em>subclass</em>&nbsp;is considered a subclass of this ABC. This means that you can customize the behavior of&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">issubclass</span></code>&nbsp;further without the need to call&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta.register" title="abc.ABCMeta.register" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">register()</span></code></a>&nbsp;on every class you want to consider a subclass of the ABC. (This class method is called from the&nbsp;<code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__subclasscheck__()</span></code>&nbsp;method of the ABC.)</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">This method should return&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">True</span></code>,&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">False</span></code>&nbsp;or&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">NotImplemented</span></code>. If it returns&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">True</span></code>, the&nbsp;<em>subclass</em>&nbsp;is considered a subclass of this ABC. If it returns&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">False</span></code>, the&nbsp;<em>subclass</em>&nbsp;is not considered a subclass of this ABC, even if it would normally be one. If it returns&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">NotImplemented</span></code>, the subclass check is continued with the usual mechanism.</p></dd></dl><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">For a demonstration of these concepts, look at this example ABC definition:</p><div class="highlight-python3 notranslate" style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">Foo</span><span class="p">:</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">__getitem__</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">__len__</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">get_iterator</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">return</span> <span class="nb" style="color: rgb(0, 112, 32);">iter</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">)</span>
+
+<span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">MyIterable</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">__iter__</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">while</span> <span class="kc" style="color: rgb(0, 112, 32); font-weight: bold;">False</span><span class="p">:</span>
+            <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">yield</span> <span class="kc" style="color: rgb(0, 112, 32); font-weight: bold;">None</span>
+
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">get_iterator</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">return</span> <span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="fm" style="color: rgb(6, 40, 126);">__iter__</span><span class="p">()</span>
+
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@classmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">__subclasshook__</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">cls</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+        <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">if</span> <span class="bp" style="color: rgb(0, 112, 32);">cls</span> <span class="ow" style="color: rgb(0, 112, 32); font-weight: bold;">is</span> <span class="n">MyIterable</span><span class="p">:</span>
+            <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">if</span> <span class="nb" style="color: rgb(0, 112, 32);">any</span><span class="p">(</span><span class="s2" style="color: rgb(64, 112, 160);">"__iter__"</span> <span class="ow" style="color: rgb(0, 112, 32); font-weight: bold;">in</span> <span class="n">B</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="vm" style="color: rgb(187, 96, 213);">__dict__</span> <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">for</span> <span class="n">B</span> <span class="ow" style="color: rgb(0, 112, 32); font-weight: bold;">in</span> <span class="n">C</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="vm" style="color: rgb(187, 96, 213);">__mro__</span><span class="p">):</span>
+                <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">return</span> <span class="kc" style="color: rgb(0, 112, 32); font-weight: bold;">True</span>
+        <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">return</span> <span class="bp" style="color: rgb(0, 112, 32);">NotImplemented</span>
+
+<span class="n">MyIterable</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">register</span><span class="p">(</span><span class="n">Foo</span><span class="p">)</span>
+</pre></div></div><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">The ABC&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">MyIterable</span></code>&nbsp;defines the standard iterable method,&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/stdtypes.html#iterator.__iter__" title="iterator.__iter__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__iter__()</span></code></a>, as an abstract method. The implementation given here can still be called from subclasses. The&nbsp;<code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">get_iterator()</span></code>&nbsp;method is also part of the&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">MyIterable</span></code>&nbsp;abstract base class, but it does not have to be overridden in non-abstract derived classes.</p><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">The&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta.__subclasshook__" title="abc.ABCMeta.__subclasshook__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__subclasshook__()</span></code></a>&nbsp;class method defined here says that any class that has an&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/stdtypes.html#iterator.__iter__" title="iterator.__iter__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__iter__()</span></code></a>&nbsp;method in its&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/stdtypes.html#object.__dict__" title="object.__dict__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-attr docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__dict__</span></code></a>&nbsp;(or in that of one of its base classes, accessed via the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/stdtypes.html#class.__mro__" title="class.__mro__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-attr docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__mro__</span></code></a>&nbsp;list) is considered a&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">MyIterable</span></code>&nbsp;too.</p><p style="color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); margin-top: 0px; hyphens: auto; line-height: 22.4px;">Finally, the last line makes&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">Foo</span></code>&nbsp;a virtual subclass of&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">MyIterable</span></code>, even though it does not define an&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/stdtypes.html#iterator.__iter__" title="iterator.__iter__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__iter__()</span></code></a>&nbsp;method (it uses the old-style iterable protocol, defined in terms of&nbsp;<a class="reference internal" href="https://docs.python.org/3/reference/datamodel.html#object.__len__" title="object.__len__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__len__()</span></code></a>&nbsp;and&nbsp;<a class="reference internal" href="https://docs.python.org/3/reference/datamodel.html#object.__getitem__" title="object.__getitem__" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__getitem__()</span></code></a>). Note that this will not make&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">get_iterator</span></code>&nbsp;available as a method of&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">Foo</span></code>, so it is provided separately.</p></dd></dl><h3 style="hyphens: auto; line-height: 22.4px;" id="blogTitle12">decorator</h3><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#module-abc" title="abc: Abstract base classes according to PEP 3119." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abc</span></code></a>&nbsp;module also provides the following decorator:</p><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><h4 id="blogTitle13"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">@</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">abc.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">abstractmethod</code></h4><dt id="abc.abstractmethod"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">A decorator indicating abstract methods.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Using this decorator requires that the class’s metaclass is&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="abc.ABCMeta" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta</span></code></a>&nbsp;or is derived from it. A class that has a metaclass derived from&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta" title="abc.ABCMeta" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta</span></code></a>&nbsp;cannot be instantiated unless all of its abstract methods and properties are overridden. The abstract methods can be called using any of the normal ‘super’ call mechanisms.<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>&nbsp;may be used to declare abstract methods for properties and descriptors.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Dynamically adding abstract methods to a class, or attempting to modify the abstraction status of a method or class once it is created, are not supported. The&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>&nbsp;only affects subclasses derived using regular inheritance; “virtual subclasses” registered with the ABC’s&nbsp;<code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">register()</span></code>&nbsp;method are not affected.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">When&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>&nbsp;is applied in combination with other method descriptors, it should be applied as the innermost decorator, as shown in the following usage examples:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">C</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_method</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">,</span> <span class="o" style="color: rgb(102, 102, 102);">...</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@classmethod</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_classmethod</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">cls</span><span class="p">,</span> <span class="o" style="color: rgb(102, 102, 102);">...</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@staticmethod</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_staticmethod</span><span class="p">(</span><span class="o" style="color: rgb(102, 102, 102);">...</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@property</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_property</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@my_abstract_property</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">setter</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_property</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">_get_x</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">_set_x</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="n">x</span> <span class="o" style="color: rgb(102, 102, 102);">=</span> <span class="nb" style="color: rgb(0, 112, 32);">property</span><span class="p">(</span><span class="n">_get_x</span><span class="p">,</span> <span class="n">_set_x</span><span class="p">)</span>
+</pre></div></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">In order to correctly interoperate with the abstract base class machinery, the descriptor must identify itself as abstract using&nbsp;<code class="xref py py-attr docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">__isabstractmethod__</span></code>. In general, this attribute should be&nbsp;<code class="docutils literal notranslate" style="background-color: rgb(236, 240, 243); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">True</span></code>&nbsp;if any of the methods used to compose the descriptor are abstract. For example, Python’s built-in&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#property" title="property" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">property</span></code></a>&nbsp;does the equivalent of:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">Descriptor</span><span class="p">:</span>
+    <span class="o" style="color: rgb(102, 102, 102);">...</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@property</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">__isabstractmethod__</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">return</span> <span class="nb" style="color: rgb(0, 112, 32);">any</span><span class="p">(</span><span class="nb" style="color: rgb(0, 112, 32);">getattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1" style="color: rgb(64, 112, 160);">'__isabstractmethod__'</span><span class="p">,</span> <span class="kc" style="color: rgb(0, 112, 32); font-weight: bold;">False</span><span class="p">)</span> <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">for</span>
+                   <span class="n">f</span> <span class="ow" style="color: rgb(0, 112, 32); font-weight: bold;">in</span> <span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">_fget</span><span class="p">,</span> <span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">_fset</span><span class="p">,</span> <span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">_fdel</span><span class="p">))</span>
+</pre></div></div><div class="admonition note" style="margin-top: 10px; margin-bottom: 10px; padding: 7px; background-color: rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204); border-radius: 3px;"><p class="first admonition-title" style="margin: 0px 10px 5px 0px; font-weight: bold; display: inline; hyphens: auto; line-height: 22.4px;">Note</p>&nbsp;<p class="last" style="margin-top: 0px; hyphens: auto; line-height: 22.4px; margin-bottom: 5px; display: inline;">Unlike Java abstract methods, these abstract methods may have an implementation. This implementation can be called via the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#super" title="super" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background: rgb(214, 214, 214); padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">super()</span></code></a>&nbsp;mechanism from the class that overrides it. This could be useful as an end-point for a super-call in a framework that uses cooperative multiple-inheritance.</p></div></dd></dl><h3 style="hyphens: auto; line-height: 22.4px;" id="blogTitle14">legacy decorators</h3><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#module-abc" title="abc: Abstract base classes according to PEP 3119." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abc</span></code></a>&nbsp;module also supports the following legacy decorators:</p><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><h4 id="blogTitle15"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">@</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">abc.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">abstractclassmethod</code></h4><dt id="abc.abstractclassmethod"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.abstractclassmethod" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2.</span></p></div><div class="deprecated" style="border-radius: 3px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Deprecated since version 3.3:&nbsp;</span>It is now possible to use&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#classmethod" title="classmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">classmethod</span></code></a>&nbsp;with<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>, making this decorator redundant.</p></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">A subclass of the built-in&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#classmethod" title="classmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">classmethod()</span></code></a>, indicating an abstract classmethod. Otherwise it is similar to&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">This special case is deprecated, as the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#classmethod" title="classmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">classmethod()</span></code></a>&nbsp;decorator is now correctly identified as abstract when applied to an abstract method:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">C</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@classmethod</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_classmethod</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">cls</span><span class="p">,</span> <span class="o" style="color: rgb(102, 102, 102);">...</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+</pre></div></div></dd></dl><dl class="function" style="margin-bottom: 15px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><h4 id="blogTitle16"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">@</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">abc.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">abstractstaticmethod</code></h4><dt id="abc.abstractstaticmethod"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.abstractstaticmethod" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.2.</span></p></div><div class="deprecated" style="border-radius: 3px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Deprecated since version 3.3:&nbsp;</span>It is now possible to use&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#staticmethod" title="staticmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">staticmethod</span></code></a>&nbsp;with<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>, making this decorator redundant.</p></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">A subclass of the built-in&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#staticmethod" title="staticmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">staticmethod()</span></code></a>, indicating an abstract staticmethod. Otherwise it is similar to&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">This special case is deprecated, as the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#staticmethod" title="staticmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">staticmethod()</span></code></a>&nbsp;decorator is now correctly identified as abstract when applied to an abstract method:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">C</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@staticmethod</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_staticmethod</span><span class="p">(</span><span class="o" style="color: rgb(102, 102, 102);">...</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+</pre></div></div></dd></dl><dl class="function" style="margin-bottom: 15px; background-color: rgb(255, 255, 255); font-size: 16px; font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; color: rgb(34, 34, 34);"><h4 id="blogTitle17"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">@</code><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">abc.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">abstractproperty</code></h4><dt id="abc.abstractproperty"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.abstractproperty" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><div class="deprecated" style="border-radius: 3px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">Deprecated since version 3.3:&nbsp;</span>It is now possible to use&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#property" title="property" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-class docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">property</span></code></a>,&nbsp;<code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">property.getter()</span></code>,&nbsp;<code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">property.setter()</span></code>&nbsp;and&nbsp;<code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">property.deleter()</span></code>&nbsp;with<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.abstractmethod" title="abc.abstractmethod" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abstractmethod()</span></code></a>, making this decorator redundant.</p></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">A subclass of the built-in&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#property" title="property" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">property()</span></code></a>, indicating an abstract property.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">This special case is deprecated, as the&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/functions.html#property" title="property" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-func docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">property()</span></code></a>&nbsp;decorator is now correctly identified as abstract when applied to an abstract method:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">C</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@property</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">my_abstract_property</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+</pre></div></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">The above example defines a read-only property; you can also define a read-write abstract property by appropriately marking one or more of the underlying methods as abstract:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">C</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@property</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">x</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@x</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">setter</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@abstractmethod</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">x</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span>
+</pre></div></div><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">If only some components are abstract, only those components need to be updated to create a concrete property in a subclass:</p><div class="highlight-python3 notranslate" style="position: relative;"><div class="highlight" style="background: rgb(238, 255, 204);"><pre style="overflow-y: hidden; padding: 5px; background-color: rgb(238, 255, 204); color: rgb(51, 51, 51); line-height: 18.528px; border: 1px solid rgb(170, 204, 153); font-family: monospace, sans-serif; font-size: 15.44px;"><span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">class</span> <span class="nc" style="color: rgb(14, 132, 181); font-weight: bold;">D</span><span class="p">(</span><span class="n">C</span><span class="p">):</span>
+    <span class="nd" style="color: rgb(85, 85, 85); font-weight: bold;">@C</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">x</span><span class="o" style="color: rgb(102, 102, 102);">.</span><span class="n">setter</span>
+    <span class="k" style="color: rgb(0, 112, 32); font-weight: bold;">def</span> <span class="nf" style="color: rgb(6, 40, 126);">x</span><span class="p">(</span><span class="bp" style="color: rgb(0, 112, 32);">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="o" style="color: rgb(102, 102, 102);">...</span></pre></div></div></dd></dl><h3 style="" id="blogTitle18">functions</h3><p style="hyphens: auto; text-align: justify; line-height: 22.4px; color: rgb(34, 34, 34); font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">The&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#module-abc" title="abc: Abstract base classes according to PEP 3119." style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-mod docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">abc</span></code></a>&nbsp;module also provides the following functions:</p><dl class="function" style="margin-bottom: 15px; background-color: rgb(255, 255, 255); font-size: 16px; font-family: &quot;Lucida Grande&quot;, Arial, sans-serif; color: rgb(34, 34, 34);"><h4 id="blogTitle19"><code class="descclassname" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;">abc.</code><code class="descname" style="background-color: transparent; padding: 0px 1px; font-size: 19.2px; font-family: monospace, sans-serif; font-weight: bold; border-radius: 3px;">get_cache_token</code><span class="sig-paren" style="font-size: larger;">(</span><span class="sig-paren" style="font-size: larger;">)</span></h4><dt id="abc.get_cache_token"><a class="headerlink" href="https://docs.python.org/3/library/abc.html#abc.get_cache_token" title="Permalink to this definition" style="color: rgb(99, 99, 187); text-decoration-line: none; visibility: hidden; font-size: 0.8em; padding: 0px 4px;"></a></dt><dd style="margin-top: 3px; margin-bottom: 10px; margin-left: 30px; hyphens: auto; text-align: justify; line-height: 20.8px;"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">Returns the current abstract base class cache token.</p><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;">The token is an opaque object (that supports equality testing) identifying the current version of the abstract base class cache for virtual subclasses. The token changes with every call to&nbsp;<a class="reference internal" href="https://docs.python.org/3/library/abc.html#abc.ABCMeta.register" title="abc.ABCMeta.register" style="color: rgb(99, 99, 187); text-decoration-line: none;"><code class="xref py py-meth docutils literal notranslate" style="background-color: transparent; padding: 0px 1px; font-size: 15.44px; font-family: monospace, sans-serif; border-radius: 3px;"><span class="pre" style="hyphens: none;">ABCMeta.register()</span></code></a>&nbsp;on any ABC.</p><div class="versionadded"><p style="margin-top: 0px; hyphens: auto; line-height: 22.4px;"><span class="versionmodified" style="font-style: italic;">New in version 3.4.</span></p></div></dd></dl><p><br></p><h2>metaclass conflict</h2><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><div><br></div>
+</article>
+{% endblock point1 %}
