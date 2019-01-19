@@ -1106,6 +1106,20 @@ async def py_stdlib_debugging_and_profiling():
         '__template__': 'py_stdlib_debugging_and_profiling.html',
     }
 
+# python standard library: data_types
+@get('/py/stdlib/data_types')
+async def py_stdlib_data_types():
+    return {
+        '__template__': 'py_stdlib_data_types.html',
+    }
+
+# python standard library: data_type_collections_abc
+@get('/py/stdlib/data_type_collections_abc')
+async def py_stdlib_data_type_collections_abc():
+    return {
+        '__template__': 'py_stdlib_data_type_collections_abc.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
