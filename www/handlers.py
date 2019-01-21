@@ -1120,6 +1120,13 @@ async def py_stdlib_data_type_collections_abc():
         '__template__': 'py_stdlib_data_type_collections_abc.html',
     }
 
+# python language magic_methods
+@get('/py/magic_methods')
+async def py_magic_methods():
+    return {
+        '__template__': 'py_magic_methods.html',
+    }
+
 @get('/py/glossary')
 async def py_glossary():
     return {
@@ -1131,6 +1138,7 @@ async def py_interpreter():
     return {
         '__template__': 'py_interpreter.html',
     }
+
 # extend end Python  =================================================================================
 
 # extend Python 爬虫  =================================================================================
@@ -1139,6 +1147,7 @@ async def python_webspider():
     return {
         '__template__': 'python_webspider.html',
     }
+
 # extend end Python 爬虫  =================================================================================
 
 # extend python web frame ===================================================================================
