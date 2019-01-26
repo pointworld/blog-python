@@ -1141,6 +1141,7 @@ async def py_interpreter():
 
 # extend end Python  =================================================================================
 
+
 # extend Python 爬虫  =================================================================================
 @get('/python/webspider')
 async def python_webspider():
@@ -1150,7 +1151,22 @@ async def python_webspider():
 
 # extend end Python 爬虫  =================================================================================
 
-# extend python web frame ===================================================================================
+
+# extend Python topics  =================================================================================
+@get('/py/topics')
+async def py_topics():
+    return {
+        '__template__': 'py_topics.html',
+    }
+
+@get('/py/topic/socket')
+async def py_topic_socket():
+    return {
+        '__template__': 'py_topic_socket.html',
+    }
+
+# extend end Python topics  =================================================================================
+
 
 # python web frame - django
 @get('/django')
