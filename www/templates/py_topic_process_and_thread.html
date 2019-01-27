@@ -1,0 +1,39 @@
+{% extends 'c-word.html' %}
+
+{% block title %} process and thread - Python | Topic {% endblock title %}
+
+{% block point1 %}
+<article contenteditable="true">
+  <p><font color="#ff0000" style="background-color: yellow;"><b>Category: 计算机 | 程序设计语言 | Python | topic | process and thread</b></font></p>
+  <h1 id="blogTitle0">process and thread</h1><h2 id="blogTitle1">Python 中的 GIL</h2><div><br></div><div><br></div><h3 id="blogTitle2">什么是 GIL</h3><div><div>GIL -- global interpreter lock （全局解释器锁）</div><div><br></div><div>Python（cpython） 中的一个线程对应于 C 语言中的一个线程</div><div><br></div><div>GIL 限制多线程同时执行，保证同一时间内只有一个线程在执行，无法将多个线程映射到多个 CPU 上执行（没有利用多核优势）</div></div><div><br></div><h3 id="blogTitle3">为什么需要 GIL</h3><div><br></div><h3 id="blogTitle4">什么时候会释放 GIL 锁</h3><div><div><ul><li>遇到像 i/o 操作这种，会有时间空闲情况，造成 CPU 闲置的情况会释放 GIL<br></li><li>会有一个专门 ticks 进行计数，一旦 ticks 数值达到 100，这个时候释放 GIL 锁，线程之间开始竞争 GIL 锁(说明: ticks 这个数值可以进行设置来延长或者缩减获得 GIL 锁的线程使用 CPU 的时间)</li></ul><div><br></div><pre># GIL -- Global Interpreter Lock
+
+total = 0
+
+
+def add() -&gt; None:
+    global total
+    for i in range(1000000):
+        total += 1
+
+
+def sub() -&gt; None:
+    global total
+    for i in range(1000000):
+        total -= 1
+
+
+import threading
+
+thread1 = threading.Thread(target=add)
+thread2 = threading.Thread(target=sub)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+print(total)
+</pre></div></div><div><br></div><div><br></div><div><br></div><h3 id="blogTitle5">互斥锁和 GIL 锁的关系</h3><div><div><ul><li>GIL 锁&nbsp; : 保证同一时刻只有一个线程能使用到 CPU<br></li><li>互斥锁 : 多线程时, 保证修改共享数据时有序的修改, 不会产生数据修改混乱<br></li></ul></div></div><div><br></div><div><br></div><div><br></div><h2 id="blogTitle6">Python 多线程编程</h2><h2 id="blogTitle7">线程间通信-Queue</h2><h2 id="blogTitle8">线程同步（Lock、Rlock、semaphores、Condition）</h2><h2 id="blogTitle9">concurrent 线程池编码</h2><h2 id="blogTitle10">多进程编程 - multiprocessing</h2><h2 id="blogTitle11">进程间通信</h2><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div>
+</article>
+{% endblock point1 %}

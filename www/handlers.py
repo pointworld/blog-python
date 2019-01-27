@@ -1120,6 +1120,20 @@ async def py_stdlib_data_type_collections_abc():
         '__template__': 'py_stdlib_data_type_collections_abc.html',
     }
 
+# python standard library: concurrent_execution
+@get('/py/stdlib/concurrent_execution')
+async def py_stdlib_concurrent_execution():
+    return {
+        '__template__': 'py_stdlib_concurrent_execution.html',
+    }
+
+# python standard library: concurrent_execution threading
+@get('/py/stdlib/threading')
+async def py_stdlib_threading():
+    return {
+        '__template__': 'py_stdlib_threading.html',
+    }
+
 # python language magic_methods
 @get('/py/magic_methods')
 async def py_magic_methods():
@@ -1163,6 +1177,12 @@ async def py_topics():
 async def py_topic_socket():
     return {
         '__template__': 'py_topic_socket.html',
+    }
+
+@get('/py/topic/process_and_thread')
+async def py_topic_process_and_thread():
+    return {
+        '__template__': 'py_topic_process_and_thread.html',
     }
 
 # extend end Python topics  =================================================================================
