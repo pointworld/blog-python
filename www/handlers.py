@@ -1134,6 +1134,13 @@ async def py_stdlib_threading():
         '__template__': 'py_stdlib_threading.html',
     }
 
+# python standard library: concurrent_execution multiprocessing
+@get('/py/stdlib/multiprocessing')
+async def py_stdlib_multiprocessing():
+    return {
+        '__template__': 'py_stdlib_multiprocessing.html',
+    }
+
 # python language magic_methods
 @get('/py/magic_methods')
 async def py_magic_methods():
