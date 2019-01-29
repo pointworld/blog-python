@@ -232,6 +232,12 @@ async def computer_hardware():
         '__template__': 'computer_hardware.html',
     }
 
+@get('/computer/hardware/bus')
+async def computer_hardware_bus():
+    return {
+        '__template__': 'computer_hardware_bus.html',
+    }
+
 @get('/hardware/harddisk')
 async def hardware_harddisk():
     return {
