@@ -238,6 +238,12 @@ async def computer_hardware_bus():
         '__template__': 'computer_hardware_bus.html',
     }
 
+@get('/computer/hardware/cache')
+async def computer_hardware_cache():
+    return {
+        '__template__': 'computer_hardware_cache.html',
+    }
+
 @get('/hardware/harddisk')
 async def hardware_harddisk():
     return {
