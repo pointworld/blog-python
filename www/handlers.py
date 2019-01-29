@@ -226,6 +226,12 @@ async def computer():
         '__template__': 'computer.html',
     }
 
+@get('/computer/hardware')
+async def computer_hardware():
+    return {
+        '__template__': 'computer_hardware.html',
+    }
+
 @get('/hardware/harddisk')
 async def hardware_harddisk():
     return {
