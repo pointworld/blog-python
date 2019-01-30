@@ -437,6 +437,12 @@ async def os_linux():
         '__template__': 'os_linux.html',
     }
 
+@get('/os/linux/command')
+async def os_linux_command():
+    return {
+        '__template__': 'os_linux_command.html',
+    }
+
 # end os  =================================================================================
 
 # extend front_end  =================================================================================
