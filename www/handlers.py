@@ -443,6 +443,12 @@ async def os_linux_command():
         '__template__': 'os_linux_command.html',
     }
 
+@get('/os/linux/shell')
+async def os_linux_shell():
+    return {
+        '__template__': 'os_linux_shell.html',
+    }
+
 # end os  =================================================================================
 
 # extend front_end  =================================================================================
