@@ -443,10 +443,46 @@ async def os_linux_command():
         '__template__': 'os_linux_command.html',
     }
 
+@get('/os/linux/command_shell')
+async def os_linux_command_shell():
+    return {
+        '__template__': 'os_linux_command_shell.html',
+    }
+
 @get('/os/linux/shell')
 async def os_linux_shell():
     return {
         '__template__': 'os_linux_shell.html',
+    }
+
+@get('/os/linux/file')
+async def os_linux_file():
+    return {
+        '__template__': 'os_linux_file.html',
+    }
+
+@get('/os/linux/user_and_group')
+async def os_linux_user_and_group():
+    return {
+        '__template__': 'os_linux_user_and_group.html',
+    }
+
+@get('/os/linux/permission')
+async def os_linux_permission():
+    return {
+        '__template__': 'os_linux_permission.html',
+    }
+
+@get('/os/linux/disk')
+async def os_linux_disk():
+    return {
+        '__template__': 'os_linux_disk.html',
+    }
+
+@get('/os/linux/network')
+async def os_linux_network():
+    return {
+        '__template__': 'os_linux_network.html',
     }
 
 # end os  =================================================================================

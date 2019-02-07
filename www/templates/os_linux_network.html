@@ -1,0 +1,41 @@
+{% extends 'c-word.html' %}
+
+{% block title %} Network - OS | Linux {% endblock title %}
+
+{% block point1 %}
+<article contenteditable="true">
+  <p><b style="background-color: yellow;">Category: 计算机 | 软件 | 系统软件 | OS | Linux | Network</b><br></p>
+  <h1 id="blogTitle0">Network</h1><div><br></div><div><br></div><div><h2 id="blogTitle160">网络设置</h2><h3 id="blogTitle161">网卡配置文件</h3><h4 id="blogTitle162">位置</h4><pre>ls /etc/sysconfig/network-scripts/
+
+<font color="#ff0000"><b>ifcfg-ens33</b></font>  ifdown-ippp  ifdown-routes    ifup          ifup-ipv6   ifup-ppp       ifup-tunnel
+<b><font color="#ff0000">ifcfg-lo</font></b>     ifdown-ipv6  ifdown-sit       ifup-aliases  ifup-isdn   ifup-routes    ifup-wireless
+ifdown       ifdown-isdn  ifdown-Team      ifup-bnep     ifup-plip   ifup-sit       init.ipv6-global
+ifdown-bnep  ifdown-post  ifdown-TeamPort  ifup-eth      ifup-plusb  ifup-Team      network-functions
+ifdown-eth   ifdown-ppp   ifdown-tunnel    ifup-ippp     ifup-post   ifup-TeamPort  network-functions-ipv6</pre><div><br></div><div>在该目录中网卡配置文件的命名格式：ifcfg-网卡名称</div><div><br></div><pre>1. 查看网卡相关信息
+
+cat /etc/sysconfig/network-scripts/ifcfg-ens33
+
+TYPE="Ethernet"
+PROXY_METHOD="none"
+BROWSER_ONLY="no"
+BOOTPROTO="dhcp"                              # 地址的分配方式，DHCP 表示动态主机分配协议
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+NAME="ens33"
+UUID="bb5bc6c4-30ab-42ec-adb5-b1c91806dfb1"
+DEVICE="ens33"
+ONBOOT="yes"                                  # 是否开机启动
+<br></pre><div><br></div><div><b>扩展：</b></div><div>如果修改网卡的配置文件，但是该配置文件的目录层次很深，此时可以在浅的目录中创建一个快捷方式，方便以后去查找。通过 ln -s 命令创建软链接</div><div><br></div><div><br></div><h3 id="blogTitle163">网卡服务重启方式</h3><div><pre>如何重启网卡
+
+service network restart
+# 在有的分支版本中可能没有 service 命令来快速操作服务，但有一个共性的目录：/etc/init.d，这个目录中放着很多服务的快捷方法
+
+/etc/init.d/network restart
+# 重启网卡的命名还可以使用该方式</pre></div><div><br></div><h3 id="blogTitle164">停止某个网卡</h3><pre>ifdown 网卡名</pre><div><br></div><h3 id="blogTitle165">开启某个网卡</h3><pre>&nbsp;ifup 网卡名</pre><div><br></div><h3 id="blogTitle166">配置选项说明</h3></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div>
+</article>
+{% endblock point1 %}
