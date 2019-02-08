@@ -485,6 +485,12 @@ async def os_linux_network():
         '__template__': 'os_linux_network.html',
     }
 
+@get('/os/linux/process')
+async def os_linux_process():
+    return {
+        '__template__': 'os_linux_process.html',
+    }
+
 # end os  =================================================================================
 
 # extend front_end  =================================================================================
