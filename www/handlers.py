@@ -193,12 +193,6 @@ async def architecture():
         '__template__': 'architecture.html',
     }
 
-@get('/tcp')
-async def tcp():
-    return {
-        '__template__': 'tcp.html',
-    }
-
 @get('/urn')
 async def urn():
     return {
@@ -309,7 +303,7 @@ async def network_firewall():
         '__template__': 'network_firewall.html',
     }
 
-@get('/network/socket')
+@get('/network_socket')
 async def network_socket():
     return {
         '__template__': 'network_socket.html',
@@ -1388,6 +1382,13 @@ async def bootstrap():
 
 # extend wiki =======================================================================================
 
+# computer | network | protocol | application layer | Hypertext Transfer Protocol
+@get('/Hypertext_Transfer_Protocol')
+async def Hypertext_Transfer_Protocol():
+    return {
+        '__template__': 'Hypertext_Transfer_Protocol.html',
+    }
+
 # computer | network | protocol | transport layer
 @get('/transport_layer')
 async def transport_layer():
@@ -1400,6 +1401,20 @@ async def transport_layer():
 async def port():
     return {
         '__template__': 'port.html',
+    }
+
+# computer | network | protocol | transport layer | TCP(Transmission Control Protocol)
+@get('/Transmission_Control_Protocol')
+async def Transmission_Control_Protocol():
+    return {
+        '__template__': 'Transmission_Control_Protocol.html',
+    }
+
+# computer | network | IPC (Inter-Process Communication)
+@get('/inter-process_communication')
+async def inter_process_communication():
+    return {
+        '__template__': 'inter-process_communication.html',
     }
 
 # extend end wiki ===================================================================================
