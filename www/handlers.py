@@ -455,10 +455,10 @@ async def os_linux_shell():
         '__template__': 'os_linux_shell.html',
     }
 
-@get('/os/linux/file')
-async def os_linux_file():
+@get('/os/linux/fs')
+async def os_linux_fs():
     return {
-        '__template__': 'os_linux_file.html',
+        '__template__': 'os_linux_fs.html',
     }
 
 @get('/os/linux/user_and_group')
