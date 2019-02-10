@@ -309,6 +309,12 @@ async def network_firewall():
         '__template__': 'network_firewall.html',
     }
 
+@get('/network/socket')
+async def network_socket():
+    return {
+        '__template__': 'network_socket.html',
+    }
+
 @get('/http')
 async def http():
     return {
@@ -1380,6 +1386,23 @@ async def bootstrap():
 # extend end others  =================================================================================
 
 
+# extend wiki =======================================================================================
+
+# computer | network | protocol | transport layer
+@get('/transport_layer')
+async def transport_layer():
+    return {
+        '__template__': 'transport_layer.html',
+    }
+
+# computer | network | protocol | transport layer | port
+@get('/port')
+async def port():
+    return {
+        '__template__': 'port.html',
+    }
+
+# extend end wiki ===================================================================================
 
 
 
