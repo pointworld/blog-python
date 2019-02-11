@@ -309,12 +309,6 @@ async def network_socket():
         '__template__': 'network_socket.html',
     }
 
-@get('/http')
-async def http():
-    return {
-        '__template__': 'http.html',
-    }
-
 
 # end network  =================================================================================
 
