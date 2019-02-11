@@ -1411,6 +1411,13 @@ async def inter_process_communication():
         '__template__': 'inter-process_communication.html',
     }
 
+# computer |
+@get('/MIME')
+async def MIME():
+    return {
+        '__template__': 'MIME.html',
+    }
+
 # extend end wiki ===================================================================================
 
 
