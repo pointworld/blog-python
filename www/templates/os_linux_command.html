@@ -856,7 +856,22 @@ tail  +3 tcpserver.c
 
 3、查看不断刷新的文件的最后 10 行 (一般用于查看系统的日志比较多，变化的内容不能是用户手动编辑该文件增加的)
 
-tail -10f file.log</pre><p><br></p><h3 id="blogTitle448">talk</h3><h3 id="blogTitle449">tar</h3><h4 id="blogTitle450">用途</h4><div><div>saves many files together into a single tape or disk archive, and can restore individual files from the archive.</div></div><h4 id="blogTitle451">用法</h4><div>tar [OPTION...] [FILE]...<br></div><h4 id="blogTitle452">示例</h4><div><br></div><pre>1、给文件打包
+tail -10f file.log</pre><p><br></p><h3 id="blogTitle448">talk</h3><h3 id="blogTitle449">tar</h3><h4 id="blogTitle450">用途</h4><div><div>saves many files together into a single tape or disk archive, and can restore individual files from the archive.</div></div><div><br></div><div><p style="margin-top: 0px; margin-bottom: 25px; line-height: 1.7em; color: rgb(68, 68, 68); font-family: Helvetica; font-size: 14px;"><strong>tar 命令</strong>可以为 linux 的文件和目录创建档案。利用 tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用 tar 命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p><p style="margin-top: 0px; margin-bottom: 25px; line-height: 1.7em; color: rgb(68, 68, 68); font-family: Helvetica; font-size: 14px;">首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。</p><p style="margin-top: 0px; margin-bottom: 25px; line-height: 1.7em; color: rgb(68, 68, 68); font-family: Helvetica; font-size: 14px;">为什么要区分这两个概念呢？这源于 Linux 中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar 命令），然后再用压缩程序进行压缩（<span class="wp_keywordlink"><a href="http://man.linuxde.net/gzip" title="gzip命令" target="_blank" style="border: none; text-decoration-line: none;">gzip</a></span>&nbsp;<span class="wp_keywordlink"><a href="http://man.linuxde.net/bzip2" title="bzip2命令" target="_blank" style="border: none; text-decoration-line: none;">bzip2</a>&nbsp;</span>命令）。</p></div><h4 id="blogTitle451">用法</h4><div>tar [OPTION...] [FILE]...<br></div><div><br></div><pre>DESCRIPTION
+       GNU `tar' saves many files together into a single tape or disk archive, and can restore individual files from the archive.
+
+       Note that this manual page contains just very brief description (or more like a list of possible functionality) originally generated
+       by the help2man utility.  The full documentation for tar is maintained as a Texinfo manual.  If the info and tar programs are  prop‐
+       erly installed at your site, the command `info tar' should give you access to the complete manual.
+
+EXAMPLES
+       tar -cf archive.tar foo bar
+              # Create archive.tar from files foo and bar.
+
+       tar -tvf archive.tar
+              # List all files in archive.tar verbosely.
+
+       tar -xf archive.tar
+              # Extract all files from archive.tar.<br></pre><div><br></div><div><br></div><h4 id="blogTitle452">示例</h4><div><br></div><pre>1、给文件打包
 <br>tar -cvf file.tar *.log
 <br>2、解包
 <br>tar -xvf file.tar</pre><p><br></p><h3 id="blogTitle453">tcpdump</h3><h3 id="blogTitle454">tee</h3><h4 id="blogTitle455">用途</h4><div>tee - read from standard input and write to standard output and files<br></div><h4 id="blogTitle456">用法</h4><div>tee [OPTION]... [FILE]...<br></div><div><br></div><div>Copy standard input to each FILE, and also to standard output.<br></div><div><br></div><div><div>&nbsp; &nbsp; &nbsp; &nbsp;-a, --append</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; append to the given FILEs, do not overwrite</div></div><h4 id="blogTitle457">示例</h4><pre>1、把结果输出到终端和文件中

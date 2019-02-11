@@ -1418,6 +1418,27 @@ async def MIME():
         '__template__': 'MIME.html',
     }
 
+# computer | software | web | server | Nginx
+@get('/Nginx')
+async def Nginx():
+    return {
+        '__template__': 'Nginx.html',
+    }
+
+# computer | software | web | server | proxy | reverse proxy
+@get('/Reverse_proxy')
+async def Reverse_proxy():
+    return {
+        '__template__': 'Reverse_proxy.html',
+    }
+
+# computer | software | web | server | Load balancing
+@get('/Load_balancing')
+async def Load_balancing():
+    return {
+        '__template__': 'Load_balancing.html',
+    }
+
 # extend end wiki ===================================================================================
 
 
