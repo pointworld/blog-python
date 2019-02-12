@@ -1439,6 +1439,13 @@ async def Load_balancing():
         '__template__': 'Load_balancing.html',
     }
 
+# computer | software | os | linux | file descriptor
+@get('/File_descriptor')
+async def File_descriptor():
+    return {
+        '__template__': 'File_descriptor.html',
+    }
+
 # extend end wiki ===================================================================================
 
 
