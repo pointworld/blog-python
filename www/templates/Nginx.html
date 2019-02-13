@@ -37,7 +37,37 @@ drwxr-xr-x. 2 root root   19 Feb 11 17:38 sbin<font color="#000000" face="Times 
 [root@localhost nginx]# ps aux | grep nginx
 root      55198  0.0  0.0  20552   616 ?        Ss   17:47   0:00 nginx: master process ./sbin/nginx
 nobody    55199  0.0  0.1  21004  1340 ?        S    17:47   0:00 nginx: worker process
-root      55223  0.0  0.0 112708   976 pts/0    R+   17:48   0:00 grep --color=auto nginx<br></pre><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><h3 id="blogTitle62">停止</h3><div><br></div><div><div>停止 Nginx 有两种方法：</div><div><ul><li>一种是快速停止；<br></li><ul><li>快速停止是指立即停止当前 Nginx 服务正在处理的所有网络请求，马上丢弃连接，停止工作；</li></ul><li>一种是平缓停止。<br></li><ul><li>平缓停止是指允许 Nginx 服务将当前正在处理的网络请求处理完成，但不再接受新的请求，之后关闭连接，停止工作。</li></ul></ul></div><div><br></div><div><br></div><h4 id="blogTitle63">快速停止</h4><div><pre>[root@localhost nginx]# ps aux | grep nginx
+root      55223  0.0  0.0 112708   976 pts/0    R+   17:48   0:00 grep --color=auto nginx<br></pre><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><h3 id="blogTitle62">解析域名，建立网站目录并访问（局域网）</h3><div><div>如果不配置域名，通过 ip 地址也可以直接访问</div><div><br></div><div>但若配置了域名，就需要做域名解析</div></div><div><br></div><div><br></div><div>在 nginx 主配置文件 nginx.conf 中复制一个 server 段，搭建一个新的虚拟机</div><pre>
+...
+
+http {
+    ...
+
+    # 复制一个 server 段，搭建一个新的虚拟机
+    server {
+        listen       80;
+        server_name  onepointworld.com www.onepointworld.com;
+
+        ...
+    }
+
+...</pre><div><br></div><h4>修改本地 hosts 文件</h4><div>增加如下内容</div><pre># mac vm centos nginx
+192.168.2.132 onepointworld.com www.onepointworld.com<br></pre><div>格式为：</div><pre>ip hostname ...</pre><div><br></div><h4>修改 Linux 系统防火墙配置</h4><div>把 nginx 装在 CentOS 上，用本机访问虚拟机的时候，如果出现不能访问的问题，则可能是 Linux 的防火墙问题。<br></div><div><br></div><div>把你需要访问的网络端口开放出去，设置如下：<br></div><pre># sample configuration for iptables service
+# you can edit this manually or use system-config-firewall
+# please do not ask us to add additional ports/services to this default configuration
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+
+# open port 80
+-A INPUT -p tcp --dport 80 -j ACCEPT
+
+-A INPUT -j REJECT --reject-with icmp-host-prohibited<br></pre><div><div><br></div><div>新增的</div><div><pre># open port 80<br>-A INPUT -p tcp --dport 80 -j ACCEPT</pre></div><div>用于 nginx 服务器。</div><div><br></div><div>也可以新增其它配置，如端口 3306，为了 mysql 的远程访问。</div><div><br></div><div>配置完后，重启防火墙即可。</div><pre>service iptables restart</pre></div><div><br></div><div>这时浏览器应该就能正常访问了。</div><div><br></div><h3 id="blogTitle62">停止</h3><div><br></div><div><div>停止 Nginx 有两种方法：</div><div><ul><li>一种是快速停止；<br></li><ul><li>快速停止是指立即停止当前 Nginx 服务正在处理的所有网络请求，马上丢弃连接，停止工作；</li></ul><li>一种是平缓停止。<br></li><ul><li>平缓停止是指允许 Nginx 服务将当前正在处理的网络请求处理完成，但不再接受新的请求，之后关闭连接，停止工作。</li></ul></ul></div><div><br></div><div><br></div><h4 id="blogTitle63">快速停止</h4><div><pre>[root@localhost nginx]# ps aux | grep nginx
 root      55198  0.0  0.0  20552   616 ?        Ss   17:47   0:00 nginx: master process ./sbin/nginx
 nobody    55199  0.0  0.1  21004  1340 ?        S    17:47   0:00 nginx: worker process
 root      55223  0.0  0.0 112708   976 pts/0    R+   17:48   0:00 grep --color=auto nginx
@@ -66,8 +96,8 @@ root      55223  0.0  0.0 112708   976 pts/0    R+   17:48   0:00 grep --color=a
   <pre class="hljs bash"><span class="hljs-built_in">kill</span> WINCH `/Nginx/logs/nginx.pid`
 </pre>
   <p>这样就在不停止提供 Web 服务的前提下完成了 Nginx 服务器的平滑升级。</p></div><h3 id="blogTitle67">配置</h3><div>配置文件路径：/usr/local/nginx/conf</div><div>主配置文件路径：/usr/local/nginx/conf/nginx.conf</div><h4 id="blogTitle68">默认的 nginx.conf 文件</h4><div><pre class="hljs objectivec" style="box-sizing: border-box; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 13px; padding: 15px; margin-top: 0px; margin-bottom: 20px; line-height: 1.42857; overflow-wrap: normal; color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); border: 1px solid rgb(204, 204, 204); border-radius: 4px; word-break: break-word !important;"><code class="objectivec" style="box-sizing: border-box; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: inherit; background-color: transparent; border-radius: 0px; padding: 0px; border: none; vertical-align: middle;"><span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#user  nobody;
-</span>#开启的线程数，一般跟逻辑CPU核数一致
-worker_processes  <span class="hljs-number" style="box-sizing: border-box; color: rgb(209, 154, 102);">1</span>;        <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#全局生效</span>
+</span># 配置工作进程的数量
+worker_processes  <span class="hljs-number" style="box-sizing: border-box; color: rgb(209, 154, 102);">1</span>;
 
 
 #定位全局错误日志文件，级别以notice显示，还有debug,info,warn,error,crit模式，debug输出最多，crir输出最少，根据实际环境而定
@@ -81,7 +111,7 @@ worker_processes  <span class="hljs-number" style="box-sizing: border-box; color
 
 
 events {
-    #定义每个进程的最大连接数,受系统进程的最大打开文件数量限制
+    # 配置单个工作进程的最大连接数（单个进程并发量）,受系统进程的最大打开文件数量限制
     worker_connections  <span class="hljs-number" style="box-sizing: border-box; color: rgb(209, 154, 102);">1024</span>;        <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#在 events 部分中生效</span>
 }
 
@@ -107,20 +137,22 @@ http {
 
     <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#gzip  on;</span>
 
-    server {       <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#以下指令在 http 的 server 部分中生效
-</span>        #监听端口，其中 http 是80，https 是 443
+    # 虚拟主机配置，可配置多个
+    server {     <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">
+</span>        # 监听端口，其中 http 是 80，https 是 443
         listen       <span class="hljs-number" style="box-sizing: border-box; color: rgb(209, 154, 102);">80</span>;
-        #主机域名
+        # 主机域名
         server_name  localhost;
 
-        #设置访问的语言编码
+        # 设置访问的语言编码
         <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#charset koi8-r;</span>
 
         #设置虚拟主机访问日志的存放路径及日志的格式为main
         <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#access_log  logs/host.access.log  main;</span>
 
-        #监听所有的 / 访问路径，并将它转化相应服务器
-        location / {        <span class="hljs-meta" style="box-sizing: border-box; color: rgb(97, 174, 238);">#以下指令在 http/server 的 location 中生效</span>
+        # 配置默认访问页面
+        location / {
+            # 默认网站根目录，可以直接放到 server 段下
             root   html;
             index  index.html index.htm;
         }
@@ -246,8 +278,8 @@ http{                          <span class="hljs-comment">#http 块</span>
   <pre class="hljs undefined"><code>user nobody nobody;
 </code></pre>
   <p>这也是 user 指令的默认配置。user 指令只能在全局块中配置。</p><p><br>
-    　　<strong>注意：在 Nginx 配置文件中，每一条指令都必须以分号结束，请不要忘记。</strong></p></div></div></div><h4 id="blogTitle71">配置允许生成的 worker process 数</h4><div><div><p>worker process 是 Nginx 服务器实现并发处理服务的关键所在。从理论上来说，worker process 的值越大，可以支持的并发处理量也越多，但实际上它还要受到来自软件本身、操作系统本身资源和能力、硬件设备等的制约。</p><p><br>
-  　　配置允许生成的 worker process 数的指令是worker_processes，其语法格式为：</p>
+    　　<strong>注意：在 Nginx 配置文件中，每一条指令都必须以分号结束，请不要忘记。</strong></p></div></div></div><h4 id="blogTitle71">配置工作进程的数量</h4><div><div><p>worker process 是 Nginx 服务器实现并发处理服务的关键所在。从理论上来说，worker process 的值越大，可以支持的并发处理量也越多，但实际上它还要受到来自软件本身、操作系统本身资源和能力、硬件设备等的制约。</p><p><br>
+  　　配置允许生成的 worker process 数的指令是 worker_processes，其语法格式为：</p>
   <pre class="hljs cpp">worker_processes number | <span class="hljs-keyword">auto</span>;
 
 number，指定 Nginx 进程最多可以产生的 worker process 数。
@@ -259,7 +291,13 @@ root      <span class="hljs-number">5875</span>  <span class="hljs-number">0.0</
 nobody    <span class="hljs-number">5876</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.1</span>  <span class="hljs-number">25236</span>  <span class="hljs-number">1212</span> ?        S    <span class="hljs-number">09</span>:<span class="hljs-number">54</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> nginx: worker process
 root      <span class="hljs-number">5878</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span> <span class="hljs-number">112680</span>   <span class="hljs-number">972</span> pts/<span class="hljs-number">1</span>    R+   <span class="hljs-number">09</span>:<span class="hljs-number">54</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> grep --color=<span class="hljs-keyword">auto</span> nginx
 </pre>
-  <p>如果将 number 改为3，重新运行 Nginx 进程，再次使用以上命令，则可以看到此时的 Nginx 服务器除了主进程之外，已经生成了3个 worker process。此指令只能在全局块中设置。</p></div><h4 id="blogTitle72">配置 Nginx 进程 PID 存放路径</h4><div><div><p>Nginx 进程作为系统的守护进程，我们需要在某文件中保存当前运行程序的主进程号。Nginx 支持对它的存放路径进行自定义配置，指令是 pid，其语法格式为：</p>
+  <p>如果将 number 改为 3，重新运行 Nginx 进程，再次使用以上命令，则可以看到此时的 Nginx 服务器除了主进程之外，已经生成了 3 个 worker process。此指令只能在全局块中设置。</p><pre>[root@localhost nginx]# ps aux | grep nginx
+root       6667  0.0  0.1  20596  1400 ?        Ss   Feb12   0:00 nginx: master process ./ngin
+nobody    50294  0.0  0.1  21024  1460 ?        S    11:59   0:00 nginx: worker process
+nobody    50295  0.0  0.1  21024  1460 ?        S    11:59   0:00 nginx: worker process
+nobody    50296  0.0  0.1  21024  1460 ?        S    11:59   0:00 nginx: worker process
+root      50394  0.0  0.0 112708   976 pts/4    R+   12:01   0:00 grep --color=auto nginx
+</pre></div><div><br></div><h4 id="blogTitle72">配置 Nginx 进程 PID 存放路径</h4><div><div><p>Nginx 进程作为系统的守护进程，我们需要在某文件中保存当前运行程序的主进程号。Nginx 支持对它的存放路径进行自定义配置，指令是 pid，其语法格式为：</p>
   <pre class="hljs undefined">pid file;
 其中，file 指定存放路径和文件名称。
 </pre>
@@ -282,13 +320,13 @@ root      <span class="hljs-number">5878</span>  <span class="hljs-number">0.0</
   <pre class="hljs php"><span class="hljs-keyword">use</span> <span class="hljs-title">method</span>;
 </pre>
   <p>其中，method 可选择的内容有：select、poll、kqueue、epoll、rtsig、/dev/poll 以及 eventport。<br>
-    　　此指令只能在 events 块中进行配置。</p></div></div></div><div><br></div><div><div><div><h4 id="blogTitle78">配置最大连接数</h4>
+    　　此指令只能在 events 块中进行配置。</p></div></div></div><div><br></div><div><div><div><h4 id="blogTitle78">配置单个进程的最大连接数</h4>
   <p>指令 worker_connections 主要用来设置允许每一个 worker process 同时开启的最大连接数。其语法结构为：</p>
   <pre class="hljs undefined">worker_connections number;<code>
 </code></pre>
-  <p>此指令的默认设置为 512。<br>
+  <p>此指令的默认设置为 1024。<br>
     　　<strong>注意：这里的 Number 不仅仅包括和前端用户建立的连接数，而是包括所有可能的连接数。另外，number 值不能大于操作系统支持打开的最大文件句柄数量。</strong><br>
-    　　此指令只能在 events 块中进行配置。</p></div><div><div><h4 id="blogTitle79">定义MIME-Type</h4>
+    　　此指令只能在 events 块中进行配置。</p></div><div><div><h4 id="blogTitle79">计算该 nginx 服务器的总并发量</h4><div>= nginx 工作进程数 * 单个工作进程的并发数</div><div>= worker_processes * worker_connections</div><div><br></div><h4 id="blogTitle79">定义MIME-Type</h4>
   <p>在默认的 Nginx 配置文件中，我们看到在 http 全局块中有以下两行配置：</p>
   <pre class="hljs php">    <span class="hljs-keyword">include</span>       mime.types;        <span class="hljs-comment">#以下指令在 http部分中生效</span>
     default_type  application/octet-stream;
@@ -477,13 +515,13 @@ listen 8000;                          <span class="hljs-comment">#监听具体�
 listen 192.168.1.10 default_server backlog=1024;    <span class="hljs-comment">#设置192.168.1.10的连接请求默认由此虚拟主机处理，并且允许最多1024网络连接同时处于挂起状态。</span>
 </pre>
   <h4 id="blogTitle85">基于名称的虚拟主机配置</h4>
-  <p>这里的“主机”，j 就是指此server 块对外提供的虚拟主机。设置了主机的名称并配置好 DNS，用户就可以使用这个名称向此虚拟主机发送请求了。配置主机名称的指令为server_name，其语法结构为：</p>
+  <p>这里的“主机”，就是指此 server 块对外提供的虚拟主机。设置了主机的名称并配置好 DNS，用户就可以使用这个名称向此虚拟主机发送请求了。配置主机名称的指令为server_name，其语法结构为：</p>
   <pre class="hljs undefined">server_name name ...;
 </pre>
   <p>对于 name 来说，可以只有一个名称，也可以由多个名称并列，之间用空格隔开。每个名字就是一个域名，由两段或三段组成，之间由点号“.”隔开。下面是一个简单的示例：</p>
   <pre class="hljs css"><span class="hljs-selector-tag">server_name</span> <span class="hljs-selector-tag">myserver</span><span class="hljs-selector-class">.com</span> <span class="hljs-selector-tag">www</span><span class="hljs-selector-class">.myserver</span><span class="hljs-selector-class">.com</span>;
 </pre>
-  <p>在该例中，此虚拟主机的名称设置为<a href="https://link.jianshu.com?t=http%3A%2F%2Fmyserver.com" target="_blank" rel="nofollow">myserver.com</a>或<a href="https://link.jianshu.com?t=http%3A%2F%2Fwww.myserver.com" target="_blank" rel="nofollow">www.myserver.com</a>。Nginx服务器规定，第一个名称作为此虚拟主机的主要名称。<br>
+  <p>在该例中，此虚拟主机的名称设置为&nbsp;<a href="https://link.jianshu.com?t=http%3A%2F%2Fmyserver.com" target="_blank" rel="nofollow">myserver.com</a>&nbsp;或&nbsp;<a href="https://link.jianshu.com?t=http%3A%2F%2Fwww.myserver.com" target="_blank" rel="nofollow">www.myserver.com</a>。Nginx 服务器规定，第一个名称作为此虚拟主机的主要名称。<br>
     　　在 name 中可以使用通配符“*”和正则表达式。</p>
   <h4 id="blogTitle86">基于 IP 的虚拟主机配置</h4>
   <p>配置基于 IP 的虚拟主机，即为 Nginx 服务器提供的每台虚拟主机配置一个不同的 IP，因此需要将网卡设置为同时能够监听多个 IP 地址。</p>
