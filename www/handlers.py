@@ -1446,6 +1446,20 @@ async def File_descriptor():
         '__template__': 'File_descriptor.html',
     }
 
+# computer | cluster
+@get('/Computer_cluster')
+async def Computer_cluster():
+    return {
+        '__template__': 'Computer_cluster.html',
+    }
+
+# computer | server
+@get('/Server')
+async def Server():
+    return {
+        '__template__': 'Server.html',
+    }
+
 # extend end wiki ===================================================================================
 
 
