@@ -1460,6 +1460,13 @@ async def Server():
         '__template__': 'Server.html',
     }
 
+# computer | server | web server
+@get('/Web_server')
+async def Web_server():
+    return {
+        '__template__': 'Web_server.html',
+    }
+
 # extend end wiki ===================================================================================
 
 
