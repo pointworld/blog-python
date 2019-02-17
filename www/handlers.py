@@ -1405,10 +1405,10 @@ async def Transmission_Control_Protocol():
     }
 
 # computer | network | IPC (Inter-Process Communication)
-@get('/inter-process_communication')
-async def inter_process_communication():
+@get('/Inter-process_communication')
+async def Inter_process_communication():
     return {
-        '__template__': 'inter-process_communication.html',
+        '__template__': 'Inter-process_communication.html',
     }
 
 # computer |
