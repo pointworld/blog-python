@@ -1391,10 +1391,10 @@ async def transport_layer():
     }
 
 # computer | network | protocol | transport layer | port
-@get('/port')
-async def port():
+@get('/Port')
+async def Port():
     return {
-        '__template__': 'port.html',
+        '__template__': 'Port.html',
     }
 
 # computer | network | protocol | transport layer | TCP(Transmission Control Protocol)
@@ -1473,6 +1473,30 @@ async def Thread():
     return {
         '__template__': 'Thread.html',
     }
+
+# computer | network | protocol | Internet_protocol_suite
+@get('/Internet_protocol_suite')
+async def Internet_protocol_suite():
+    return {
+        '__template__': 'Internet_protocol_suite.html',
+    }
+
+# computer | hardware | Network_switch
+@get('/Network_switch')
+async def Network_switch():
+    return {
+        '__template__': 'Network_switch.html',
+    }
+
+# computer | network | IP_address
+@get('/IP_address')
+async def IP_address():
+    return {
+        '__template__': 'IP_address.html',
+    }
+
+
+
 
 # extend end wiki ===================================================================================
 
