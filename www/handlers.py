@@ -1467,6 +1467,13 @@ async def Web_server():
         '__template__': 'Web_server.html',
     }
 
+# computer | process | thread
+@get('/Thread')
+async def Thread():
+    return {
+        '__template__': 'Thread.html',
+    }
+
 # extend end wiki ===================================================================================
 
 
