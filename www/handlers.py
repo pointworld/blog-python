@@ -1495,6 +1495,27 @@ async def IP_address():
         '__template__': 'IP_address.html',
     }
 
+# computer | network | protocol | Transport layer | User_Datagram_Protocol
+@get('/User_Datagram_Protocol')
+async def User_Datagram_Protocol():
+    return {
+        '__template__': 'User_Datagram_Protocol.html',
+    }
+
+# computer | hardware | network | hub
+@get('/Hub')
+async def Hub():
+    return {
+        '__template__': 'Hub.html',
+    }
+
+# computer | hardware | network | protocol | Address Resolution Protocol
+@get('/Address_Resolution_Protocol')
+async def Address_Resolution_Protocol():
+    return {
+        '__template__': 'Address_Resolution_Protocol.html',
+    }
+
 
 
 
