@@ -1509,11 +1509,32 @@ async def Hub():
         '__template__': 'Hub.html',
     }
 
-# computer | hardware | network | protocol | Address Resolution Protocol
+# computer | network | protocol | Address Resolution Protocol
 @get('/Address_Resolution_Protocol')
 async def Address_Resolution_Protocol():
     return {
         '__template__': 'Address_Resolution_Protocol.html',
+    }
+
+# computer | hardware | network | Router
+@get('/Router')
+async def Router():
+    return {
+        '__template__': 'Router.html',
+    }
+
+# computer | network | protocol | Internet_Control_Message_Protocol
+@get('/Internet_Control_Message_Protocol')
+async def Internet_Control_Message_Protocol():
+    return {
+        '__template__': 'Internet_Control_Message_Protocol.html',
+    }
+
+# computer | network | hardware | Gateway
+@get('/Gateway')
+async def Gateway():
+    return {
+        '__template__': 'Gateway.html',
     }
 
 
