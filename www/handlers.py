@@ -1207,6 +1207,20 @@ async def py_stdlib_multiprocessing():
         '__template__': 'py_stdlib_multiprocessing.html',
     }
 
+# computer | software | programming language | python | standard library | networking and interprocess communication | socket
+@get('/py/stdlib/socket')
+async def py_stdlib_socket():
+    return {
+        '__template__': 'py_stdlib_socket.html',
+    }
+
+# computer | software | programming language | python | standard library | networking and interprocess communication | select
+@get('/py/stdlib/select')
+async def py_stdlib_select():
+    return {
+        '__template__': 'py_stdlib_select.html',
+    }
+
 # python language magic_methods
 @get('/py/magic_methods')
 async def py_magic_methods():
