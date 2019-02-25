@@ -1558,6 +1558,20 @@ async def Uniform_Resource_Identifier():
         '__template__': 'Uniform_Resource_Identifier.html',
     }
 
+# computer | network | application | server | Web Server Gateway Interface
+@get('/Web_Server_Gateway_Interface')
+async def Web_Server_Gateway_Interface():
+    return {
+        '__template__': 'Web_Server_Gateway_Interface.html',
+    }
+
+# computer | network | application | server | uWSGI
+@get('/uWSGI')
+async def uWSGI():
+    return {
+        '__template__': 'uWSGI.html',
+    }
+
 
 
 
