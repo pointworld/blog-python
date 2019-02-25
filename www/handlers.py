@@ -1551,6 +1551,13 @@ async def Gateway():
         '__template__': 'Gateway.html',
     }
 
+# computer | network | Uniform Resource Identifiers
+@get('/Uniform_Resource_Identifier')
+async def Uniform_Resource_Identifier():
+    return {
+        '__template__': 'Uniform_Resource_Identifier.html',
+    }
+
 
 
 
