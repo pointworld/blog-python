@@ -1572,6 +1572,20 @@ async def uWSGI():
         '__template__': 'uWSGI.html',
     }
 
+# computer | network | protocol | application layer | File_Transfer_Protocol
+@get('/File_Transfer_Protocol')
+async def File_Transfer_Protocol():
+    return {
+        '__template__': 'File_Transfer_Protocol.html',
+    }
+
+# computer | network | server | FTP server | vsftpd
+@get('/Vsftpd')
+async def Vsftpd():
+    return {
+        '__template__': 'Vsftpd.html',
+    }
+
 
 
 
