@@ -1586,6 +1586,20 @@ async def Vsftpd():
         '__template__': 'Vsftpd.html',
     }
 
+# computer | network | server | network file system server | samba
+@get('/Samba')
+async def Samba():
+    return {
+        '__template__': 'Samba.html',
+    }
+
+# computer | network | protocol | application layer | secure shell
+@get('/Secure_shell')
+async def Secure_shell():
+    return {
+        '__template__': 'Secure_shell.html',
+    }
+
 
 
 
