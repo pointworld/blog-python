@@ -562,16 +562,18 @@ async def database_mysql():
         '__template__': 'database_mysql.html',
     }
 
-@get('/database/redis')
-async def database_redis():
+# computer | software | database | NoSQL | Redis
+@get('/Redis')
+async def Redis():
     return {
-        '__template__': 'database_redis.html',
+        '__template__': 'Redis.html',
     }
 
-@get('/database/mongodb')
-async def database_mongodb():
+# computer | software | database | NoSQL | MongoDB
+@get('/MongoDB')
+async def MongoDB():
     return {
-        '__template__': 'database_mongodb.html',
+        '__template__': 'MongoDB.html',
     }
 
 @get('/cron')
@@ -1598,6 +1600,13 @@ async def Samba():
 async def Secure_shell():
     return {
         '__template__': 'Secure_shell.html',
+    }
+
+# computer | software | database | NoSQL
+@get('/NoSQL')
+async def NoSQL():
+    return {
+        '__template__': 'NoSQL.html',
     }
 
 
