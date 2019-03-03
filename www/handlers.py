@@ -556,10 +556,11 @@ async def database():
         '__template__': 'database.html',
     }
 
-@get('/database/mysql')
-async def database_mysql():
+# computer | software | database | RDBMS | MySQL
+@get('/MySQL')
+async def MySQL():
     return {
-        '__template__': 'database_mysql.html',
+        '__template__': 'MySQL.html',
     }
 
 # computer | software | database | NoSQL | Redis
