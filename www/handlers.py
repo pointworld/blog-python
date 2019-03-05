@@ -1610,6 +1610,27 @@ async def NoSQL():
         '__template__': 'NoSQL.html',
     }
 
+# computer | software | design | Model View Controller
+@get('/Model_view_controller')
+async def Model_View_Controller():
+    return {
+        '__template__': 'Model_view_controller.html',
+    }
+
+# computer | software | application | web crawler
+@get('/Web_crawler')
+async def Web_crawler():
+    return {
+        '__template__': 'Web_crawler.html',
+    }
+
+# computer | network | protocol | application layer | HTTPS
+@get('/HTTPS')
+async def HTTPS():
+    return {
+        '__template__': 'HTTPS.html',
+    }
+
 
 
 
