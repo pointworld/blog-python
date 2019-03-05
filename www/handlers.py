@@ -1105,11 +1105,25 @@ async def py_stdlib_enum():
         '__template__': 'py_stdlib_enum.html',
     }
 
-# python standard library: enum
+# computer | software | programming language | python | standard library | Internet Protocols and Support | urllib
 @get('/py/stdlib/urllib')
 async def py_stdlib_urllib():
     return {
         '__template__': 'py_stdlib_urllib.html',
+    }
+
+# computer | software | programming language | python | standard library | Internet Protocols and Support | urllib.request
+@get('/py/stdlib/urllib_request')
+async def py_stdlib_urllib_request():
+    return {
+        '__template__': 'py_stdlib_urllib_request.html',
+    }
+
+# computer | software | programming language | python | standard library | Internet Protocols and Support | urllib.response
+@get('/py/stdlib/urllib_response')
+async def py_stdlib_urllib_response():
+    return {
+        '__template__': 'py_stdlib_urllib_response.html',
     }
 
 # python standard library: time
