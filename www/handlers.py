@@ -1126,6 +1126,13 @@ async def py_stdlib_urllib_response():
         '__template__': 'py_stdlib_urllib_response.html',
     }
 
+# computer | software | programming language | python | standard library | Internet Protocols and Support | urllib.parse
+@get('/py/stdlib/urllib_parse')
+async def py_stdlib_urllib_parse():
+    return {
+        '__template__': 'py_stdlib_urllib_parse.html',
+    }
+
 # python standard library: time
 @get('/py/stdlib/time')
 async def py_stdlib_time():
