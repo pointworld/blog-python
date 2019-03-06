@@ -1133,6 +1133,41 @@ async def py_stdlib_urllib_parse():
         '__template__': 'py_stdlib_urllib_parse.html',
     }
 
+# computer | software | programming language | python | standard library | Internet Protocols and Support | http
+@get('/py/stdlib/http')
+async def py_stdlib_http():
+    return {
+        '__template__': 'py_stdlib_http.html',
+    }
+
+# computer | software | programming language | python | standard library | Internet Protocols and Support | http server
+@get('/py/stdlib/http_server')
+async def py_stdlib_http_server():
+    return {
+        '__template__': 'py_stdlib_http_server.html',
+    }
+
+# computer | software | programming language | python | standard library | Internet Protocols and Support | http client
+@get('/py/stdlib/http_client')
+async def py_stdlib_http_client():
+    return {
+        '__template__': 'py_stdlib_http_client.html',
+    }
+
+# computer | software | programming language | python | standard library | Internet Protocols and Support | http cookies
+@get('/py/stdlib/http_cookies')
+async def py_stdlib_http_cookies():
+    return {
+        '__template__': 'py_stdlib_http_cookies.html',
+    }
+
+# computer | software | programming language | python | standard library | Internet Protocols and Support | http cookiejar
+@get('/py/stdlib/http_cookiejar')
+async def py_stdlib_http_cookiejar():
+    return {
+        '__template__': 'py_stdlib_http_cookiejar.html',
+    }
+
 # python standard library: time
 @get('/py/stdlib/time')
 async def py_stdlib_time():
