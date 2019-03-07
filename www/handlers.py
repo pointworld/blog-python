@@ -1687,6 +1687,20 @@ async def HTTPS():
         '__template__': 'HTTPS.html',
     }
 
+# computer | software | language | XPath
+@get('/XPath')
+async def XPath():
+    return {
+        '__template__': 'XPath.html',
+    }
+
+# computer | software | language | python | Internet Protocols and Support | third lib | requests
+@get('/py/thirdlib/requests')
+async def py_thirdlib_requests():
+    return {
+        '__template__': 'py_thirdlib_requests.html',
+    }
+
 
 
 
