@@ -1701,6 +1701,13 @@ async def py_thirdlib_requests():
         '__template__': 'py_thirdlib_requests.html',
     }
 
+# computer | software | language | python | framework | crawler | scrapy
+@get('/Scrapy')
+async def Scrapy():
+    return {
+        '__template__': 'Scrapy.html',
+    }
+
 
 
 
