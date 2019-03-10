@@ -1708,6 +1708,13 @@ async def Scrapy():
         '__template__': 'Scrapy.html',
     }
 
+# computer | software | language | python | Data Persistence | third lib | database driver | PyMongo
+@get('/PyMongo')
+async def PyMongo():
+    return {
+        '__template__': 'PyMongo.html',
+    }
+
 
 
 
