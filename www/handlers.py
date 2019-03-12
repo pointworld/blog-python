@@ -1280,6 +1280,13 @@ async def py_stdlib_select():
         '__template__': 'py_stdlib_select.html',
     }
 
+# computer | software | programming language | python | standard library | Text Processing Services | string
+@get('/py/stdlib/string')
+async def py_stdlib_string():
+    return {
+        '__template__': 'py_stdlib_string.html',
+    }
+
 # python language magic_methods
 @get('/py/magic_methods')
 async def py_magic_methods():
