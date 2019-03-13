@@ -1715,6 +1715,13 @@ async def Scrapy():
         '__template__': 'Scrapy.html',
     }
 
+# computer | software | language | python | framework | crawler | scrapy | settings
+@get('/Scrapy/Settings')
+async def Scrapy_settings():
+    return {
+        '__template__': 'Scrapy_settings.html',
+    }
+
 # computer | software | language | python | Data Persistence | third lib | database driver | PyMongo
 @get('/PyMongo')
 async def PyMongo():
