@@ -1168,18 +1168,25 @@ async def py_stdlib_http_cookiejar():
         '__template__': 'py_stdlib_http_cookiejar.html',
     }
 
-# python standard library: time
+# computer | software | programming language | python | standard library | Generic Operating System Services | python standard library | time
 @get('/py/stdlib/time')
 async def py_stdlib_time():
     return {
         '__template__': 'py_stdlib_time.html',
     }
 
-# python standard library: os
+# computer | software | programming language | python | standard library | generic operating system services | python standard library | os
 @get('/py/stdlib/os')
 async def py_stdlib_os():
     return {
         '__template__': 'py_stdlib_os.html',
+    }
+
+# computer | software | programming language | python | standard library | generic operating system services | python standard library | logging
+@get('/py/stdlib/logging')
+async def py_stdlib_logging():
+    return {
+        '__template__': 'py_stdlib_logging.html',
     }
 
 # python standard library: pickle
