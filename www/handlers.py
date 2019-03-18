@@ -1729,6 +1729,27 @@ async def Scrapy_settings():
         '__template__': 'Scrapy_settings.html',
     }
 
+# computer | software | language | python | framework | crawler | scrapy | basic concepts
+@get('/scrapy/basic_concepts')
+async def scrapy_basic_concepts():
+    return {
+        '__template__': 'scrapy_basic_concepts.html',
+    }
+
+# computer | software | language | python | framework | crawler | scrapy | basic concepts | spiders
+@get('/scrapy/basic_concept/spiders')
+async def scrapy_basic_concept_spiders():
+    return {
+        '__template__': 'scrapy_basic_concept_spiders.html',
+    }
+
+# computer | software | language | python | framework | crawler | scrapy | basic concepts | requests and responses
+@get('/scrapy/basic_concept/requests_and_responses')
+async def scrapy_basic_concept_requests_and_responses():
+    return {
+        '__template__': 'scrapy_basic_concept_requests_and_responses.html',
+    }
+
 # computer | software | language | python | framework | crawler | scrapy | built-in services
 @get('/scrapy/built_in_services')
 async def scrapy_built_in_services():
